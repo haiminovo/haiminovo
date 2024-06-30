@@ -2,7 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import DigitalNumber from './digitalNumber/DigitalNumber';
 
-export default function DigitalClock() {
+interface IProps {
+    className?: string;
+    backgroundColor?: string;
+}
+
+export default function DigitalClock(props: IProps) {
+    const { backgroundColor, className } = props;
     const [renderArr, setRenderArr] = useState<string[]>([]);
     useEffect(() => {
         const timmer = setInterval(() => {
@@ -13,9 +19,9 @@ export default function DigitalClock() {
         return () => clearInterval(timmer);
     }, []);
     return (
-        <div className="flex h-full">
+        <div className={`flex h-36 ${className}`}>
             {renderArr.map((item: any, index: React.Key) => (
-                <DigitalNumber key={index} value={item}></DigitalNumber>
+                <DigitalNumber key={index} value={item} backgroundColor={backgroundColor}></DigitalNumber>
             ))}
         </div>
     );

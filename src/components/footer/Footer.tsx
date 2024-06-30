@@ -4,13 +4,10 @@ import siteConfig from '@/configs/siteConfig';
 
 export default function Footer() {
     return (
-        <footer>
-            <div className="flex gap-4 w-full justify-center p-2">
-                <a target="_blank" href="https://beian.miit.gov.cn">
-                    浙ICP备2021034756号
-                </a>
+        <footer className="flex justify-between px-3 py-2 bg-[#fefffd] rounded-xl m-2  text-xs">
+            <div className="flex gap-4">
                 <a
-                    className="flex gap-2"
+                    className="flex gap-1"
                     target="_blank"
                     href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010502007246"
                 >
@@ -24,8 +21,11 @@ export default function Footer() {
                     />
                     浙公网安备33010502007246号
                 </a>
-                <a target="_blank">© 2024 haimin</a>
+                <a target="_blank" href="https://beian.miit.gov.cn">
+                    浙ICP备2021034756号
+                </a>
             </div>
+            <a target="_blank">© 2024 by haimin.&emsp;All rights reserved. </a>
         </footer>
     );
 }

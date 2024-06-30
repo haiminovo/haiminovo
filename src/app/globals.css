@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 * {
-    font-family: PingFangSC-Regular, sans-serif;
+    font-weight: 400;
+    font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica;
 }
