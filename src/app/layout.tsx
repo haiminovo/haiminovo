@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Footer from '../components/footer/Footer';
-import Navbar from '../components/navbar/NavBar';
+import Footer from '@/components/footer/Footer';
+import Navbar from '@/components/navbar/NavBar';
 import Aside from '@/components/aside/Aside';
 import Links from '@/components/links/Links';
 import Menu from '@/components/menu/Menu';
+import MyInf from '@/components/myInf/MyInf';
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,19 +24,24 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${inter.className} relative flex justify-center min-h-screen h-full bg-[#E0E9E2]`}>
-                <Navbar className="fixed  w-[1280px] top-0 right-[220px] left-[440px] z-50"></Navbar>
-                <Aside className="fixed top-0 left-[220px] z-50 h-screen">
-                    <Links></Links>
-                </Aside>
-                <main className=" absolute top-14 left-[440px] flex flex-1 min-h-screen min-w-[768px] max-w-[1280px] h-[200vh] w-full">
-                    <div className="flex flex-col flex-1 bg-[#f5f9f6]">
-                        {children}
-                        <Footer></Footer>
-                    </div>
-                    <Aside>
-                        <Menu></Menu>
+                <AntdRegistry>
+                    <Aside className="sticky top-0 z-50 h-screen">
+                        <MyInf></MyInf>
+                        <Links></Links>
                     </Aside>
-                </main>
+                    <div className="flex flex-col h-full">
+                        <Navbar className="sticky w-[1280px] top-0 z-50"></Navbar>
+                        <main className="top-14 flex flex-1 min-h-[calc(100vh-56px)] min-w-[768px] max-w-[1280px]  w-full">
+                            <div className="flex flex-col flex-1 bg-[#f5f9f6] w-full px-6 pt-6">
+                                {children}
+                                <Footer></Footer>
+                            </div>
+                            <Aside>
+                                <Menu></Menu>
+                            </Aside>
+                        </main>
+                    </div>
+                </AntdRegistry>
             </body>
         </html>
     );

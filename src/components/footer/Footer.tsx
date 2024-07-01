@@ -4,7 +4,7 @@ import siteConfig from '@/configs/siteConfig';
 
 export default function Footer() {
     return (
-        <footer className="flex justify-between px-3 py-2 bg-[#fefffd] rounded-xl m-2  text-xs">
+        <footer className="flex justify-between px-3 py-2 bg-[#fefffd] rounded-xl my-2 text-xs">
             <div className="flex gap-4">
                 <a
                     className="flex gap-1"

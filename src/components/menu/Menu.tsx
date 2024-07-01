@@ -1,7 +1,44 @@
+import { CalendarOutlined, CommentOutlined, DisconnectOutlined, FileTextOutlined } from '@ant-design/icons';
+
 export default function Menu() {
+    const blogInfos = [
+        {
+            title: '文章总计',
+            icon: <FileTextOutlined />,
+            value: 'mock',
+        },
+        {
+            title: '评论总计',
+            icon: <CommentOutlined />,
+            value: 'mock',
+        },
+        {
+            title: '运行时长',
+            icon: <CalendarOutlined />,
+            value: 'mock',
+        },
+        {
+            title: '最后活跃',
+            icon: <DisconnectOutlined />,
+            value: 'mock',
+        },
+    ];
     return (
-        <div className="flex flex-col w-full p-1">
-            <div className="w-full h-28 bg-[#F3F7F4] rounded-md"></div>
+        <div className="flex flex-col w-full p-1 gap-2">
+            <h5>blog Info</h5>
+            <div className="flex flex-col w-full h-28 bg-[#F3F7F4] rounded-md">
+                {blogInfos.map((item) => {
+                    return (
+                        <li key={item.title} className="flex flex-1 items-center justify-between px-3">
+                            <div className="flex gap-2">
+                                <span>{item.icon}</span>
+                                <span>{item.title}</span>
+                            </div>
+                            <span>{item.value}</span>
+                        </li>
+                    );
+                })}
+            </div>
         </div>
     );
 }

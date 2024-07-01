@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+body {
     font-weight: 400;
-    font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica;
+    color: #888;
+    font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif,
+        monospace !important;
+    scrollbar-width: thin;
+}
+
+svg {
+    color: unset !important;
 }
