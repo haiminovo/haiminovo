@@ -2,13 +2,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { Typography } from 'antd';
-import Reply from '../reply/Reply';
 const { Paragraph } = Typography;
 interface IProps {
     className?: string;
 }
 // 评论
-export default function Comment(props: IProps) {
+export default function Reply(props: IProps) {
     const { className } = props;
     return (
         <div className={`flex flex-col gap-2  ${className}`}>

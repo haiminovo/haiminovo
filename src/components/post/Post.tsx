@@ -1,12 +1,16 @@
-'use client';
 import { Typography } from 'antd';
 const { Paragraph } = Typography;
 import Image from 'next/image';
 import { ClockCircleOutlined, CommentOutlined, UserOutlined } from '@ant-design/icons';
 
-export default function Post() {
+interface IProps {
+    className?: string;
+}
+
+export default function Post(props: IProps) {
+    const { className } = props;
     return (
-        <div className="flex gap-1 w-full rounded-2xl bg-white">
+        <div className={`flex gap-1 w-full rounded-2xl bg-white ${className}`}>
             <Image alt="用户头像" src={'/bird0.svg'} width={128} height={128}></Image>
             <div className=" p-4  gap-4">
                 <h1>placeholder</h1>

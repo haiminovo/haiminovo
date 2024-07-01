@@ -10,7 +10,7 @@ import { Breadcrumb } from 'antd';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { twMerge } from 'tailwind-merge';
-
+import  Comment from '@/components/comment/Comment';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -71,6 +71,7 @@ export default function RootLayout({
                 </div>
             </div>
             <span>评论</span>
+            <Comment></Comment>
         </div>
     );
 }
