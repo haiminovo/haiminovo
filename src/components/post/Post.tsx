@@ -1,3 +1,4 @@
+'use client';
 import { Typography } from 'antd';
 const { Paragraph } = Typography;
 import Image from 'next/image';
@@ -5,12 +6,13 @@ import { ClockCircleOutlined, CommentOutlined, UserOutlined } from '@ant-design/
 
 interface IProps {
     className?: string;
+    onClick?: () => void;
 }
 
 export default function Post(props: IProps) {
-    const { className } = props;
+    const { className, onClick } = props;
     return (
-        <div className={`flex gap-1 w-full rounded-2xl bg-white ${className}`}>
+        <div className={`flex gap-1 w-full rounded-2xl bg-white ${className}`} onClick={onClick}>
             <Image alt="用户头像" src={'/bird0.svg'} width={128} height={128}></Image>
             <div className=" p-4  gap-4">
                 <h1>placeholder</h1>
