@@ -32,6 +32,18 @@ export default function PostList() {
         {
             title: '2',
         },
+        {
+            title: '2',
+        },
+        {
+            title: '2',
+        },
+        {
+            title: '2',
+        },
+        {
+            title: '2',
+        },
     ];
     return (
         <div className="flex flex-col w-full gap-3 text-[#666]">

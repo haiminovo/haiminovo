@@ -30,13 +30,13 @@ export default function RootLayout({
                         <Links></Links>
                     </Aside>
                     <div className="flex flex-col h-full">
-                        <Navbar className="sticky w-[1280px] top-0 z-50"></Navbar>
-                        <main className="top-14 flex flex-1 min-h-[calc(100vh-56px)] min-w-[768px] max-w-[1280px]  w-full">
+                        <Navbar className="sticky w-[1280px] top-0 z-50 max-2xl:w-[1080px]"></Navbar>
+                        <main className="top-14 flex flex-1 min-h-[calc(100vh-56px)] min-w-[768px] max-w-[1280px] w-full max-2xl:w-[1080px]">
                             <div className="flex flex-col flex-1 bg-[#f5f9f6] w-full px-6 pt-6">
                                 {children}
                                 <Footer></Footer>
                             </div>
-                            <Aside>
+                            <Aside className="max-xl:hidden">
                                 <Menu></Menu>
                             </Aside>
                         </main>

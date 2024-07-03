@@ -10,7 +10,7 @@ import { Breadcrumb } from 'antd';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { twMerge } from 'tailwind-merge';
-import  Comment from '@/components/comment/Comment';
+import Comment from '@/components/comment/Comment';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -29,20 +29,11 @@ export default function RootLayout({
                 className={twMerge('bg-white rounded-lg', '[&.ant-breadcrumb]:py-2 [&.ant-breadcrumb]:px-3')}
                 items={[
                     {
-                        href: '',
+                        href: '/',
                         title: <HomeOutlined />,
                     },
                     {
-                        href: '',
-                        title: (
-                            <>
-                                <UserOutlined />
-                                <span>Application List</span>
-                            </>
-                        ),
-                    },
-                    {
-                        title: 'Application',
+                        title: 'id',
                     },
                 ]}
             />

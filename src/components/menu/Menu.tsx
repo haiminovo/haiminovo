@@ -24,8 +24,8 @@ export default function Menu() {
         },
     ];
     return (
-        <div className="flex flex-col w-full p-1 gap-2">
-            <h5>blog Info</h5>
+        <div className="flex flex-col w-full p-1 gap-1">
+            <h5 className="ml-1 text-[#333] font-normal">博客信息</h5>
             <div className="flex flex-col w-full h-28 bg-[#F3F7F4] rounded-md">
                 {blogInfos.map((item) => {
                     return (

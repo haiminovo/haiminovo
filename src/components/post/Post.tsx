@@ -15,8 +15,8 @@ export default function Post(props: IProps) {
         <div className={`flex gap-1 w-full rounded-2xl bg-white ${className}`} onClick={onClick}>
             <Image alt="用户头像" src={'/bird0.svg'} width={128} height={128}></Image>
             <div className=" p-4  gap-4">
-                <h1>placeholder</h1>
-                <Paragraph ellipsis={{ rows: 2 }}>
+                <h1 className="text-[#333] font-medium">placeholder</h1>
+                <Paragraph className="[&.ant-typography]:text-[#888]" ellipsis={{ rows: 2 }}>
                     here is a long description of each post and it should be cuted while the word is too long. here is a
                     long description of each post and it should be cuted while the word is too long. here is a long
                     description of each post and it should be cuted while the word is too long.
