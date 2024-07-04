@@ -26,12 +26,12 @@ export default function RootLayout({
             <body className={`${inter.className} relative flex justify-center min-h-screen h-full bg-[#E0E9E2]`}>
                 <AntdRegistry>
                     <Aside className="sticky top-0 z-50 h-screen">
-                        <MyInf></MyInf>
+                        <MyInf className="max-lg:hidden"></MyInf>
                         <Links></Links>
                     </Aside>
                     <div className="flex flex-col h-full">
                         <Navbar className="sticky w-[1280px] top-0 z-50 max-2xl:w-[960px] max-xl:w-[830px] max-lg:w-[700px] max-md:w-[570px]"></Navbar>
-                        <main className="top-14 flex flex-1 min-h-[calc(100vh-56px)] max-w-[1280px] w-full max-2xl:w-[960px] max-xl:w-[830px] max-lg:w-[700px] max-md:w-[570px]">
+                        <main className="top-14 flex flex-1 min-h-[calc(100vh-56px)] max-w-[1280px] w-full max-2xl:w-[960px] max-xl:w-[810px] max-lg:w-[660px] max-md:w-[510px]">
                             <div className="flex flex-col flex-1 bg-[#f5f9f6] w-full px-6 pt-6">
                                 {children}
                                 <Footer></Footer>
