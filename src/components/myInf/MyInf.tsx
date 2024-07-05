@@ -16,7 +16,7 @@ export default function MyInf(props: IProps) {
                 height={64}
                 className="rounded-3xl"
             ></Image>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center max-xl:hidden">
                 <p className="text-sm font-bold">haimin</p>
                 <p className="text-xs">dont know what to say.</p>
             </div>

@@ -32,7 +32,7 @@ export default function Menu() {
                         <li key={item.title} className="flex flex-1 items-center justify-between px-3">
                             <div className="flex gap-2">
                                 <span>{item.icon}</span>
-                                <span>{item.title}</span>
+                                <span className=" max-xl:hidden">{item.title}</span>
                             </div>
                             <span>{item.value}</span>
                         </li>

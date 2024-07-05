@@ -27,7 +27,7 @@ export default function Links() {
                     className="flex items-center h-8 p-2 rounded-lg hover:bg-[#E0E9E2] gap-4"
                 >
                     <>{item.icon}</>
-                    <p>{item.title}</p>
+                    <p className="max-lg:hidden">{item.title}</p>
                 </Link>
             ))}
         </div>
