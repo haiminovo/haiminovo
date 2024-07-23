@@ -7,11 +7,11 @@ export default function Menu() {
             icon: <FileTextOutlined />,
             value: 'mock',
         },
-        {
-            title: '评论总计',
-            icon: <CommentOutlined />,
-            value: 'mock',
-        },
+        // {
+        //     title: '评论总计',
+        //     icon: <CommentOutlined />,
+        //     value: 'mock',
+        // },
         {
             title: '运行时长',
             icon: <CalendarOutlined />,

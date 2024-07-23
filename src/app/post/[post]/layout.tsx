@@ -33,7 +33,7 @@ export default function RootLayout({
                         title: <HomeOutlined />,
                     },
                     {
-                        title: 'id',
+                        title: 'post',
                     },
                 ]}
             />
@@ -61,7 +61,6 @@ export default function RootLayout({
                     </button>
                 </div>
             </div>
-            <span>评论</span>
             <Comment></Comment>
         </div>
     );

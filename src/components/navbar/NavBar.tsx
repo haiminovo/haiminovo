@@ -13,7 +13,6 @@ export default function Navbar(props: IProps) {
         >
             <div className="flex justify-between w-full max-md:justify-end">
                 <DigitalClock className="scale-[20%] -translate-x-44 -translate-y-14 max-md:hidden"></DigitalClock>
-                <div>placeholder</div>
             </div>
         </div>
     );
