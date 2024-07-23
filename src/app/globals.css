@@ -14,10 +14,12 @@ svg {
     color: unset !important;
 }
 
-@media screen and (max-width: 768px) {
-}
-@media screen and (max-width: 1024px) {
-}
-
-@media screen and (max-width: 1440px) {
+@media (prefers-color-scheme: dark) {
+    html {
+        filter: invert(1) hue-rotate(180deg);
+        transition: color 300ms, background-color 300ms;
+    }
+    html img {
+        filter: invert(1) hue-rotate(180deg);
+    }
 }
