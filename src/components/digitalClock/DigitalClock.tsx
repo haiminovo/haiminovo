@@ -1,15 +1,22 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import DigitalNumber from './digitalNumber/DigitalNumber';
 
 interface IProps {
     className?: string;
     backgroundColor?: string;
+    zoom?: number;
 }
 
 export default function DigitalClock(props: IProps) {
-    const { backgroundColor, className } = props;
+    const { backgroundColor, className, zoom } = props;
     const [renderArr, setRenderArr] = useState<string[]>([]);
+    const ref: any = useRef(null);
+    useLayoutEffect(() => {
+        if (!ref?.current?.style) return;
+        ref.current.style.zoom = zoom;
+    }, [zoom]);
+
     useEffect(() => {
         const timmer = setInterval(() => {
             const timeNow = new Date();
@@ -19,7 +26,7 @@ export default function DigitalClock(props: IProps) {
         return () => clearInterval(timmer);
     }, []);
     return (
-        <div className={`flex h-36 ${className}`}>
+        <div ref={ref} className={`flex h-36 ${className}`}>
             {renderArr.map((item: any, index: React.Key) => (
                 <DigitalNumber key={index} value={item} backgroundColor={backgroundColor}></DigitalNumber>
             ))}

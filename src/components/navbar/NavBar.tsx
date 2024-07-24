@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import DigitalClock from '../digitalClock/DigitalClock';
 
 interface IProps {
@@ -12,7 +12,7 @@ export default function Navbar(props: IProps) {
             className={`flex h-14 p-4 font-bold bg-gradient-to-r from-[rgba(235,242,237,1)] to-[rgba(225,232,227,.5)] backdrop-blur-[2px] ${className}`}
         >
             <div className="flex justify-between w-full max-md:justify-end">
-                <DigitalClock className="scale-[20%] -translate-x-44 -translate-y-14 max-md:hidden"></DigitalClock>
+                <DigitalClock zoom={0.25} className="max-md:hidden"></DigitalClock>
             </div>
         </div>
     );

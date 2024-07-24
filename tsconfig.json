@@ -23,6 +23,13 @@
             "contentlayer/generated": ["./.contentlayer/generated"] //markdown文件编译后存放的目录
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".contentlayer/generated"],
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        ".contentlayer/generated",
+        "contentlayer.config.js"
+    ],
     "exclude": ["node_modules", "dist"]
 }
