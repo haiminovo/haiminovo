@@ -1,0 +1,17 @@
+name: CI
+on:
+    # 代码push的时候触发
+    push:
+        # master 分支的时候触发
+        branches: main
+jobs:
+    # 定义一个job，名字为CI
+    CI:
+        # 使用github提供给我们的机器去跑
+        runs-on: ubuntu-latest
+        # 步骤
+        steps:
+            # 步骤名为test
+            - name: test
+              # 打印哈哈
+              run: echo 嘿嘿嘿
