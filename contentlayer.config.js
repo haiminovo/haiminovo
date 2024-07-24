@@ -10,12 +10,12 @@ const computedFields = {
     slug: {
         // 计算字段用于生成文档的URL slug
         type: 'string',
-        resolve: (doc: { _raw: { flattenedPath: any } }) => `/${doc._raw.flattenedPath}`,
+        resolve: (doc) => `/${doc._raw.flattenedPath}`,
     },
     slugAsParams: {
         // 计算字段用于生成文档的URL参数形式的slug
         type: 'string',
-        resolve: (doc: { _raw: { flattenedPath: string } }) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
+        resolve: (doc) => doc._raw.flattenedPath.split('/').slice(1).join('/'),
     },
 };
 
@@ -71,15 +71,15 @@ export default makeSource({
                 rehypePrettyCode,
                 {
                     theme: 'github-dark',
-                    onVisitLine(node: { children: string | any[] }) {
+                    onVisitLine(node) {
                         if (node.children.length === 0) {
                             node.children = [{ type: 'text', value: ' ' }];
                         }
                     },
-                    onVisitHighlightedLine(node: { properties: { className: string[] } }) {
+                    onVisitHighlightedLine(node) {
                         node.properties.className.push('line--highlighted');
                     },
-                    onVisitHighlightedWord(node: { properties: { className: string[] } }) {
+                    onVisitHighlightedWord(node) {
                         node.properties.className = ['word--highlighted'];
                     },
                 },

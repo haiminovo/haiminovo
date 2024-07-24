@@ -15,7 +15,7 @@ interface IProps {
 export default function Post(props: IProps) {
     const { data, className, onClick } = props;
     const { title, description, authors, date } = data;
-    const imageSize = window.innerWidth < 768 ? 32 : window.innerWidth < 1024 ? 64 : isBrowser ? 128 : 128;
+    const imageSize = 128; //window.innerWidth < 768 ? 32 : window.innerWidth < 1024 ? 64 : isBrowser ? 128 : 128;
     return (
         <div
             className={`flex items-center gap-4 w-full rounded-2xl bg-white p-4 cursor-pointer ${className}`}
