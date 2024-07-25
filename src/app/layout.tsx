@@ -5,9 +5,10 @@ import Footer from '@/components/footer/Footer';
 import Navbar from '@/components/navbar/NavBar';
 import Aside from '@/components/aside/Aside';
 import Links from '@/components/links/Links';
-import Menu from '@/components/menu/Menu';
 import MyInf from '@/components/myInf/MyInf';
+import SiteInf from '@/components/siteInf/SiteInf';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import SiteAnalytics from '@/components/siteAnalytics/SiteAnalytics';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <SiteAnalytics></SiteAnalytics>
             <body className={`${inter.className} relative flex justify-center min-h-screen h-full bg-[#E0E9E2]`}>
                 <AntdRegistry>
                     <Aside className="sticky top-0 z-50 h-screen max-sm:hidden">
@@ -37,7 +39,7 @@ export default function RootLayout({
                                 <Footer></Footer>
                             </div>
                             <Aside className="max-xl:hidden">
-                                <Menu></Menu>
+                                <SiteInf></SiteInf>
                             </Aside>
                         </main>
                     </div>

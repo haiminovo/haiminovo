@@ -4,8 +4,6 @@ import { useRouter } from 'next/navigation';
 import Post from '../post/Post';
 
 export default function PostList() {
-    console.log(allPosts);
-
     const router = useRouter();
     const posts = allPosts;
     return (

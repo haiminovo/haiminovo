@@ -4,7 +4,6 @@ import {
     HomeOutlined,
     LikeOutlined,
     PayCircleOutlined,
-    UserOutlined,
 } from '@ant-design/icons';
 import { Breadcrumb } from 'antd';
 import type { Metadata } from 'next';
@@ -49,7 +48,6 @@ export default function RootLayout({
                         <span>允许规范转载</span>
                     </div>
                 </li>
-                {/* todo:按钮颜色处理一下 */}
                 <div className="flex justify-center items-center gap-12 w-full text-sm">
                     <button className="flex items-center gap-1 py-1 px-2 rounded-xl text-white bg-gradient-to-tr from-[rgba(203,158,73,1)] to-[rgba(255,225,128,1)]">
                         <PayCircleOutlined className=" text-red" />

@@ -1,21 +1,17 @@
-import { CalendarOutlined, CommentOutlined, DisconnectOutlined, FileTextOutlined } from '@ant-design/icons';
+import { CalendarOutlined, DisconnectOutlined, FileTextOutlined } from '@ant-design/icons';
+import { allPosts } from 'contentlayer/generated';
 
-export default function Menu() {
+export default function SiteInf() {
     const blogInfos = [
         {
             title: '文章总计',
             icon: <FileTextOutlined />,
-            value: 'mock',
+            value: allPosts.length,
         },
-        // {
-        //     title: '评论总计',
-        //     icon: <CommentOutlined />,
-        //     value: 'mock',
-        // },
         {
             title: '运行时长',
             icon: <CalendarOutlined />,
-            value: 'mock',
+            value: ((new Date().getTime() - new Date('2024-07-25').getTime()) / 86400000).toFixed(2) + '天',
         },
         {
             title: '最后活跃',

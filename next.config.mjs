@@ -2,8 +2,8 @@
 import { withContentlayer } from 'next-contentlayer'
 
 const nextConfig = {
-    output: 'export',
-    trailingSlash: true,
+    output: 'export', // ssg
+    trailingSlash: true, // 动态路由刷新问题
     images: {
         loader: 'akamai',
         path: '',

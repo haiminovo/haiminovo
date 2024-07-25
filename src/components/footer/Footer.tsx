@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import siteConfig from '@/configs/siteConfig';
 
 export default function Footer() {
     return (
@@ -16,7 +15,7 @@ export default function Footer() {
                         width={16}
                         height={16}
                         alt="浙公网安备33010502007246号"
-                        src={siteConfig.imgServer + '备案图标.png'}
+                        src={'/备案图标.png'}
                         unoptimized
                     />
                     浙公网安备33010502007246号
