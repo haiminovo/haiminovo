@@ -26,7 +26,7 @@ const SiteAnalytics = () => {
             var _hmt = _hmt || [];
             (function() {
             var hm = document.createElement("script");
-            hm.src = "<https://hm.baidu.com/hm.js?7a9f906e5caf3a001a3df333c920d23c";
+            hm.src = "https://hm.baidu.com/hm.js?7a9f906e5caf3a001a3df333c920d23c";
             var s = document.getElementsByTagName("script")[0]; 
             s.parentNode.insertBefore(hm, s);
             })();
