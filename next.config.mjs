@@ -3,6 +3,7 @@ import { withContentlayer } from 'next-contentlayer'
 
 const nextConfig = {
     output: 'export',
+    trailingSlash: true,
     images: {
         loader: 'akamai',
         path: '',
