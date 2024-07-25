@@ -14,7 +14,7 @@ jobs:
         steps:
             # 拉取最新的代码
             - name: Checkout repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
               with:
                   # 克隆的分支
                   ref: main
@@ -31,7 +31,7 @@ jobs:
               run: npm run build
             # 产物上传服务器
             - name: Upload to Deploy Server
-              uses: easingthemes/ssh-deploy@v2.0.7
+              uses: easingthemes/ssh-deploy@main
               env:
                   # 免密登录的秘钥
                   SSH_PRIVATE_KEY: ${{ secrets.SSH }}
