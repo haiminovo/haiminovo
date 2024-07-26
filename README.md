@@ -1,1 +1,1 @@
-here is my blog->[haiminovo.cn](http://haiminovo.cn)
+我的个人博客 (Next.js contentLayer giscus SSG) => [haiminovo.cn](http://haiminovo.cn)
