@@ -10,11 +10,9 @@
     },
     "dependencies": {
         "@ant-design/icons": "^5.3.7",
-        "@ant-design/nextjs-registry": "^1.0.0",
         "@docusaurus/theme-common": "^3.4.0",
         "@giscus/react": "^3.0.0",
         "@types/mdx": "^2.0.13",
-        "antd": "^5.18.3",
         "concurrently": "^8.2.2",
         "contentlayer2": "^0.4.6",
         "next": "14.2.4",

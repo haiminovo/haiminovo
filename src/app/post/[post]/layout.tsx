@@ -5,7 +5,6 @@ import {
     LikeOutlined,
     PayCircleOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb } from 'antd';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { twMerge } from 'tailwind-merge';
@@ -24,18 +23,6 @@ export default function RootLayout({
 }>) {
     return (
         <div className={`${inter.className} flex flex-col gap-4 h-full`}>
-            <Breadcrumb
-                className={twMerge('bg-white rounded-lg', '[&.ant-breadcrumb]:py-2 [&.ant-breadcrumb]:px-3')}
-                items={[
-                    {
-                        href: '/',
-                        title: <HomeOutlined />,
-                    },
-                    {
-                        title: 'post',
-                    },
-                ]}
-            />
             <div className="bg-white rounded-lg p-6">
                 {children}
                 <li className="flex justify-between text-xs py-8">

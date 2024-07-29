@@ -3,12 +3,12 @@ import Image from 'next/image';
 
 export default function Footer() {
     return (
-        <footer className="flex justify-between px-3 py-2 bg-[#fefffd] rounded-xl my-2 text-xs">
+        <footer className="flex justify-between px-3 py-2 bg-[#fefffd] rounded-xl my-2 text-xs whitespace-nowrap max-md:flex-col items-center">
             <div className="flex gap-4">
                 <a
                     className="flex gap-1"
                     target="_blank"
-                    href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010502007246"
+                    href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010502007246"
                 >
                     <Image
                         className="object-contain"
