@@ -22,16 +22,18 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="zh-cn" className="max-[720px]:scale-50 max-[720px]:h-[200%] max-[720px]:overflow-hidden">
             <head>
                 <meta
                     name="viewport"
-                    content={`width=720, initial-scale=0.5, minimum-scale=0.5, maximum-scale=1.0`}
-                ></meta>
+                    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+                />
             </head>
             <SiteAnalytics></SiteAnalytics>
-            <body className={`${inter.className} relative flex justify-center min-h-screen h-full bg-[#E0E9E2]`}>
-                <Aside className="sticky top-0 z-50 h-screen max-sm:hidden">
+            <body
+                className={`${inter.className} relative flex justify-center min-h-screen h-full bg-[#E0E9E2] max-[720px]:-translate-y-[100vh]`}
+            >
+                <Aside className="sticky top-0 z-50 min-h-screen h-full">
                     <MyInf className="max-lg:hidden"></MyInf>
                     <Links></Links>
                 </Aside>
