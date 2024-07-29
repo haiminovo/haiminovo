@@ -1,3 +1,4 @@
+'use client';
 import { CalendarOutlined, DisconnectOutlined, FileTextOutlined } from '@ant-design/icons';
 import { allPosts } from 'contentlayer/generated';
 
