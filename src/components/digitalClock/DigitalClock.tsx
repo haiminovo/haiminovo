@@ -5,8 +5,6 @@ import DigitalNumber from './digitalNumber/DigitalNumber';
 interface IProps {
     className?: string;
     backgroundColor?: string;
-    zoom?: number;
-    style?: any;
 }
 
 export default function DigitalClock(props: IProps) {
