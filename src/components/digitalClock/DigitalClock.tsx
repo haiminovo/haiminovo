@@ -6,16 +6,13 @@ interface IProps {
     className?: string;
     backgroundColor?: string;
     zoom?: number;
+    style?: any;
 }
 
 export default function DigitalClock(props: IProps) {
-    const { backgroundColor, className, zoom } = props;
+    const { backgroundColor, className, ...rest } = props;
     const [renderArr, setRenderArr] = useState<string[]>([]);
     const ref: any = useRef(null);
-    useLayoutEffect(() => {
-        if (!ref?.current?.style) return;
-        ref.current.style.zoom = zoom;
-    }, [zoom]);
 
     useEffect(() => {
         const timmer = setInterval(() => {
@@ -26,7 +23,7 @@ export default function DigitalClock(props: IProps) {
         return () => clearInterval(timmer);
     }, []);
     return (
-        <div ref={ref} className={`flex h-36 ${className}`}>
+        <div ref={ref} className={`flex h-36 ] ${className}`} {...rest}>
             {renderArr.map((item: any, index: React.Key) => (
                 <DigitalNumber key={index} value={item} backgroundColor={backgroundColor}></DigitalNumber>
             ))}

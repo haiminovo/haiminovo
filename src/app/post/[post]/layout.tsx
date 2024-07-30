@@ -22,7 +22,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <div className={`${inter.className} flex flex-col gap-4 h-full`}>
+        <div className={`${inter.className} flex flex-col gap-4`}>
             <div className="bg-white rounded-lg p-6">
                 {children}
                 <li className="flex justify-between text-xs py-8">
