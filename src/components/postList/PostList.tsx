@@ -7,7 +7,7 @@ export default function PostList() {
     const router = useRouter();
     const posts = allPosts;
     return (
-        <div className="flex flex-col w-full gap-3 text-[#666]">
+        <div className="flex flex-col w-full gap-3">
             {posts.map((item, index) => (
                 <Post
                     data={item}

@@ -2,7 +2,6 @@ import React from 'react';
 interface IProps {
     active?: boolean;
     direction?: 'top' | 'mid' | 'bottom' | 'left' | 'right';
-    backgroundColor?: string;
 }
 const directionDegreeMap = {
     top: 'rotate-180',
@@ -12,12 +11,12 @@ const directionDegreeMap = {
     right: '-rotate-90',
 };
 export default function BaseStick(props: IProps) {
-    const { active = true, direction = 'bottom', backgroundColor } = props;
+    const { active = true, direction = 'bottom' } = props;
     if (!active) return <div className="h-2 w-12"></div>;
     const basicStickStyle =
-        'relative bg-black h-2 w-12 ' +
-        `before:absolute before:left-0 before:w-2 before:h-2 before:${backgroundColor || 'bg-white'} ` +
-        `after:absolute after:right-0 after:w-2 after:h-2 after:${backgroundColor || 'bg-white'} `;
+        'relative bg-custom-color-dark-4 dark:bg-custom-color-4 h-2 w-12 ' +
+        `before:absolute before:left-0 before:w-2 before:h-2 before:bg-custom-color-4 dark:before:bg-custom-color-dark-4 ` +
+        `after:absolute after:right-0 after:w-2 after:h-2 after:before:bg-custom-color-4 dark:after:bg-custom-color-dark-4 `;
     const directionStickStyle =
         'before:[clip-path:polygon(_0%_0%,_-40%_100%,_100%_0%,_0%_0%)] ' +
         'after:[clip-path:polygon(_0%_0%,_140%_100%,_100%_0%,_0%_0%)] ' +

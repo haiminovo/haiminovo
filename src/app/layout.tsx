@@ -31,20 +31,23 @@ export default function RootLayout({
             </head>
             <SiteAnalytics></SiteAnalytics>
             <body
-                className={`${inter.className} relative flex justify-center min-h-screen h-full bg-[#E0E9E2] max-[768px]:-translate-y-[100vh]`}
+                className={`${inter.className} relative flex justify-center min-h-screen h-full
+                 bg-custom-color-1 text-font-normal
+                 dark:bg-custom-color-dark-1 dark:text-font-normal-dark
+                 max-[768px]:-translate-y-[100vh]`}
             >
-                <Aside className="sticky top-0 z-50 min-h-screen h-full">
+                <Aside className="sticky top-0 z-50 min-h-screen h-full bg-custom-color-4 dark:bg-custom-color-dark-4">
                     <MyInf className="max-lg:hidden"></MyInf>
                     <Links></Links>
                 </Aside>
                 <div className="flex flex-col h-full">
                     <Navbar className="sticky w-[1280px] min-w-[320px] top-0 z-50 max-2xl:w-[960px] max-xl:w-[810px] max-lg:w-[708px]"></Navbar>
                     <main className="top-14 flex flex-1 w-full h-full min-h-[calc(100vh-56px)] max-w-[1280px] max-2xl:w-[960px] max-xl:w-[810px] max-lg:w-[708px]">
-                        <div className="flex flex-col flex-1 bg-[#f5f9f6] w-full px-6 pt-6 no-scrollbar max-[768px]:overflow-scroll">
+                        <div className="flex flex-col flex-1 bg-custom-color-7 dark:bg-custom-color-dark-7 w-full px-6 pt-6 no-scrollbar max-[768px]:overflow-scroll">
                             {children}
                             <Footer></Footer>
                         </div>
-                        <Aside className="max-xl:hidden">
+                        <Aside className="bg-custom-color-4 dark:bg-custom-color-dark-4 max-xl:hidden">
                             <SiteInf></SiteInf>
                         </Aside>
                     </main>

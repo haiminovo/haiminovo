@@ -3,7 +3,6 @@ import BaseStick from './baseStick/BaseStick';
 
 interface IProps {
     value: '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | ':';
-    backgroundColor?: string;
 }
 
 const stickActiveMap = {
@@ -18,57 +17,29 @@ const stickActiveMap = {
 };
 
 export default function DigitalNumber(props: IProps) {
-    const { value = 8, backgroundColor } = props;
+    const { value = 8 } = props;
     if (value === ':') {
         return (
-            <div className="flex flex-col gap-8 justify-center items-center ">
-                <div className={`h-2 w-2 ${'bg-black'}`}></div>
-                <div className={`h-2 w-2 ${'bg-black'}`}></div>
+            <div className="flex flex-col gap-8 p-4 justify-center items-center -translate-y-2">
+                <div className={`h-2 w-2 bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
+                <div className={`h-2 w-2 bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
             </div>
         );
     }
     return (
         <div className="w-16 overflow-clip">
             <div className="relative flex flex-col w-36 translate-x-2">
-                <BaseStick
-                    direction="top"
-                    active={!!stickActiveMap[0][value]}
-                    backgroundColor={backgroundColor}
-                ></BaseStick>
+                <BaseStick direction="top" active={!!stickActiveMap[0][value]}></BaseStick>
                 <div className="flex m-5 translate-x-[-45px]">
-                    <BaseStick
-                        direction="left"
-                        active={!!stickActiveMap[1][value]}
-                        backgroundColor={backgroundColor}
-                    ></BaseStick>
-                    <BaseStick
-                        direction="right"
-                        active={!!stickActiveMap[2][value]}
-                        backgroundColor={backgroundColor}
-                    ></BaseStick>
+                    <BaseStick direction="left" active={!!stickActiveMap[1][value]}></BaseStick>
+                    <BaseStick direction="right" active={!!stickActiveMap[2][value]}></BaseStick>
                 </div>
-                <BaseStick
-                    direction="mid"
-                    active={!!stickActiveMap[3][value]}
-                    backgroundColor={backgroundColor}
-                ></BaseStick>
+                <BaseStick direction="mid" active={!!stickActiveMap[3][value]}></BaseStick>
                 <div className="flex m-5 translate-x-[-45px]">
-                    <BaseStick
-                        direction="left"
-                        active={!!stickActiveMap[4][value]}
-                        backgroundColor={backgroundColor}
-                    ></BaseStick>
-                    <BaseStick
-                        direction="right"
-                        active={!!stickActiveMap[5][value]}
-                        backgroundColor={backgroundColor}
-                    ></BaseStick>
+                    <BaseStick direction="left" active={!!stickActiveMap[4][value]}></BaseStick>
+                    <BaseStick direction="right" active={!!stickActiveMap[5][value]}></BaseStick>
                 </div>
-                <BaseStick
-                    direction="bottom"
-                    active={!!stickActiveMap[6][value]}
-                    backgroundColor={backgroundColor}
-                ></BaseStick>
+                <BaseStick direction="bottom" active={!!stickActiveMap[6][value]}></BaseStick>
             </div>
         </div>
     );

@@ -19,20 +19,31 @@
         }
     }
 }
-
-body {
-    font-weight: 400;
-    color: #888;
-    font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif,
-        monospace !important;
-    scrollbar-width: thin;
-}
-
 svg {
     color: unset !important;
 }
+body {
+    font-weight: 400;
+    color: #3a4a5a;
+    font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif,
+        monospace !important;
+    scrollbar-width: thin;
+    :is(.dark *) {
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+
+:root {
+    --color-mode: 'light';
+}
 
 @media (prefers-color-scheme: dark) {
+    :root {
+        --color-mode: 'dark';
+    }
+}
+
+/* @media (prefers-color-scheme: dark) {
     html {
         filter: invert(1) hue-rotate(180deg);
         transition: color 300ms, background-color 300ms;
@@ -40,4 +51,4 @@ svg {
     html img {
         filter: invert(1) hue-rotate(180deg);
     }
-}
+} */

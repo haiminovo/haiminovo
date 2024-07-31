@@ -4,11 +4,10 @@ import DigitalNumber from './digitalNumber/DigitalNumber';
 
 interface IProps {
     className?: string;
-    backgroundColor?: string;
 }
 
 export default function DigitalClock(props: IProps) {
-    const { backgroundColor, className, ...rest } = props;
+    const { className } = props;
     const [renderArr, setRenderArr] = useState<string[]>([]);
     const ref: any = useRef(null);
 
@@ -21,9 +20,9 @@ export default function DigitalClock(props: IProps) {
         return () => clearInterval(timmer);
     }, []);
     return (
-        <div ref={ref} className={`flex h-36 ] ${className}`} {...rest}>
+        <div ref={ref} className={`flex h-36 ${className}`}>
             {renderArr.map((item: any, index: React.Key) => (
-                <DigitalNumber key={index} value={item} backgroundColor={backgroundColor}></DigitalNumber>
+                <DigitalNumber key={index} value={item}></DigitalNumber>
             ))}
         </div>
     );
