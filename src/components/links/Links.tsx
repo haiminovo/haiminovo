@@ -6,24 +6,26 @@ interface IProps {
     showIcon?: boolean;
 }
 
+export const links: {
+    title: string;
+    path: string;
+    icon?: any;
+}[] = [
+    {
+        title: '首页',
+        path: '/',
+        icon: <HomeOutlined />,
+    },
+    {
+        title: '面板',
+        path: '/dashboard',
+        icon: <HomeOutlined />,
+    },
+];
+
 export default function Links(props: IProps) {
     const { className, showIcon = true } = props;
-    const links: {
-        title: string;
-        path: string;
-        icon?: any;
-    }[] = [
-        {
-            title: '首页',
-            path: '/',
-            icon: <HomeOutlined />,
-        },
-        {
-            title: '面板',
-            path: '/dashboard',
-            icon: <HomeOutlined />,
-        },
-    ];
+
     return (
         <div className={`flex w-full gap-3 ${className}`}>
             {links.map((item) => (
