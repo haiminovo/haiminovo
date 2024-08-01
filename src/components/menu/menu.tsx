@@ -14,7 +14,7 @@ export default function Menu(props: IProps) {
     return (
         <div className={`flex items-center gap-4 ${className}`}>
             {isExpanded && (
-                <div className={`flex gap-3 font-thin`}>
+                <div className={`flex gap-3 font-normal`}>
                     {links.map((item) => (
                         <Link
                             key={item.title}
