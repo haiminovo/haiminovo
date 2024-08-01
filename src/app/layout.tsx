@@ -22,35 +22,51 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="zh-Hans-CN" className="max-[768px]:scale-50 max-[768px]:h-[200%] max-[768px]:overflow-hidden">
+        <html lang="zh-Hans-CN">
             <head>
                 <meta
                     name="viewport"
-                    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+                    content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1, maximum-scale=10"
                 />
             </head>
             <SiteAnalytics></SiteAnalytics>
             <body
                 className={`${inter.className} relative flex justify-center min-h-screen h-full
-                 bg-custom-color-1 text-font-normal
-                 dark:bg-custom-color-dark-1 dark:text-font-normal-dark
-                 max-[768px]:-translate-y-[100vh]`}
+                bg-custom-color-1 text-font-normal
+                dark:bg-custom-color-dark-1 dark:text-font-normal-dark
+                 `}
             >
-                <Aside className="sticky top-0 z-50 min-h-screen h-full bg-custom-color-4 dark:bg-custom-color-dark-4">
-                    <MyInf className="max-lg:hidden"></MyInf>
-                    <Links></Links>
-                </Aside>
-                <div className="flex flex-col h-full">
-                    <Navbar className="sticky w-[1280px] min-w-[320px] top-0 z-50 max-2xl:w-[960px] max-xl:w-[810px] max-lg:w-[708px]"></Navbar>
-                    <main className="top-14 flex flex-1 w-full h-full min-h-[calc(100vh-56px)] max-w-[1280px] max-2xl:w-[960px] max-xl:w-[810px] max-lg:w-[708px]">
-                        <div className="flex flex-col flex-1 bg-custom-color-7 dark:bg-custom-color-dark-7 w-full px-6 pt-6 no-scrollbar max-[768px]:overflow-scroll">
-                            {children}
-                            <Footer></Footer>
+                <div className="flex w-[1440px]">
+                    <Aside
+                        className="sticky top-0 flex flex-col justify-between z-50 h-screen
+                        bg-custom-color-4 dark:bg-custom-color-dark-4 max-[768px]:hidden"
+                    >
+                        <div>
+                            <MyInf></MyInf>
+                            <Links className="flex-col px-3"></Links>
                         </div>
-                        <Aside className="bg-custom-color-4 dark:bg-custom-color-dark-4 max-xl:hidden">
-                            <SiteInf></SiteInf>
-                        </Aside>
-                    </main>
+                        <SiteInf></SiteInf>
+                    </Aside>
+                    <div className="flex flex-1 flex-col h-full">
+                        <Navbar className="sticky w-full top-0 z-50"></Navbar>
+                        <main
+                            className="top-14 flex flex-1 w-full h-full 
+                                min-h-[calc(100vh-56px)]"
+                        >
+                            <div className="flex flex-col flex-1 justify-between ">
+                                <div
+                                    className="flex flex-col flex-1 w-full pt-6 no-scrollbar px-6
+                                    bg-custom-color-7 dark:bg-custom-color-dark-7 max-[768px]:overflow-scroll max-md:px-2"
+                                >
+                                    {children}
+                                </div>
+                                <Footer></Footer>
+                            </div>
+                            <Aside className="bg-custom-color-4 dark:bg-custom-color-dark-4 max-xl:hidden">
+                                <SiteInf></SiteInf>
+                            </Aside>
+                        </main>
+                    </div>
                 </div>
             </body>
         </html>

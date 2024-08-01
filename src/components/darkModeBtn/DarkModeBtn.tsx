@@ -1,6 +1,6 @@
 'use client';
 import { removeLS, getLS, setLS } from '@/utils';
-import { SunOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined } from '@ant-design/icons';
 import React, { useLayoutEffect, useState } from 'react';
 
 interface IProps {
@@ -9,8 +9,9 @@ interface IProps {
 
 export default function DarkModeBtn(props: IProps) {
     const { className } = props;
-    const [rootElement, setRootElement] = useState<any>(); // <html>
-    const darkModeStorageKey = 'user-color-scheme'; // 作为 localStorage 的 key
+    const [rootElement, setRootElement] = useState<any>();
+    const [isDark, setIsDark] = useState(false);
+    const darkModeStorageKey = 'user-color-scheme';
 
     const validColorModeKeys: any = {
         dark: true,
@@ -24,8 +25,6 @@ export default function DarkModeBtn(props: IProps) {
 
     const getModeFromClassList = () => {
         const res = rootElement?.classList.contains('dark');
-        console.log(res);
-
         return res ? 'dark' : 'light';
     };
 
@@ -47,11 +46,13 @@ export default function DarkModeBtn(props: IProps) {
         const currentSetting = mode || getLS(darkModeStorageKey);
         if (validColorModeKeys[currentSetting]) {
             if (currentSetting === 'light') {
+                setIsDark(false);
                 rootElement?.classList.remove('dark');
             } else {
                 rootElement?.classList.add('dark');
             }
         } else {
+            setIsDark(true);
             rootElement?.classList.remove('dark');
             removeLS(darkModeStorageKey);
         }
@@ -67,12 +68,13 @@ export default function DarkModeBtn(props: IProps) {
 
     return (
         <div
-            className={`flex ${className}`}
+            className={`flex cursor-pointer ${className}`}
             onClick={() => {
+                setIsDark(!isDark);
                 applyCustomDarkModeSettings(toggleCustomDarkMode());
             }}
         >
-            <SunOutlined />
+            {isDark ? <SunOutlined /> : <MoonOutlined />}
         </div>
     );
 }

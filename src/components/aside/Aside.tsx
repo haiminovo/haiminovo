@@ -7,11 +7,5 @@ interface IProps {
 
 export default function Aside(props: IProps) {
     const { children, className } = props;
-    return (
-        <aside
-            className={`flex flex-col items-center w-[220px] p-3 text-sm max-xl:w-[110px] max-lg:w-[60px] ${className}`}
-        >
-            {children}
-        </aside>
-    );
+    return <aside className={`flex flex-col items-center w-52 p-2 text-sm max-xl:w-32 ${className}`}>{children}</aside>;
 }

@@ -1,7 +1,13 @@
 import Link from 'next/link';
 import { HomeOutlined } from '@ant-design/icons';
 
-export default function Links() {
+interface IProps {
+    className?: string;
+    showIcon?: boolean;
+}
+
+export default function Links(props: IProps) {
+    const { className, showIcon = true } = props;
     const links: {
         title: string;
         path: string;
@@ -19,15 +25,15 @@ export default function Links() {
         },
     ];
     return (
-        <div className="flex flex-col w-full gap-3">
+        <div className={`flex w-full gap-3 ${className}`}>
             {links.map((item) => (
                 <Link
                     key={item.title}
                     href={item.path}
-                    className="flex items-center h-8 p-2 rounded-lg hover:bg-custom-color-2 dark:hover:bg-custom-color-dark-2 gap-4"
+                    className="flex items-center p-2 rounded-lg gap-3 hover:bg-custom-color-2 dark:hover:bg-custom-color-dark-2"
                 >
-                    <>{item.icon}</>
-                    <p className="max-lg:hidden">{item.title}</p>
+                    <div>{showIcon && item.icon}</div>
+                    <p>{item.title}</p>
                 </Link>
             ))}
         </div>

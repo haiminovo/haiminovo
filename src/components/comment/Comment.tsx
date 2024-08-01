@@ -1,4 +1,5 @@
 'use client';
+import { getLS } from '@/utils';
 import Giscus from '@giscus/react';
 
 export default function Comment() {
@@ -13,7 +14,7 @@ export default function Comment() {
             reactionsEnabled="1"
             emitMetadata="0"
             inputPosition="top"
-            theme="light"
+            theme={getLS('user-color-scheme') || 'noborder_light'}
             lang="zh-CN"
             loading="lazy"
         />
