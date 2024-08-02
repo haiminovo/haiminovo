@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
-import { ClockCircleOutlined, CommentOutlined, UserOutlined } from '@ant-design/icons';
-import { isDesktop, isTablet, isMobile } from 'react-device-detect';
+import { ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { isMobile } from 'react-device-detect';
 import type { Post } from 'contentlayer/generated';
 import { useEffect, useState } from 'react';
 
@@ -22,20 +22,16 @@ export default function Post(props: IProps) {
     }, []);
     return (
         <div
-            className={`flex items-start gap-4 w-full h-40 rounded-2xl bg-white p-4 cursor-pointer max-md:p-2 max-md:h-32 ${className}`}
+            className={`flex items-start gap-4 w-full h-40 rounded-2xl p-4 cursor-pointer max-md:p-2 max-md:h-32 ${className}`}
             onClick={onClick}
         >
-            <Image
-                className="rounded-lg mt-2"
-                alt="文章头图"
-                src={'/bird0.svg'}
-                width={imgSize}
-                height={imgSize}
-            ></Image>
+            <Image className="rounded-lg" alt="文章头图" src={'/bird0.svg'} width={imgSize} height={imgSize}></Image>
             <div className="flex flex-col justify-between gap-1 w-full h-full">
-                <div className="flex flex-col w-full">
-                    <h1 className="font-medium text-font-strong dark:text-font-light-dark">{title}</h1>
-                    <div className="w-full text-xs overflow-hidden text-ellipsis line-clamp-4">{description}</div>
+                <div className="flex flex-col justify-center w-full">
+                    <strong className="font-medium text-font-strong dark:text-font-light-dark">{title}</strong>
+                    <p className="w-full pl-1 text-xs overflow-hidden text-ellipsis line-clamp-4 indent-1 text-font-normal dark:text-font-normal-dark">
+                        {description}
+                    </p>
                 </div>
 
                 <ul

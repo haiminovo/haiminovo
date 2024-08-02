@@ -39,18 +39,6 @@ export default function SiteInf() {
                     );
                 })}
                 <li className="flex flex-1 items-center">
-                    <div id="busuanzi_container_site_uv" className="w-full">
-                        <div className="flex flex-1 items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <UserOutlined />
-                                <span className=" max-xl:hidden">访问人数</span>
-                            </div>
-
-                            <span id="busuanzi_value_site_uv"></span>
-                        </div>
-                    </div>
-                </li>
-                <li className="flex flex-1 items-center">
                     <div id="busuanzi_container_site_pv" className="w-full">
                         <div className="flex flex-1 items-center justify-between">
                             <div className="flex items-center gap-2">

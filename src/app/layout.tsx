@@ -48,7 +48,7 @@ export default function RootLayout({
                         <SiteInf></SiteInf>
                     </Aside>
                     <div className="flex flex-1 flex-col h-full">
-                        <Navbar className="sticky w-full top-0 z-50"></Navbar>
+                        <Navbar className="sticky w-full top-0 z-50 h-14 max-md:h-10"></Navbar>
                         <main
                             className="top-14 flex flex-1 w-full h-full 
                                 min-h-[calc(100vh-56px)]"

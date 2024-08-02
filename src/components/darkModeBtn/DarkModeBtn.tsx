@@ -1,6 +1,6 @@
 'use client';
 import { removeLS, getLS, setLS } from '@/utils';
-import { MoonOutlined, SunOutlined } from '@ant-design/icons';
+import { MoonFilled, MoonOutlined, SunOutlined } from '@ant-design/icons';
 import React, { useLayoutEffect, useState } from 'react';
 
 interface IProps {
@@ -68,13 +68,13 @@ export default function DarkModeBtn(props: IProps) {
 
     return (
         <div
-            className={`flex cursor-pointer ${className}`}
+            className={`flex items-center cursor-pointer text-sm ${className}`}
             onClick={() => {
                 setIsDark(!isDark);
                 applyCustomDarkModeSettings(toggleCustomDarkMode());
             }}
         >
-            {isDark ? <SunOutlined /> : <MoonOutlined />}
+            {isDark ? <SunOutlined /> : <MoonFilled />}
         </div>
     );
 }

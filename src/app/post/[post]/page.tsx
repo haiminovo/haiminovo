@@ -28,7 +28,7 @@ export default async function Post({ params }: PageProps) {
     return (
         <article className="container py-6">
             <div className="space-y-4">
-                <h1 className="inline-block font-heading text-4xl ">{page.title}</h1>
+                <h1 className="inline-block font-heading text-4xl">{page.title}</h1>
                 {page.description && <p className="text-xl text-muted-foreground">{page.description}</p>}
             </div>
             <hr className="my-4" />

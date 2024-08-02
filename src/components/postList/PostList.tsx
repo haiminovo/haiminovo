@@ -1,14 +1,16 @@
 'use client';
-import { allPosts } from 'contentlayer/generated';
+import { allPosts, allDocuments } from 'contentlayer/generated';
 import { useRouter } from 'next/navigation';
 import Post from '../post/Post';
 
 export default function PostList() {
+    console.log('ap', allPosts);
+    console.log('ad', allDocuments);
+
     const router = useRouter();
-    const posts = allPosts;
     return (
         <div className="flex flex-col w-full gap-3">
-            {posts.map((item, index) => (
+            {allPosts.map((item, index) => (
                 <Post
                     data={item}
                     key={index}

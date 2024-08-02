@@ -11,16 +11,16 @@ export default function Navbar(props: IProps) {
     const { className } = props;
     return (
         <div
-            className={`flex h-14 p-4 font-bold bg-gradient-to-r backdrop-blur-[2px] max-md:h-10
+            className={`flex items-center py-2 px-4 font-bold bg-gradient-to-r backdrop-blur-[2px]
                 from-custom-color-4/100 to-custom-color-1/50 
                 dark:from-custom-color-dark-4/100 dark:to-custom-color-dark-1/50
                 ${className}`}
         >
-            <div className="flex justify-between w-full max-md:justify-end">
-                <DigitalClock className="zoom-25 max-md:hidden"></DigitalClock>
+            <div className="flex items-center justify-between w-full h-full max-md:justify-end">
+                <DigitalClock className="zoom-25 h-full max-md:hidden"></DigitalClock>
                 <div className="flex items-center gap-4">
+                    <Menu className="md:hidden"></Menu>
                     <DarkModeBtn></DarkModeBtn>
-                    <Menu className=" lg:hidden"></Menu>
                 </div>
             </div>
         </div>
