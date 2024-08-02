@@ -10,11 +10,9 @@ export default function Dashboard() {
     useEffect(() => {
         const colors = generateColor(basicColorSelect);
         if (!colors) return;
-        console.log(colors);
         setColorArr(colors);
         const colors1 = generateColor(basicColorSelect, 'dark');
         if (!colors1) return;
-        console.log(colors1);
         setColorArr1(colors1);
     }, [basicColorSelect]);
     return (

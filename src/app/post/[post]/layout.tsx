@@ -10,6 +10,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { twMerge } from 'tailwind-merge';
 import Comment from '@/components/comment/Comment';
+import Script from 'next/script';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -24,6 +25,11 @@ export default function RootLayout({
 }>) {
     return (
         <div className={`${inter.className} flex flex-col gap-4`}>
+            <Script
+                id="busuanzi"
+                strategy="afterInteractive"
+                src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+            ></Script>
             <div className="bg-white rounded-lg p-6">
                 {children}
                 <div className="flex justify-between text-xs py-8">
@@ -37,7 +43,6 @@ export default function RootLayout({
                                 <div className="flex flex-1 items-center justify-between gap-2">
                                     <div className="flex items-center gap-1">
                                         <EyeOutlined />
-                                        <span className=" max-xl:hidden">浏览量</span>
                                     </div>
                                     <span id="busuanzi_value_page_pv"></span>
                                 </div>

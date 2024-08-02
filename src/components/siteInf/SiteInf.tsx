@@ -1,6 +1,7 @@
 'use client';
 import { BarChartOutlined, CalendarOutlined, FileTextOutlined, UserOutlined } from '@ant-design/icons';
 import { allPosts } from 'contentlayer/generated';
+import Script from 'next/dist/client/script';
 
 export default function SiteInf() {
     const blogInfos = [
@@ -17,11 +18,16 @@ export default function SiteInf() {
     ];
     return (
         <div className="flex flex-col w-full p-1 gap-1">
+            <Script
+                id="busuanzi"
+                strategy="afterInteractive"
+                src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+            ></Script>
             <h1 className="ml-1 text-font-strong dark:text-font-strong-dark font-normal">博客信息</h1>
-            <ul className="flex flex-col justify-center w-full h-32 bg-custom-color-7 dark:bg-custom-color-dark-7 rounded-md">
+            <ul className="flex flex-col justify-center gap-3 p-3 w-full bg-custom-color-7 dark:bg-custom-color-dark-7 rounded-md">
                 {blogInfos.map((item) => {
                     return (
-                        <li key={item.title} className="flex flex-1 items-center px-3">
+                        <li key={item.title} className="flex flex-1 items-center">
                             <div className="flex flex-1 items-center justify-between">
                                 <div className="flex items-center gap-2">
                                     {item.icon}
@@ -32,7 +38,7 @@ export default function SiteInf() {
                         </li>
                     );
                 })}
-                <li className="flex flex-1 items-center px-3">
+                <li className="flex flex-1 items-center">
                     <div id="busuanzi_container_site_uv" className="w-full">
                         <div className="flex flex-1 items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -44,14 +50,13 @@ export default function SiteInf() {
                         </div>
                     </div>
                 </li>
-                <li className="flex flex-1 items-center px-3">
+                <li className="flex flex-1 items-center">
                     <div id="busuanzi_container_site_pv" className="w-full">
                         <div className="flex flex-1 items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <BarChartOutlined />
                                 <span className=" max-xl:hidden">总访问量</span>
                             </div>
-
                             <span id="busuanzi_value_site_pv"></span>
                         </div>
                     </div>
