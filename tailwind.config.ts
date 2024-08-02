@@ -35,8 +35,6 @@ export const basicColor = '#dfe9e2';
 const themeColors: any = {};
 generateColor(basicColor)?.forEach((item, index) => (themeColors[`custom-color-${index + 1}`] = item));
 generateColor(basicColor, 'dark')?.forEach((item, index) => (themeColors[`custom-color-dark-${index + 1}`] = item));
-console.log('/////', themeColors);
-
 const config: Config = {
     darkMode: ['selector'],
     content: [

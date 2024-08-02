@@ -1,6 +1,5 @@
 export const generateColor = (str: string, mode: 'dark' | 'light' = 'light') => {
     let basicColor = hexToRgb(str);
-    console.log(basicColor);
     if (!basicColor) return;
     if (mode === 'dark') basicColor = basicColor.map((item) => item - 100);
     const stepArr = basicColor.map((item) =>
