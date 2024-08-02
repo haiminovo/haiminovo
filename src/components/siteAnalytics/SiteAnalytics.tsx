@@ -3,6 +3,11 @@ import Script from 'next/script';
 const SiteAnalytics = () => {
     return (
         <>
+            <Script
+                id="busuanzi"
+                strategy="afterInteractive"
+                src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+            ></Script>
             <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=G-NNFGZDLC24`} />
             <Script
                 id="googleAnalytics"
