@@ -26,7 +26,7 @@ export default function RootLayout({
             <head>
                 <meta
                     name="viewport"
-                    content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1, maximum-scale=10"
+                    content="width=device-width, user-scalable=1, initial-scale=1.0, minimum-scale=1, maximum-scale=10"
                 />
             </head>
             <SiteAnalytics></SiteAnalytics>
