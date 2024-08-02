@@ -80,13 +80,10 @@ const components: MDXComponents = {
         />
     ),
     pre: ({ className, ...props }) => (
-        <pre className={twMerge('mb-4 mt-6 overflow-x-auto rounded-lg border bg-black', className)} {...props} />
+        <pre className={twMerge('mb-4 mt-6 overflow-x-auto rounded-lg bg-black', className)} {...props} />
     ),
     code: ({ className, ...props }) => (
-        <code
-            className={twMerge('relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm', className)}
-            {...props}
-        />
+        <code className={twMerge('relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm', className)} {...props} />
     ),
     Image,
     Callout,

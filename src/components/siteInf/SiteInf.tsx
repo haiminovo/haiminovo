@@ -1,5 +1,5 @@
 'use client';
-import { CalendarOutlined, DisconnectOutlined, FileTextOutlined } from '@ant-design/icons';
+import { BarChartOutlined, CalendarOutlined, FileTextOutlined } from '@ant-design/icons';
 import { allPosts } from 'contentlayer/generated';
 
 export default function SiteInf() {
@@ -13,11 +13,6 @@ export default function SiteInf() {
             title: '运行时长',
             icon: <CalendarOutlined />,
             value: ((new Date().getTime() - new Date('2024-07-25').getTime()) / 86400000).toFixed(2) + '天',
-        },
-        {
-            title: '最后活跃',
-            icon: <DisconnectOutlined />,
-            value: 'mock',
         },
     ];
     return (
@@ -35,6 +30,15 @@ export default function SiteInf() {
                         </li>
                     );
                 })}
+                <li className="flex flex-1 items-center justify-between px-3">
+                    <div className="flex gap-2">
+                        <BarChartOutlined />
+                        <span className=" max-xl:hidden">总访问量</span>
+                    </div>
+                    <div>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </div>
+                </li>
             </div>
         </div>
     );

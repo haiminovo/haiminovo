@@ -63,7 +63,8 @@ export default function RootLayout({
                                 <Footer></Footer>
                             </div>
                             <Aside className="bg-custom-color-4 dark:bg-custom-color-dark-4 max-xl:hidden">
-                                <SiteInf></SiteInf>
+                                <div></div>
+                                {/* <SiteInf></SiteInf> */}
                             </Aside>
                         </main>
                     </div>

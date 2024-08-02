@@ -36,11 +36,11 @@ export default function RootLayout({
                     </div>
                 </li>
                 <div className="flex justify-center items-center gap-12 w-full text-sm">
-                    <button className="flex items-center gap-1 py-1 px-2 rounded-xl text-font-light-dark bg-gradient-to-tr from-[rgba(203,158,73,1)] to-[rgba(255,225,128,1)]">
+                    <button className="flex items-center gap-1 py-1 px-2 rounded-xl text-font-normal-dark bg-gradient-to-tr from-[rgba(203,158,73,1)] to-[rgba(255,225,128,1)]">
                         <PayCircleOutlined />
                         打赏
                     </button>
-                    <button className="flex items-center gap-1 py-1 px-2 rounded-xl text-font-light-dark bg-gradient-to-tr from-[rgba(243,113,113,1)] to-[rgba(255,168,168,1)]">
+                    <button className="flex items-center gap-1 py-1 px-2 rounded-xl text-font-normal-dark bg-gradient-to-tr from-[rgba(243,113,113,1)] to-[rgba(255,168,168,1)]">
                         <LikeOutlined />
                         点赞
                     </button>

@@ -34,14 +34,14 @@ export default function Post(props: IProps) {
             ></Image>
             <div className="flex flex-col justify-between gap-1 w-full h-full">
                 <div className="flex flex-col w-full">
-                    <h1 className="text-font-strong font-medium">{title}</h1>
+                    <h1 className="font-medium text-font-strong dark:text-font-light-dark">{title}</h1>
                     <div className="w-full text-xs overflow-hidden text-ellipsis line-clamp-4">{description}</div>
                 </div>
 
                 <ul
                     className="flex justify-end gap-5 bg-gradient-to-l rounded-md px-3 text-xs p-1
                  from-custom-color-10 to-custom-color-7 text-font-light 
-                dark:from-custom-color-dark-10 dark:to-custom-color-dark-7 dark:text-font-light-dark 
+                 dark:from-custom-color-dark-10 dark:to-custom-color-dark-7 dark:text-font-light-dark 
                 "
                 >
                     <li className="flex items-center h-full gap-2">

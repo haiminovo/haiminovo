@@ -33,6 +33,11 @@ const SiteAnalytics = () => {
           `,
                 }}
             />
+            <Script
+                id="busuanzi"
+                strategy="afterInteractive"
+                src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+            ></Script>
         </>
     );
 };
