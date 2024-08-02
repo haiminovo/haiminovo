@@ -1,8 +1,13 @@
 'use client';
-import { BarChartOutlined, CalendarOutlined, FileTextOutlined, UserOutlined } from '@ant-design/icons';
+import { BarChartOutlined, CalendarOutlined, FileTextOutlined, LoadingOutlined, UserOutlined } from '@ant-design/icons';
 import { allPosts } from 'contentlayer/generated';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 export default function SiteInf() {
+    const [runtime, setRuntime] = useState<string>();
+    useLayoutEffect(() => {
+        setRuntime(((new Date().getTime() - new Date('2024-07-25').getTime()) / 86400000).toFixed(2));
+    }, []);
     const blogInfos = [
         {
             title: '文章总计',
@@ -12,9 +17,10 @@ export default function SiteInf() {
         {
             title: '运行时长',
             icon: <CalendarOutlined />,
-            value: ((new Date().getTime() - new Date('2024-07-25').getTime()) / 86400000).toFixed(2) + '天',
+            value: runtime,
         },
     ];
+
     return (
         <div className="flex flex-col w-full p-1 gap-1">
             <h1 className="ml-1 text-font-strong dark:text-font-strong-dark font-normal">博客信息</h1>
@@ -27,7 +33,7 @@ export default function SiteInf() {
                                     {item.icon}
                                     <span className=" max-xl:hidden">{item.title}</span>
                                 </div>
-                                <span>{item.value}</span>
+                                <span>{item.value || <LoadingOutlined />}</span>
                             </div>
                         </li>
                     );
@@ -39,7 +45,9 @@ export default function SiteInf() {
                                 <BarChartOutlined />
                                 <span className=" max-xl:hidden">总访问量</span>
                             </div>
-                            <span id="busuanzi_value_site_pv"></span>
+                            <span id="busuanzi_value_site_pv">
+                                <LoadingOutlined />
+                            </span>
                         </div>
                     </div>
                 </li>

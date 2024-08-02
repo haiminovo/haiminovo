@@ -1,6 +1,6 @@
 'use client';
 import { removeLS, getLS, setLS } from '@/utils';
-import { MoonFilled, MoonOutlined, SunOutlined } from '@ant-design/icons';
+import { MoonFilled, SunFilled } from '@ant-design/icons';
 import React, { useLayoutEffect, useState } from 'react';
 
 interface IProps {
@@ -74,7 +74,7 @@ export default function DarkModeBtn(props: IProps) {
                 applyCustomDarkModeSettings(toggleCustomDarkMode());
             }}
         >
-            {isDark ? <SunOutlined /> : <MoonFilled />}
+            {isDark ? <SunFilled /> : <MoonFilled />}
         </div>
     );
 }
