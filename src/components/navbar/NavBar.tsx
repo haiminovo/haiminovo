@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React from 'react';
 import DigitalClock from '../digitalClock/DigitalClock';
 import DarkModeBtn from '../darkModeBtn/DarkModeBtn';
 import Menu from '../menu/menu';

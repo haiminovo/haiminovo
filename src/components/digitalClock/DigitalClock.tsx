@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DigitalNumber from './digitalNumber/DigitalNumber';
 
 interface IProps {
