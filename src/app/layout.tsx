@@ -8,6 +8,7 @@ import Links from '@/components/links/Links';
 import MyInf from '@/components/myInf/MyInf';
 import SiteInf from '@/components/siteInf/SiteInf';
 import SiteAnalytics from '@/components/siteAnalytics/SiteAnalytics';
+import Tags from '@/components/tags/Tags';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -63,8 +64,7 @@ export default function RootLayout({
                                 <Footer></Footer>
                             </div>
                             <Aside className="bg-custom-color-4 dark:bg-custom-color-dark-4 max-xl:hidden">
-                                <div></div>
-                                {/* <SiteInf></SiteInf> */}
+                                <Tags></Tags>
                             </Aside>
                         </main>
                     </div>

@@ -11,7 +11,7 @@ interface IProps {
     onClick?: () => void;
 }
 
-export default function Post(props: IProps) {
+export default function PostItem(props: IProps) {
     const { data, className, onClick } = props;
     const { title, description, authors, date } = data;
     const [imgSize, setImageSize] = useState(128);
@@ -29,7 +29,7 @@ export default function Post(props: IProps) {
             <div className="flex flex-col justify-between gap-1 w-full h-full">
                 <div className="flex flex-col justify-center w-full">
                     <strong className="font-medium text-font-strong dark:text-font-light-dark">{title}</strong>
-                    <p className="w-full pl-1 text-xs overflow-hidden text-ellipsis line-clamp-4 indent-1 text-font-normal dark:text-font-normal-dark">
+                    <p className="w-full pl-1 text-xs text-ellipsis line-clamp-4 indent-1 text-font-normal dark:text-font-normal-dark">
                         {description}
                     </p>
                 </div>
@@ -43,14 +43,12 @@ export default function Post(props: IProps) {
                     <li className="flex items-center h-full gap-2">
                         <UserOutlined />
                         {authors.map((item) => (
-                            <a key={item} href="">
-                                {item}
-                            </a>
+                            <div key={item}>{item}</div>
                         ))}
                     </li>
                     <li className="flex items-center gap-2 whitespace-nowrap">
                         <ClockCircleOutlined />
-                        <a href="">{date.slice(0, 10)}</a>
+                        <div>{date.slice(0, 10)}</div>
                     </li>
                 </ul>
             </div>

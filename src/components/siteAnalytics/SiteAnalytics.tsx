@@ -23,7 +23,7 @@ const SiteAnalytics = () => {
           `,
                 }}
             />
-            <Script
+            {/* <Script
                 id="baiduAnalytics"
                 strategy="afterInteractive"
                 dangerouslySetInnerHTML={{
@@ -37,7 +37,7 @@ const SiteAnalytics = () => {
             })();
           `,
                 }}
-            />
+            /> */}
         </>
     );
 };

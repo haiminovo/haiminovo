@@ -20,9 +20,9 @@ export default function DigitalNumber(props: IProps) {
     const { value = 8 } = props;
     if (value === ':') {
         return (
-            <div className="flex flex-col gap-8 p-4 justify-center items-center -translate-y-2">
-                <div className={`h-2 w-2 bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
-                <div className={`h-2 w-2 bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
+            <div className="flex flex-col gap-8 p-4 justify-center items-center">
+                <div className={`h-3 w-3 rounded-md bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
+                <div className={`h-3 w-3 rounded-md bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
             </div>
         );
     }

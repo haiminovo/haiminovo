@@ -37,6 +37,10 @@ export const Post = defineDocumentType(() => ({
             type: 'date',
             required: true,
         },
+        tags: {
+            type: 'list',
+            of: { type: 'string' },
+        },
         // published: {
         //   type: "boolean",
         //   default: true,
@@ -46,13 +50,10 @@ export const Post = defineDocumentType(() => ({
         //   required: true,
         // },
         authors: {
-            // Reference types are not embedded.
-            // Until this is fixed, we can use a simple list.
-            // type: "reference",
-            // of: Author,
             type: 'list',
             of: { type: 'string' },
             required: true,
+            default: ['haiminovo'],
         },
     },
     computedFields,
