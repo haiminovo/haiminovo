@@ -1,5 +1,5 @@
 'use client';
-import { allPosts, allDocuments, Post } from 'contentlayer/generated';
+import { allPosts, Post } from 'contentlayer/generated';
 import { useRouter, useSearchParams } from 'next/navigation';
 import PostItem from '../postItem/PostItem';
 import { useEffect, useState } from 'react';

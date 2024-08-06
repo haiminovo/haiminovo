@@ -22,15 +22,21 @@
         }
     }
 }
+
 svg {
     color: unset !important;
 }
-body {
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
     font-weight: 400;
     color: #3a4a5a;
     font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif,
         monospace !important;
-    scrollbar-width: thin;
+}
+
+body {
     :is(.dark *) {
         color: rgba(255, 255, 255, 0.7);
     }
