@@ -14,7 +14,7 @@ import PageNavigator from '@/components/pageNavigator/PageNavigator';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: '野猪巢穴',
+    title: '癫疯路',
     description: 'haimin的个人网站',
 };
 
