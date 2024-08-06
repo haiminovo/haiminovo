@@ -1,7 +1,7 @@
 'use client';
 import { removeLS, getLS, setLS } from '@/utils';
 import { MoonFilled, SunFilled } from '@ant-design/icons';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useState } from 'react';
 
 interface IProps {
     className?: string;
@@ -12,11 +12,6 @@ export default function DarkModeBtn(props: IProps) {
     const [rootElement, setRootElement] = useState<any>();
     const [isDark, setIsDark] = useState(false);
     const darkModeStorageKey = 'user-color-scheme';
-
-    const validColorModeKeys: any = {
-        dark: true,
-        light: true,
-    };
 
     const invertDarkModeObj: any = {
         dark: 'light',
@@ -30,7 +25,7 @@ export default function DarkModeBtn(props: IProps) {
 
     const toggleCustomDarkMode = () => {
         let currentSetting: any = getLS(darkModeStorageKey);
-        if (validColorModeKeys[currentSetting]) {
+        if (currentSetting) {
             currentSetting = invertDarkModeObj[currentSetting];
         } else if (currentSetting === null) {
             currentSetting = invertDarkModeObj[getModeFromClassList()];
@@ -42,21 +37,24 @@ export default function DarkModeBtn(props: IProps) {
         return currentSetting;
     };
 
-    const applyCustomDarkModeSettings = (mode?: any) => {
-        const currentSetting = mode || getLS(darkModeStorageKey);
-        if (validColorModeKeys[currentSetting]) {
-            if (currentSetting === 'light') {
-                setIsDark(false);
-                rootElement?.classList.remove('dark');
+    const applyCustomDarkModeSettings = useCallback(
+        (mode?: any) => {
+            const currentSetting = mode || getLS(darkModeStorageKey);
+            if (currentSetting) {
+                if (currentSetting === 'light') {
+                    setIsDark(false);
+                    rootElement?.classList.remove('dark');
+                } else {
+                    rootElement?.classList.add('dark');
+                }
             } else {
-                rootElement?.classList.add('dark');
+                setIsDark(true);
+                rootElement?.classList.remove('dark');
+                removeLS(darkModeStorageKey);
             }
-        } else {
-            setIsDark(true);
-            rootElement?.classList.remove('dark');
-            removeLS(darkModeStorageKey);
-        }
-    };
+        },
+        [rootElement?.classList]
+    );
 
     useLayoutEffect(() => {
         setRootElement(document.documentElement);
@@ -64,7 +62,7 @@ export default function DarkModeBtn(props: IProps) {
 
     useLayoutEffect(() => {
         if (rootElement) applyCustomDarkModeSettings();
-    }, [rootElement]);
+    }, [applyCustomDarkModeSettings, rootElement]);
 
     return (
         <div

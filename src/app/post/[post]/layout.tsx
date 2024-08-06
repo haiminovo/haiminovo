@@ -6,17 +6,8 @@ import {
     LikeOutlined,
     PayCircleOutlined,
 } from '@ant-design/icons';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { twMerge } from 'tailwind-merge';
-import Comment from '@/components/comment/Comment';
-import Script from 'next/script';
 const inter = Inter({ subsets: ['latin'] });
-
-export const metadata: Metadata = {
-    title: '野猪巢穴',
-    description: 'haimin的个人网站',
-};
 
 export default function RootLayout({
     children,

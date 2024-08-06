@@ -10,4 +10,3 @@ export default function Home() {
         </Suspense>
     );
 }
-// 样式覆盖格式 className={twMerge('[&.ant-typography]:text-[#888]')}

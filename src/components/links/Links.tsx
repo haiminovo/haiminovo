@@ -32,7 +32,7 @@ export default function Links(props: IProps) {
                 <Link
                     key={item.title}
                     href={item.path}
-                    className="flex items-center p-2 rounded-lg gap-3 hover:bg-custom-color-2 dark:hover:bg-custom-color-dark-2"
+                    className="flex items-center p-2 rounded-lg gap-3 font-semibold hover:bg-custom-color-2 dark:hover:bg-custom-color-dark-2"
                 >
                     <div>{showIcon && item.icon}</div>
                     <p>{item.title}</p>

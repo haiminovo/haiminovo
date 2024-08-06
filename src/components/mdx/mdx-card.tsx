@@ -1,8 +1,6 @@
 // mdx-card.tsx
 import Link from 'next/link';
 
-import { twMerge } from 'tailwind-merge';
-
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
     href?: string;
     disabled?: boolean;
@@ -11,11 +9,10 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function MdxCard({ href, className, children, disabled, ...props }: CardProps) {
     return (
         <div
-            className={twMerge(
-                'group relative rounded-lg border p-6 shadow-md transition-shadow hover:shadow-lg',
-                disabled && 'cursor-not-allowed opacity-60',
-                className
-            )}
+            className={
+                'group relative rounded-lg border p-6 shadow-md transition-shadow hover:shadow-lg' + disabled &&
+                'cursor-not-allowed opacity-60 ' + className
+            }
             {...props}
         >
             <div className="flex flex-col justify-between space-y-4">

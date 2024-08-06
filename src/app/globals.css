@@ -3,28 +3,49 @@
 @tailwind utilities;
 
 @layer utilities {
-    @variants responsive {
-        .zoom-20 {
-            zoom: 0.2;
-        }
-        .zoom-25 {
-            zoom: 0.25;
-        }
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
+    .zoom-20 {
+        zoom: 0.2;
+    }
+    .zoom-25 {
+        zoom: 0.25;
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
 
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .no-scrollbar {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-        }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
     }
 }
 
-svg {
-    color: unset !important;
+@property --scroll-position {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+
+@keyframes adjust-pos {
+    to {
+        --scroll-position: 100;
+    }
+}
+
+:root {
+    animation: adjust-pos 3s linear both;
+    animation-timeline: scroll();
+}
+
+.toTopBox {
+    counter-reset: scroll-position calc(var(--scroll-position) * 1);
+}
+
+@container style(--scroll-position: 0) {
+    .toTopBox {
+        display: none;
+    }
 }
 
 html {
@@ -34,6 +55,12 @@ html {
     color: #3a4a5a;
     font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif,
         monospace !important;
+
+    transition: --scroll-position 0.15s linear;
+    [data-id='--scroll-position']::before {
+        font-size: x-large;
+        content: counter(scroll-position);
+    }
 }
 
 body {
@@ -41,23 +68,3 @@ body {
         color: rgba(255, 255, 255, 0.7);
     }
 }
-
-:root {
-    --color-mode: 'light';
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-mode: 'dark';
-    }
-}
-
-/* @media (prefers-color-scheme: dark) {
-    html {
-        filter: invert(1) hue-rotate(180deg);
-        transition: color 300ms, background-color 300ms;
-    }
-    html img {
-        filter: invert(1) hue-rotate(180deg);
-    }
-} */

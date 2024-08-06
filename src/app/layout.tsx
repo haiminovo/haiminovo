@@ -10,6 +10,7 @@ import SiteInf from '@/components/siteInf/SiteInf';
 import SiteAnalytics from '@/components/siteAnalytics/SiteAnalytics';
 import Tags from '@/components/tags/Tags';
 import PageNavigator from '@/components/pageNavigator/PageNavigator';
+import BackToTop from '@/components/backToTop/BackToTop';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -68,6 +69,7 @@ export default function RootLayout({
                             <Aside className="relative bg-custom-color-4 dark:bg-custom-color-dark-4 max-xl:hidden">
                                 <Tags></Tags>
                                 <PageNavigator></PageNavigator>
+                                <BackToTop></BackToTop>
                             </Aside>
                         </main>
                     </div>
