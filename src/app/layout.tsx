@@ -15,7 +15,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: '癫疯路',
-    description: 'haimin的个人网站',
+    description: 'haimin的癫疯之路',
+    applicationName: 'haiminovo',
 };
 
 export default function RootLayout({
