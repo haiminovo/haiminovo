@@ -15,8 +15,8 @@ export default function BaseStick(props: IProps) {
     if (!active) return <div className="h-3 w-12"></div>;
     const basicStickStyle =
         'relative bg-custom-color-dark-4 dark:bg-custom-color-4 h-3 w-12 ' +
-        `before:absolute before:left-0 before:w-3 before:h-3 before:bg-custom-color-4 dark:before:bg-custom-color-dark-4 ` +
-        `after:absolute after:right-0 after:w-3 after:h-3 after:bg-custom-color-4 dark:after:bg-custom-color-dark-4 `;
+        `before:absolute before:left-0 before:w-3 before:h-3 before:bg-custom-color-2 dark:before:bg-custom-color-dark-2 ` +
+        `after:absolute after:right-0 after:w-3 after:h-3 after:bg-custom-color-2 dark:after:bg-custom-color-dark-2 `;
     const directionStickStyle =
         'before:[clip-path:polygon(_0%_0%,_-100%_100%,_100%_0%,_0%_0%)] ' +
         'after:[clip-path:polygon(_0%_0%,_200%_100%,_100%_0%,_0%_0%)] ' +

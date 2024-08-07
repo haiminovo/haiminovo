@@ -19,7 +19,7 @@ export default function Navbar(props: IProps) {
             <div className="flex items-center justify-between gap-2 w-full h-full">
                 <Links></Links>
                 <div className="flex items-center">
-                    <DigitalClock className="zoom-20 h-full max-md:hidden"></DigitalClock>
+                    <DigitalClock className="zoom-20 h-full pr-28 max-md:hidden"></DigitalClock>
                     <DarkModeBtn></DarkModeBtn>
                 </div>
             </div>
