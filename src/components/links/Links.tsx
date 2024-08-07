@@ -5,7 +5,6 @@ import {
     HomeOutlined,
     QuestionCircleOutlined,
     TeamOutlined,
-    UsergroupAddOutlined,
 } from '@ant-design/icons';
 
 interface IProps {
@@ -34,12 +33,12 @@ export const links: {
     },
     {
         title: '友链',
-        path: '/dashboard',
+        path: '/friendLink',
         icon: <TeamOutlined />,
     },
     {
         title: '关于',
-        path: '/dashboard',
+        path: '/about',
         icon: <QuestionCircleOutlined />,
     },
 ];
