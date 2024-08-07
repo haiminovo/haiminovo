@@ -48,7 +48,7 @@ export default function RootLayout({
                         <div className="flex flex-col gap-3 w-full">
                             <MyInf></MyInf>
                             <Links className="flex-col px-3 w-full"></Links>
-                            <PageNavigator className="pt-6 xl:hidden"></PageNavigator>
+                            <PageNavigator className=" pt-6 xl:hidden"></PageNavigator>
                         </div>
                         <div className="flex flex-col gap-3 w-full">
                             <Tags className="xl:hidden"></Tags>
@@ -56,11 +56,8 @@ export default function RootLayout({
                         </div>
                     </Aside>
                     <div className="flex flex-1 flex-col h-full">
-                        <Navbar className="sticky w-full top-0 z-50 h-14 max-md:h-10"></Navbar>
-                        <main
-                            className="top-14 flex flex-1 w-full h-full
-                                min-h-[calc(100vh-56px)]"
-                        >
+                        <Navbar className="top-0 z-50 h-14 max-md:h-10"></Navbar>
+                        <main className="top-14 flex flex-1 w-full h-full min-h-[calc(100vh-56px)]">
                             <div className="flex flex-col flex-1 justify-between">
                                 <div
                                     className="flex flex-col flex-1 w-full pt-6 no-scrollbar px-6
