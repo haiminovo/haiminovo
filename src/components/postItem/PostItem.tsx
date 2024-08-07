@@ -13,7 +13,7 @@ interface IProps {
 
 export default function PostItem(props: IProps) {
     const { data, className, onClick } = props;
-    const { title, description, authors, date } = data;
+    const { title, description, authors, date, tags } = data;
     const [imgSize, setImageSize] = useState(128);
     useEffect(() => {
         if (isMobile) {
@@ -22,7 +22,7 @@ export default function PostItem(props: IProps) {
     }, []);
     return (
         <div
-            className={`flex items-start gap-4 w-full h-40 rounded-2xl p-4 cursor-pointer max-md:p-2 max-md:h-32 ${className}`}
+            className={`flex items-start gap-4 w-full h-40 shadow-lg bg-custom-color-5 dark:bg-custom-color-dark-5 rounded-2xl p-4 cursor-pointer max-md:p-2 max-md:h-32 ${className}`}
             onClick={onClick}
         >
             <Image className="rounded-lg" alt="文章头图" src={'/bird0.svg'} width={imgSize} height={imgSize}></Image>
@@ -33,24 +33,38 @@ export default function PostItem(props: IProps) {
                         {description}
                     </p>
                 </div>
-
-                <ul
-                    className="flex justify-end gap-5 bg-gradient-to-l rounded-md px-3 text-xs p-1
-                 from-custom-color-10 to-custom-color-7 text-font-light 
-                 dark:from-custom-color-dark-10 dark:to-custom-color-dark-7 dark:text-font-light-dark 
+                <div className="flex justify-between pl-2">
+                    <ul
+                        className="flex gap-5 
                 "
-                >
-                    <li className="flex items-center h-full gap-2">
-                        <UserOutlined />
-                        {authors.map((item) => (
-                            <div key={item}>{item}</div>
+                    >
+                        {tags?.map((item) => (
+                            <li
+                                key={item}
+                                className="flex items-center h-full rounded-md gap-2 px-2 text-xs bg-gradient-to-tl shadow-md
+                                from-custom-color-1 to-custom-color-5 text-font-light dark:text-font-light-dark 
+                                dark:from-custom-color-dark-10 dark:to-custom-color-dark-5 "
+                            >
+                                {item}
+                            </li>
                         ))}
-                    </li>
-                    <li className="flex items-center gap-2 whitespace-nowrap">
-                        <ClockCircleOutlined />
-                        <div>{date.slice(0, 10)}</div>
-                    </li>
-                </ul>
+                    </ul>
+                    <ul
+                        className="flex gap-5 rounded-md px-3 text-xs p-1 shadow-md text-font-light dark:text-font-light-dark 
+                        bg-custom-color-4 dark:bg-custom-color-dark-10"
+                    >
+                        <li className="flex items-center h-full gap-2">
+                            <UserOutlined />
+                            {authors.map((item) => (
+                                <div key={item}>{item}</div>
+                            ))}
+                        </li>
+                        <li className="flex items-center gap-2 whitespace-nowrap">
+                            <ClockCircleOutlined />
+                            <div>{date.slice(0, 10)}</div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     );

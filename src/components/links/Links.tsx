@@ -1,9 +1,15 @@
 import Link from 'next/link';
-import { HomeOutlined } from '@ant-design/icons';
+import {
+    DashboardOutlined,
+    FileTextOutlined,
+    HomeOutlined,
+    QuestionCircleOutlined,
+    TeamOutlined,
+    UsergroupAddOutlined,
+} from '@ant-design/icons';
 
 interface IProps {
     className?: string;
-    showIcon?: boolean;
 }
 
 export const links: {
@@ -17,14 +23,29 @@ export const links: {
         icon: <HomeOutlined />,
     },
     {
+        title: '文章',
+        path: '/post',
+        icon: <FileTextOutlined />,
+    },
+    {
         title: '面板',
         path: '/dashboard',
-        icon: <HomeOutlined />,
+        icon: <DashboardOutlined />,
+    },
+    {
+        title: '友链',
+        path: '/dashboard',
+        icon: <TeamOutlined />,
+    },
+    {
+        title: '关于',
+        path: '/dashboard',
+        icon: <QuestionCircleOutlined />,
     },
 ];
 
 export default function Links(props: IProps) {
-    const { className, showIcon = true } = props;
+    const { className } = props;
 
     return (
         <div className={`flex w-full gap-3 ${className}`}>
@@ -32,9 +53,9 @@ export default function Links(props: IProps) {
                 <Link
                     key={item.title}
                     href={item.path}
-                    className="flex items-center p-2 rounded-lg gap-3 font-semibold hover:bg-custom-color-2 dark:hover:bg-custom-color-dark-2"
+                    className="flex items-center p-2 rounded-lg gap-3 font-normal hover:shadow-md hover:bg-custom-color-2 dark:hover:bg-custom-color-dark-2"
                 >
-                    <div>{showIcon && item.icon}</div>
+                    <div>{item.icon}</div>
                     <p>{item.title}</p>
                 </Link>
             ))}

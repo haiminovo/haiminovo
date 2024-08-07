@@ -18,8 +18,8 @@ export default function Tags() {
     );
     return (
         <div className="flex flex-col w-full p-1 gap-1">
-            <span className="ml-1 text-font-strong dark:text-font-light-dark font-semibold">文章标签</span>
-            <ul className="flex flex-wrap gap-3 p-3 w-full bg-custom-color-7 dark:bg-custom-color-dark-7 rounded-md">
+            <span className="ml-1 text-font-strong dark:text-font-light-dark font-medium">标签</span>
+            <ul className="flex flex-wrap gap-3 p-3 w-full shadow-md bg-custom-color-7 dark:bg-custom-color-dark-7 rounded-md">
                 {tags.map((item) => {
                     return (
                         <li key={item.tag}>
