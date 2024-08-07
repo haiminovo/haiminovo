@@ -6,9 +6,8 @@ interface IProps {
 }
 
 export default function MyInf(props: IProps) {
-    const { className } = props;
     return (
-        <div className={`flex items-center w-full h-28 p-3 gap-3 ${className}`}>
+        <div className="flex items-center w-full h-28 p-3 gap-3" {...props}>
             <Image
                 alt="用户头像"
                 src={'http://haiminovo.cn:8088/haimin.jpg'}

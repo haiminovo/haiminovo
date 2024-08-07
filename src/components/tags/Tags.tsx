@@ -3,7 +3,11 @@ import { useRouter } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 import Link from 'next/link';
 
-export default function Tags() {
+interface IProps {
+    className?: string;
+}
+
+export default function Tags(props: IProps) {
     const router = useRouter();
     const tags: { tag: string; count: number }[] = [];
     allPosts.forEach((item) =>
@@ -17,7 +21,7 @@ export default function Tags() {
         })
     );
     return (
-        <div className="flex flex-col w-full p-1 gap-1">
+        <div className="flex flex-col w-full gap-1" {...props}>
             <span className="ml-1 text-font-strong dark:text-font-light-dark font-medium">标签</span>
             <ul className="flex flex-wrap gap-3 p-3 w-full shadow-md bg-custom-color-7 dark:bg-custom-color-dark-7 rounded-md">
                 {tags.map((item) => {

@@ -58,7 +58,7 @@ export default function Dashboard() {
                 {colorArr1.slice(0, 7).map((item, index) => {
                     return (
                         <div
-                            key={index + 'a'}
+                            key={index + 'b'}
                             style={{
                                 width: '32px',
                                 height: '32px',

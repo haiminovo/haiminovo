@@ -9,10 +9,9 @@ interface IProps {
 }
 
 export default function Menu(props: IProps) {
-    const { className } = props;
     return (
-        <div className={`flex items-center gap-4 ${className}`}>
-            <div className={`flex gap-3 font-light text-sm`}>
+        <div className="flex items-center gap-4" {...props}>
+            <div className="flex gap-3 font-light text-sm">
                 {links.map((item) => (
                     <Link
                         key={item.title}

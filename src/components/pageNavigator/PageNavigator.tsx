@@ -1,9 +1,13 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
-export default function PageNavigator() {
+interface IProps {
+    className?: string;
+}
+
+export default function PageNavigator(props: IProps) {
     const pathName = usePathname();
     const [dots, setDots] = useState<{ id: string; text: string; level: number }[]>();
     useEffect(() => {
@@ -36,7 +40,7 @@ export default function PageNavigator() {
     return (
         <>
             {dots && (
-                <div className="sticky top-16 flex flex-col w-full p-1 gap-1">
+                <div className="sticky top-16 flex flex-col w-full p-1 gap-1" {...props}>
                     <span className="ml-1 text-font-strong dark:text-font-light-dark font-medium">目录</span>
                     <div className="flex flex-col gap-3 p-3 w-full shadow-md bg-custom-color-7 dark:bg-custom-color-dark-7 rounded-md">
                         {dots.map((item) => {

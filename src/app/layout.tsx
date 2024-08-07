@@ -43,13 +43,17 @@ export default function RootLayout({
                 <div className="flex w-[1440px]">
                     <Aside
                         className="sticky top-0 flex flex-col justify-between z-50 h-screen
-                        bg-custom-color-4 dark:bg-custom-color-dark-4 max-[768px]:hidden"
+                        bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:hidden"
                     >
-                        <div>
+                        <div className="flex flex-col gap-3 w-full">
                             <MyInf></MyInf>
-                            <Links className="flex-col px-3"></Links>
+                            <Links className="flex-col px-3 w-full"></Links>
+                            <PageNavigator className="pt-6 xl:hidden"></PageNavigator>
                         </div>
-                        <SiteInf></SiteInf>
+                        <div className="flex flex-col gap-3 w-full">
+                            <Tags className="xl:hidden"></Tags>
+                            <SiteInf></SiteInf>
+                        </div>
                     </Aside>
                     <div className="flex flex-1 flex-col h-full">
                         <Navbar className="sticky w-full top-0 z-50 h-14 max-md:h-10"></Navbar>

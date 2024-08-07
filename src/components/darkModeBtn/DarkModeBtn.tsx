@@ -8,7 +8,6 @@ interface IProps {
 }
 
 export default function DarkModeBtn(props: IProps) {
-    const { className } = props;
     const [rootElement, setRootElement] = useState<any>();
     const [isDark, setIsDark] = useState(false);
     const darkModeStorageKey = 'user-color-scheme';
@@ -66,11 +65,12 @@ export default function DarkModeBtn(props: IProps) {
 
     return (
         <div
-            className={`flex items-center cursor-pointer text-sm ${className}`}
+            className="flex items-center cursor-pointer text-sm"
             onClick={() => {
                 setIsDark(!isDark);
                 applyCustomDarkModeSettings(toggleCustomDarkMode());
             }}
+            {...props}
         >
             {isDark ? <SunFilled /> : <MoonFilled />}
         </div>

@@ -44,10 +44,8 @@ export const links: {
 ];
 
 export default function Links(props: IProps) {
-    const { className } = props;
-
     return (
-        <div className={`flex w-full gap-3 ${className}`}>
+        <div className="flex w-full gap-3 ${className}" {...props}>
             {links.map((item) => (
                 <Link
                     key={item.title}
