@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer utilities {
+    .zoom-15 {
+        zoom: 0.15;
+    }
     .zoom-20 {
         zoom: 0.2;
     }
@@ -58,7 +61,7 @@ html {
 
     transition: --scroll-position 0.15s linear;
     [data-id='--scroll-position']::before {
-        font-size: x-large;
+        font-size: medium;
         content: counter(scroll-position);
     }
 }

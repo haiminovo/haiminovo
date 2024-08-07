@@ -31,7 +31,7 @@ export default function SiteInf() {
                             <div className="flex flex-1 items-center justify-between">
                                 <div className="flex items-center gap-2">
                                     {item.icon}
-                                    <span className=" max-xl:hidden">{item.title}</span>
+                                    <span>{item.title}</span>
                                 </div>
                                 <span>{item.value || <LoadingOutlined />}</span>
                             </div>
@@ -43,7 +43,7 @@ export default function SiteInf() {
                         <div className="flex flex-1 items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <BarChartOutlined />
-                                <span className=" max-xl:hidden">总访问量</span>
+                                <span>总访问量</span>
                             </div>
                             <span id="busuanzi_value_site_pv">
                                 <LoadingOutlined />

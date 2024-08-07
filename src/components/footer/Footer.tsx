@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function Footer() {
     return (
         <footer
-            className="flex justify-center gap-1 p-2 text-xs whitespace-nowrap max-md:flex-wrap items-center
+            className="flex justify-center w-full gap-1 p-2 text-xs whitespace-nowrap max-md:flex-wrap items-center
             bg-custom-color-8 dark:bg-custom-color-dark-8 text-font-light dark:text-font-light-dark"
         >
             <a

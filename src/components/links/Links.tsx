@@ -1,11 +1,5 @@
 import Link from 'next/link';
-import {
-    DashboardOutlined,
-    FileTextOutlined,
-    HomeOutlined,
-    QuestionCircleOutlined,
-    TeamOutlined,
-} from '@ant-design/icons';
+import { DashboardOutlined, FileTextOutlined, HomeOutlined, TeamOutlined } from '@ant-design/icons';
 
 interface IProps {
     className?: string;
@@ -36,24 +30,19 @@ export const links: {
         path: '/friendLink',
         icon: <TeamOutlined />,
     },
-    {
-        title: '关于',
-        path: '/about',
-        icon: <QuestionCircleOutlined />,
-    },
 ];
 
 export default function Links(props: IProps) {
     return (
-        <div className="flex w-full gap-3 ${className}" {...props}>
+        <div className="flex items-center" {...props}>
             {links.map((item) => (
                 <Link
                     key={item.title}
                     href={item.path}
-                    className="flex items-center p-2 rounded-lg gap-3 font-normal hover:shadow-md hover:bg-custom-color-2 dark:hover:bg-custom-color-dark-2"
+                    className="flex items-center p-2 rounded-lg gap-1 font-normal hover:shadow-md hover:bg-custom-color-2 dark:hover:bg-custom-color-dark-2"
                 >
-                    <div>{item.icon}</div>
-                    <p>{item.title}</p>
+                    <div className="text-xs">{item.icon}</div>
+                    <div className="text-sm">{item.title}</div>
                 </Link>
             ))}
         </div>
