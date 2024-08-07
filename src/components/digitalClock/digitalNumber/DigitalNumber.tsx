@@ -27,15 +27,15 @@ export default function DigitalNumber(props: IProps) {
         );
     }
     return (
-        <div className="w-16 overflow-clip">
+        <div className="w-14">
             <div className="relative flex flex-col w-36 translate-x-2">
                 <BaseStick direction="top" active={!!stickActiveMap[0][value]}></BaseStick>
-                <div className="flex m-5 translate-x-[-45px]">
+                <div className="flex m-4 translate-x-[-40px]">
                     <BaseStick direction="left" active={!!stickActiveMap[1][value]}></BaseStick>
                     <BaseStick direction="right" active={!!stickActiveMap[2][value]}></BaseStick>
                 </div>
                 <BaseStick direction="mid" active={!!stickActiveMap[3][value]}></BaseStick>
-                <div className="flex m-5 translate-x-[-45px]">
+                <div className="flex m-4 translate-x-[-40px]">
                     <BaseStick direction="left" active={!!stickActiveMap[4][value]}></BaseStick>
                     <BaseStick direction="right" active={!!stickActiveMap[5][value]}></BaseStick>
                 </div>
