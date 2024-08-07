@@ -22,26 +22,24 @@ export default function PostItem(props: IProps) {
     }, []);
     return (
         <div
-            className={`flex items-start gap-4 w-full h-40 shadow-lg bg-custom-color-5 dark:bg-custom-color-dark-5 rounded-2xl p-4 cursor-pointer max-md:p-2 max-md:h-32 ${className}`}
+            className={`relative flex items-start gap-4 w-full h-40 shadow-lg rounded-2xl p-4 cursor-pointer max-md:h-36 max-md:p-2 max-md:gap-2
+                bg-custom-color-5 dark:bg-custom-color-dark-5 ${className}`}
             onClick={onClick}
         >
             <Image className="rounded-lg" alt="文章头图" src={'/bird0.svg'} width={imgSize} height={imgSize}></Image>
-            <div className="flex flex-col justify-between gap-1 w-full h-full">
+            <div className="flex flex-col justify-between gap-4 w-full max-md:gap-2">
                 <div className="flex flex-col justify-center w-full">
                     <strong className="font-medium text-font-strong dark:text-font-light-dark">{title}</strong>
                     <p className="w-full pl-1 text-xs text-ellipsis line-clamp-4 indent-1 text-font-normal dark:text-font-normal-dark">
                         {description}
                     </p>
                 </div>
-                <div className="flex justify-between pl-2">
-                    <ul
-                        className="flex gap-5 
-                "
-                    >
+                <div className="flex justify-between w-full gap-2 bottom-2 left-1/2 px-2 max-md:-translate-x-1/2 max-md:absolute max-[425px]:justify-end">
+                    <ul className="flex gap-2 max-[425px]:hidden">
                         {tags?.map((item) => (
                             <li
                                 key={item}
-                                className="flex items-center h-full rounded-md gap-2 px-2 text-xs bg-gradient-to-tl shadow-md
+                                className="flex items-center h-full rounded-md gap-2 px-2 text-xs shadow-md bg-gradient-to-tl 
                                 from-custom-color-1 to-custom-color-5 text-font-light dark:text-font-light-dark 
                                 dark:from-custom-color-dark-10 dark:to-custom-color-dark-5 "
                             >
@@ -50,8 +48,9 @@ export default function PostItem(props: IProps) {
                         ))}
                     </ul>
                     <ul
-                        className="flex gap-5 rounded-md px-3 text-xs p-1 shadow-md text-font-light dark:text-font-light-dark 
-                        bg-custom-color-4 dark:bg-custom-color-dark-10"
+                        className="flex items-center gap-2 rounded-md px-2 text-xs p-1 shadow-md bg-gradient-to-tl 
+                        text-font-light dark:text-font-light-dark 
+                        from-custom-color-1 to-custom-color-5 dark:from-custom-color-dark-10 dark:to-custom-color-dark-5"
                     >
                         <li className="flex items-center h-full gap-2">
                             <UserOutlined />

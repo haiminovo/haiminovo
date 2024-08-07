@@ -26,42 +26,42 @@ export default function Dashboard() {
                     setBasicColorSelect(val.target.value);
                 }}
             />
-            <div className="flex w-[500px] h-[64px]">
+            <div className="flex w-full h-[64px]">
                 {colorArr.map((item, index) => {
                     return (
                         <div
                             key={index}
                             style={{
-                                width: '50px',
-                                height: '50px',
+                                width: '32px',
+                                height: '32px',
                                 background: colorArr[index],
                             }}
                         ></div>
                     );
                 })}
             </div>
-            <div className="flex w-[500px] h-[64px]">
+            <div className="flex w-full h-[64px]">
                 {colorArr1.map((item, index) => {
                     return (
                         <div
                             key={index + 'a'}
                             style={{
-                                width: '50px',
-                                height: '50px',
+                                width: '32px',
+                                height: '32px',
                                 background: colorArr1[index],
                             }}
                         ></div>
                     );
                 })}
             </div>
-            <div className="flex w-[500px] h-[64px]">
+            <div className="flex w-full h-[64px]">
                 {colorArr1.slice(0, 7).map((item, index) => {
                     return (
                         <div
                             key={index + 'a'}
                             style={{
-                                width: '50px',
-                                height: '50px',
+                                width: '32px',
+                                height: '32px',
                                 background: `#${index}a${index + 1}a${index + 2}a`,
                             }}
                         ></div>
