@@ -24,7 +24,7 @@ export default function PostList() {
     }, [params]);
 
     return (
-        <div className="flex flex-col w-full gap-3">
+        <div className="flex flex-col w-full gap-3 p-6 max-md:p-4">
             {posts.map((item, index) => (
                 <PostItem
                     data={item}
