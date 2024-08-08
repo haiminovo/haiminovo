@@ -34,7 +34,7 @@ export const links: {
 
 export default function Links(props: IProps) {
     return (
-        <div className="flex items-center" {...props}>
+        <div className="flex items-center text-nowrap" {...props}>
             {links.map((item) => (
                 <Link
                     key={item.title}

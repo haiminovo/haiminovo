@@ -1,9 +1,6 @@
-'use client';
 import Image from 'next/image';
 import { ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
-import { isMobile } from 'react-device-detect';
 import type { Post } from 'contentlayer/generated';
-import { useEffect, useState } from 'react';
 
 interface IProps {
     data: Post;
@@ -14,59 +11,50 @@ interface IProps {
 export default function PostItem(props: IProps) {
     const { data, className, onClick } = props;
     const { title, description, authors, date, tags } = data;
-    const [imgSize, setImageSize] = useState(88);
-    useEffect(() => {
-        if (isMobile) {
-            setImageSize(64);
-        }
-    }, []);
     return (
         <div
-            className={`flex flex-col justify-between w-full h-40 shadow-lg rounded-2xl p-4 cursor-pointer max-md:h-36 max-md:p-2 max-md:gap-2
+            className={`flex flex-col justify-between gap-4 w-full shadow-lg rounded-2xl px-6 py-4 cursor-pointer
                 bg-custom-color-5 dark:bg-custom-color-dark-5 ${className}`}
         >
-            <div className={`flex items-start gap-4 `} onClick={onClick}>
-                <Image
-                    className="rounded-lg"
-                    alt="文章头图"
-                    src={'/bird0.svg'}
-                    width={imgSize}
-                    height={imgSize}
-                ></Image>
-                <div className="flex flex-col justify-between gap-4 w-full max-md:gap-2">
-                    <div className="flex flex-col justify-center w-full">
-                        <strong className="font-medium text-font-strong dark:text-font-light-dark">{title}</strong>
-                        <p className="w-full pl-1 text-xs text-ellipsis line-clamp-4 indent-1 text-font-normal dark:text-font-normal-dark">
-                            {description}
-                        </p>
-                    </div>
+            <div className="flex items-start" onClick={onClick}>
+                <div className="flex flex-col justify-center gap-2 w-full">
+                    <strong className="text-lg font-medium break-all dark:text-font-light-dark">{title}</strong>
+                    <p className="w-full text-ellipsis line-clamp-3 break-all text-font-normal dark:text-font-normal-dark">
+                        {description}
+                    </p>
                 </div>
             </div>
-            <div className="flex justify-between w-full gap-2 bottom-2 left-1/2 px-2 max-[425px]:justify-end">
-                <ul className="flex gap-2 max-[425px]:hidden">
+            <div className="flex justify-between flex-wrap w-full gap-2 bottom-2 left-1/2 max-[424px]:flex-col">
+                <ul className="flex items-center flex-wrap gap-2">
                     {tags?.map((item) => (
                         <li
                             key={item}
-                            className="flex items-center h-full rounded-md gap-2 px-2 text-xs shadow-md bg-gradient-to-tl 
+                            className="flex items-center rounded-md gap-2 px-2 text-xs text-nowrap shadow-md bg-gradient-to-tl 
                                 from-custom-color-1 to-custom-color-5 text-font-light dark:text-font-light-dark 
                                 dark:from-custom-color-dark-10 dark:to-custom-color-dark-5 "
                         >
-                            {item}
+                            #{item}
                         </li>
                     ))}
                 </ul>
                 <ul
-                    className="flex items-center gap-2 rounded-md px-2 text-xs p-1 shadow-md bg-gradient-to-t
+                    className="flex items-center flex-wrap gap-2
                         text-font-light dark:text-font-light-dark 
-                        from-custom-color-1 to-custom-color-5 dark:from-custom-color-dark-7 dark:to-custom-color-dark-5"
+"
                 >
-                    <li className="flex items-center h-full gap-2">
+                    <li
+                        className="flex items-center flex-wrap gap-2 rounded-md px-2 text-xs shadow-md bg-gradient-to-t
+                            from-custom-color-1 to-custom-color-5 dark:from-custom-color-dark-7 dark:to-custom-color-dark-5"
+                    >
                         <UserOutlined />
                         {authors.map((item) => (
                             <div key={item}>{item}</div>
                         ))}
                     </li>
-                    <li className="flex items-center gap-2 whitespace-nowrap">
+                    <li
+                        className="flex items-center gap-2 whitespace-nowrap rounded-md px-2 text-xs shadow-md bg-gradient-to-t
+                            from-custom-color-1 to-custom-color-5 dark:from-custom-color-dark-7 dark:to-custom-color-dark-5"
+                    >
                         <ClockCircleOutlined />
                         <div>{date.slice(0, 10)}</div>
                     </li>

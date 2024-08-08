@@ -1,108 +1,66 @@
 ---
-title: Privacy
-description: here is a long description of each post and it should be cuted while the word is too long. here is a
-    long description of each post and it should be cuted while the word is too long. here is a long
-    description of each post and it should be cuted while the word is too long.here is a long description of each post and it should be cuted while the word is too long. here is a
-    long description of each post and it should be cuted while the word is too long. here is a long
-    description of each post and it should be cuted while the word is too long.
+title: 使用Nextjs(SSG)+contentLayer2搭建我的blog
+description: 自己建站的打算由来已久，此前也用typcho搭配handsome记录了一些文字，但总感觉作为一个前端建站还套模版感觉有点羞愧。本来在做毕业设计时也打算做一个长期运行的站点也因为期间几段实习的辗转与就业的原因草草收场。近几周正好没什么工作安排，于是趁这个机会搓个博客。
 authors: [haiminovo]
 date: 2024-07-23
-tags: [test, a, b, c, d]
+tags: [开发, Nextjs, SSG]
 ---
 
-# Title1
+## 打通 gitAction 自动化
 
-## Title2
+在毕业设计阶段其实也搓了一个站点的雏形，选取的是 Nextjs 的 SSR+Koa 后端的方案，文章和评论系统采用的 quill 富文本编辑器，后来发现对于博客系统 SSG 似乎更有优势，原本的系统已经显得有些臃肿了，干脆直接开个新仓库。之前两家实习过的公司都有自动化的
+git Action 来进行 CI/CD 且使用体验极爽，虽然之前没有接触过但为了摆脱手动部署的繁琐还是先把自动化流程打通,参考
+[网上的教程](https://blog.csdn.net/qq_45634593/article/details/135376877?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-135376877-blog-121345434.235^v43^pc_blog_bottom_relevance_base2&spm=1001.2101.3001.4242.1&utm_relevant_index=3)
+在.github 文件夹下新建 workflos 文件夹并新建 main.yml 文件。
 
-### Title3
+项目根目录/.github/workflows/main.yml
 
-#### Title4
-
-##### Title5
-
-###### Title6
-
-```js
-// test;
-console.log('代码块测试');
+```yaml
+name: CICD
+on:
+    # 代码push的时候触发
+    push:
+        # main 分支的时候触发
+        branches:
+            - main
+jobs:
+    # 定义一个job，名字为CI
+    CI:
+        # 使用github提供给我们的机器去跑
+        runs-on: ubuntu-latest
+        # 步骤
+        steps:
+            # 拉取最新的代码
+            - name: Checkout repository
+              uses: actions/checkout@v3
+              with:
+                  # 克隆的分支
+                  ref: main
+            # 安装node环境
+            - name: Use Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '18.x'
+            # 安装依赖
+            - name: Installing Dependencies
+              run: npm install --legacy-peer-deps
+            # 打包
+            - name: Build
+              run: npm run build
+            # 产物上传服务器
+            - name: Upload to Deploy Server
+              uses: easingthemes/ssh-deploy@main
+              env:
+                  # 免密登录的秘钥
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH }}
+                  # 服务器登录用户名
+                  REMOTE_USER: ${{ secrets.USER }}
+                  # 服务器的公网IP
+                  REMOTE_HOST: ${{ secrets.IP }}
+                  # 你打包后产物的文件夹
+                  SOURCE: 'out/'
+                  # 先清空目标目录
+                  ARGS: '-avzr --delete'
+                  # 上传到服务器目标目录
+                  TARGET: '/www/wwwroot/haiminovo.cn'
 ```
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-# Title2
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-# Title3
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123
-
-123

@@ -45,8 +45,8 @@ export default function RootLayout({
                     >
                         <div className="flex flex-col gap-3 w-full">
                             <MyInf></MyInf>
-                            <PageNavigator className="xl:hidden"></PageNavigator>
-                            <Tags className="xl:hidden"></Tags>
+                            <PageNavigator className="lg:hidden"></PageNavigator>
+                            <Tags className="lg:hidden"></Tags>
                         </div>
                         <div className="flex flex-col gap-3 w-full">
                             <SiteInf></SiteInf>
@@ -63,7 +63,7 @@ export default function RootLayout({
                                     {children}
                                 </div>
                             </div>
-                            <Aside className="relative bg-custom-color-4 dark:bg-custom-color-dark-4 max-xl:hidden">
+                            <Aside className="relative bg-custom-color-4 dark:bg-custom-color-dark-4 max-lg:hidden">
                                 <Tags></Tags>
                                 <PageNavigator></PageNavigator>
                                 <BackToTop></BackToTop>

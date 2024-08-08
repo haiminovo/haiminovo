@@ -25,7 +25,6 @@
         "next-contentlayer2": "^0.4.6",
         "pnpm": "^9.4.0",
         "react": "^18",
-        "react-device-detect": "^2.2.3",
         "react-dom": "^18",
         "rehype-autolink-headings": "^7.1.0",
         "rehype-pretty-code": "^0.13.2",
