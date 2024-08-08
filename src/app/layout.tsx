@@ -9,13 +9,12 @@ import SiteAnalytics from '@/components/siteAnalytics/SiteAnalytics';
 import Tags from '@/components/tags/Tags';
 import PageNavigator from '@/components/pageNavigator/PageNavigator';
 import BackToTop from '@/components/backToTop/BackToTop';
-import Ball from '@/components/ball/Ball';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: '癫疯路',
-    description: 'haimin的癫疯之路',
+    title: '巅峰之路',
+    description: 'haimin的巅峰之路',
     applicationName: 'haiminovo',
 };
 
@@ -39,11 +38,10 @@ export default function RootLayout({
                 dark:bg-custom-color-dark-1 dark:text-font-normal-dark
                  `}
             >
-                <Ball></Ball>
                 <div className="flex w-[1440px]">
                     <Aside
-                        className="sticky top-0 flex flex-col justify-between z-10 h-screen
-                        bg-custom-color-4/80 dark:bg-custom-color-dark-4/80 max-md:hidden"
+                        className="sticky top-0 flex flex-col justify-between z-50 h-screen
+                        bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:hidden"
                     >
                         <div className="flex flex-col gap-3 w-full">
                             <MyInf></MyInf>
@@ -65,7 +63,7 @@ export default function RootLayout({
                                     {children}
                                 </div>
                             </div>
-                            <Aside className="relative bg-custom-color-4/80 dark:bg-custom-color-dark-4/80 max-xl:hidden">
+                            <Aside className="relative bg-custom-color-4 dark:bg-custom-color-dark-4 max-xl:hidden">
                                 <Tags></Tags>
                                 <PageNavigator></PageNavigator>
                                 <BackToTop></BackToTop>

@@ -36,6 +36,11 @@
     }
 }
 
+* {
+    transition: all;
+    transition-duration: 150ms;
+}
+
 :root {
     animation: adjust-pos 3s linear both;
     animation-timeline: scroll();
