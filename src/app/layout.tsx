@@ -9,6 +9,7 @@ import SiteAnalytics from '@/components/siteAnalytics/SiteAnalytics';
 import Tags from '@/components/tags/Tags';
 import PageNavigator from '@/components/pageNavigator/PageNavigator';
 import BackToTop from '@/components/backToTop/BackToTop';
+import Ball from '@/components/ball/Ball';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -38,22 +39,23 @@ export default function RootLayout({
                 dark:bg-custom-color-dark-1 dark:text-font-normal-dark
                  `}
             >
+                <Ball></Ball>
                 <div className="flex w-[1440px]">
                     <Aside
-                        className="sticky top-0 flex flex-col justify-between z-50 h-screen
-                        bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:hidden"
+                        className="sticky top-0 flex flex-col justify-between z-10 h-screen
+                        bg-custom-color-4/80 dark:bg-custom-color-dark-4/80 max-md:hidden"
                     >
                         <div className="flex flex-col gap-3 w-full">
                             <MyInf></MyInf>
-                            <Tags className="xl:hidden"></Tags>
                             <PageNavigator className="xl:hidden"></PageNavigator>
+                            <Tags className="xl:hidden"></Tags>
                         </div>
                         <div className="flex flex-col gap-3 w-full">
                             <SiteInf></SiteInf>
                         </div>
                     </Aside>
                     <div className="flex flex-1 flex-col h-full">
-                        <Navbar className="top-0 z-50 h-14 max-md:h-10"></Navbar>
+                        <Navbar className="top-0 z-10 h-14 max-md:h-10"></Navbar>
                         <main className="top-14 flex flex-1 w-full h-full min-h-[calc(100vh-56px)]">
                             <div className="flex flex-col flex-1">
                                 <div
@@ -63,7 +65,7 @@ export default function RootLayout({
                                     {children}
                                 </div>
                             </div>
-                            <Aside className="relative bg-custom-color-4 dark:bg-custom-color-dark-4 max-xl:hidden">
+                            <Aside className="relative bg-custom-color-4/80 dark:bg-custom-color-dark-4/80 max-xl:hidden">
                                 <Tags></Tags>
                                 <PageNavigator></PageNavigator>
                                 <BackToTop></BackToTop>

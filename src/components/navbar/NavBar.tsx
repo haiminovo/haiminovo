@@ -12,8 +12,8 @@ export default function Navbar(props: IProps) {
     return (
         <div
             className={`sticky flex items-center p-2 font-bold bg-gradient-to-r backdrop-blur-[2px]
-                from-custom-color-4/100 to-custom-color-1/50 
-                dark:from-custom-color-dark-4/100 dark:to-custom-color-dark-1/50
+                from-custom-color-4/80 to-custom-color-1/30 
+                dark:from-custom-color-dark-4/90 dark:to-custom-color-dark-1/30
                 ${className}`}
         >
             <div className="flex items-center justify-between gap-2 w-full h-full">

@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss';
 export const generateColor = (str: string, mode: 'dark' | 'light' = 'light') => {
     let basicColor = hexToRgb(str);
     if (!basicColor) return;
-    if (mode === 'dark') basicColor = basicColor.map((item) => item - 150);
+    if (mode === 'dark') basicColor = basicColor.map((item) => item - 100);
     const stepArr = basicColor.map((item) =>
         mode === 'dark' ? (item / 10).toFixed(0) : ((255 - item) / 10).toFixed(0)
     );
@@ -31,7 +31,7 @@ const hexToRgb = (str: string) => {
     return hexs?.map((item) => parseInt(item, 16)); // 返回rgb色值[64, 158, 255]
 };
 
-export const basicColor = '#e0e0e0';
+export const basicColor = '#d0d0d0';
 const themeColors: any = {};
 generateColor(basicColor)?.forEach((item, index) => (themeColors[`custom-color-${index + 1}`] = item));
 generateColor(basicColor, 'dark')?.forEach((item, index) => (themeColors[`custom-color-dark-${index + 1}`] = item));
