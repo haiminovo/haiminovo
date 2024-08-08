@@ -1,6 +1,6 @@
 ---
 title: 使用Nextjs(SSG)+contentLayer2搭建我的blog
-description: 自己建站的打算由来已久，此前也用typcho搭配handsome记录了一些文字，但总感觉作为一个前端建站还套模版感觉有点羞愧。本来在做毕业设计时也打算做一个长期运行的站点也因为期间几段实习的辗转与就业的原因草草收场。近几周正好没什么工作安排，于是趁这个机会搓个博客。
+description: 此前用typcho搭配handsome记录过一些文字，但总感觉作为一个前端建站还套模版感觉有点羞愧。本来在做毕业设计时也打算做一个长期运行的站点也因为期间几段实习的辗转与就业的原因草草收场。近几周正好没什么工作安排，于是趁这个机会搓个博客。
 authors: [haiminovo]
 date: 2024-07-23
 tags: [开发, Nextjs, SSG]
@@ -52,11 +52,11 @@ jobs:
               uses: easingthemes/ssh-deploy@main
               env:
                   # 免密登录的秘钥
-                  SSH_PRIVATE_KEY: ${{ secrets.SSH }}
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH }}aaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbccccccccccccccccccccck
                   # 服务器登录用户名
                   REMOTE_USER: ${{ secrets.USER }}
                   # 服务器的公网IP
-                  REMOTE_HOST: ${{ secrets.IP }}
+                  REMOTE_HOST: ${{ secrets.IP }}s
                   # 你打包后产物的文件夹
                   SOURCE: 'out/'
                   # 先清空目标目录

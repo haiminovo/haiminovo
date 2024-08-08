@@ -70,10 +70,10 @@ const components: MDXComponents = {
         />
     ),
     pre: ({ className, ...props }) => (
-        <pre className={'mb-4 mt-6 overflow-x-auto rounded-lg bg-black ' + className} {...props} />
+        <pre className={'mb-4 mt-6 overflow-x-auto rounded-lg bg-black' + className} {...props} />
     ),
     code: ({ className, ...props }) => (
-        <code className={'relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm ' + className} {...props} />
+        <code className={'relative rounded max-w-[280px] p-2 font-mono text-sm ' + className} {...props} />
     ),
     Image,
     Callout,

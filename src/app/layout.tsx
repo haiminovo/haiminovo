@@ -38,7 +38,7 @@ export default function RootLayout({
                 dark:bg-custom-color-dark-1 dark:text-font-normal-dark
                  `}
             >
-                <div className="flex w-[1440px]">
+                <div className="flex max-w-[1440px]">
                     <Aside
                         className="sticky top-0 flex flex-col justify-between z-50 h-screen
                         bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:hidden"
@@ -53,9 +53,9 @@ export default function RootLayout({
                         </div>
                     </Aside>
                     <div className="flex flex-1 flex-col h-full">
-                        <Navbar className="top-0 z-10 h-14 max-md:h-10"></Navbar>
+                        <Navbar className="top-0 z-10 h-14"></Navbar>
                         <main className="top-14 flex flex-1 w-full h-full min-h-[calc(100vh-56px)]">
-                            <div className="flex flex-col flex-1">
+                            <div className="flex flex-col w-full flex-1">
                                 <div
                                     className="flex flex-col flex-1 w-full no-scrollbar
                                     bg-custom-color-7 dark:bg-custom-color-dark-7"
