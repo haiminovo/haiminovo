@@ -45,10 +45,10 @@ export const Post = defineDocumentType(() => ({
         //   type: "boolean",
         //   default: true,
         // },
-        // image: {
-        //   type: "string",
-        //   required: true,
-        // },
+        image: {
+            type: "string",
+            required: false,
+        },
         authors: {
             type: 'list',
             of: { type: 'string' },

@@ -9,6 +9,7 @@ import SiteAnalytics from '@/components/siteAnalytics/SiteAnalytics';
 import Tags from '@/components/tags/Tags';
 import PageNavigator from '@/components/pageNavigator/PageNavigator';
 import BackToTop from '@/components/backToTop/BackToTop';
+import ImageUploader from '@/components/imageUploader/ImageUploader';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -45,6 +46,7 @@ export default function RootLayout({
                     >
                         <div className="flex flex-col gap-3 w-full">
                             <MyInf></MyInf>
+                            <ImageUploader></ImageUploader>
                             <PageNavigator className="lg:hidden"></PageNavigator>
                             <Tags className="lg:hidden"></Tags>
                         </div>

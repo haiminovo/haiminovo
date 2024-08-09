@@ -43,16 +43,16 @@ const config: Config = {
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     ],
     theme: {
-        colors: {
-            'font-light': '#5a6a7a',
-            'font-normal': '#3a4a5a',
-            'font-strong': '#1a2a3a',
-            'font-light-dark': 'rgba(255,255,255,0.9)',
-            'font-normal-dark': 'rgba(255,255,255,0.7)',
-            'font-strong-dark': 'rgba(255,255,255,0.5)',
-            ...themeColors,
-        },
         extend: {
+            colors: {
+                'font-light': '#5a6a7a',
+                'font-normal': '#3a4a5a',
+                'font-strong': '#1a2a3a',
+                'font-light-dark': 'rgba(255,255,255,0.9)',
+                'font-normal-dark': 'rgba(255,255,255,0.7)',
+                'font-strong-dark': 'rgba(255,255,255,0.5)',
+                ...themeColors,
+            },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
