@@ -38,7 +38,7 @@
 
 * {
     transition: all;
-    transition-duration: 150ms;
+    transition-duration: 50ms;
 }
 
 :root {
