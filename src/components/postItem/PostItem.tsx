@@ -15,15 +15,15 @@ export default function PostItem(props: IProps) {
 
     return (
         <div
-            style={{ background: `url(${image})` }}
+            style={{ background: `url(${image})`, backgroundPosition: 'center' }}
             className={`flex flex-col justify-between w-full gap-2 px-6 py-4 shadow-lg rounded-2xl cursor-pointer
-                bg-center bg-no-repeat bg-contain ${className}`}
+                bg-bottom bg-no-repeat bg-contain ${className}`}
         >
             <div className="flex flex-col mix-blend-difference">
                 <div className="flex items-start" onClick={onClick}>
                     <div className="flex flex-col justify-center gap-2 w-full">
-                        <strong className="text-lg font-medium break-all text-font-normal-dark">{title}</strong>
-                        <p className="w-full text-ellipsis line-clamp-3 break-all text-font-normal-dark">
+                        <strong className="text-lg font-medium break-all text-font-light-dark">{title}</strong>
+                        <p className="w-full text-ellipsis line-clamp-3 break-all text-font-light-dark">
                             {description}
                         </p>
                     </div>
