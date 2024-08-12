@@ -40,9 +40,9 @@ export default function RootLayout({
                 dark:bg-custom-color-dark-1 dark:text-font-normal-dark
                  `}
             >
-                <div className="flex w-[1440px]">
+                <div className="flex w-[1440px] shadow-xl">
                     <Aside
-                        className="sticky top-0 flex flex-col justify-between z-50 h-screen
+                        className="sticky top-0 flex flex-col justify-between z-50 h-screen 
                         bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:hidden"
                     >
                         <div className="flex flex-col gap-3 w-full">

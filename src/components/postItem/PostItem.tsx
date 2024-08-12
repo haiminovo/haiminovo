@@ -1,6 +1,5 @@
 import { ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
 import type { Post } from 'contentlayer/generated';
-import Image from 'next/image';
 
 interface IProps {
     data: Post;
