@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     title: '巅峰之路',
     description: 'haimin的巅峰之路',
     applicationName: 'haiminovo',
+    keywords: ['haimin', 'haiminovo', 'road to top', 'road to the top', '巅峰之路', '巅峰路', '前端'],
 };
 
 export default function RootLayout({

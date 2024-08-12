@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 import { Mdx } from '@/components/mdx/mdx-components';
+import { Metadata } from 'next';
 interface PageProps {
     params: {
         post: string;
@@ -22,8 +23,21 @@ export async function generateStaticParams(): Promise<PageProps['params'][]> {
     }));
 }
 
+export const metadata = async ({ params }: PageProps) => {
+    const page = await getPageFromParams(params);
+    const tags = page?.tags || [];
+    const metaRes: Metadata = {
+        title: `${page?.title}`,
+        description: `${page?.description}`,
+        applicationName: 'haiminovo',
+        keywords: [...tags],
+    };
+    return metaRes;
+};
+
 export default async function Post({ params }: PageProps) {
     const page = await getPageFromParams(params);
+
     if (!page) notFound();
     return (
         <article id="artical" className="container py-6">
