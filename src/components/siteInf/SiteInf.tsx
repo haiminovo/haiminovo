@@ -29,7 +29,7 @@ export default function SiteInf() {
                     return (
                         <li key={item.title} className="flex flex-1 items-center">
                             <div className="flex flex-1 items-center justify-between">
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 whitespace-nowrap">
                                     {item.icon}
                                     <span>{item.title}</span>
                                 </div>
@@ -41,7 +41,7 @@ export default function SiteInf() {
                 <li className="flex flex-1 items-center">
                     <div id="busuanzi_container_site_pv" className="w-full">
                         <div className="flex flex-1 items-center justify-between">
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2 whitespace-nowrap">
                                 <BarChartOutlined />
                                 <span>总访问量</span>
                             </div>

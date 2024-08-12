@@ -16,7 +16,6 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
     title: '巅峰之路',
     description: 'haimin的巅峰之路',
-    applicationName: 'haiminovo',
     keywords: ['haimin', 'haiminovo', 'road to top', 'road to the top', '巅峰之路', '巅峰路', '前端'],
 };
 
@@ -55,12 +54,12 @@ export default function RootLayout({
                             <SiteInf></SiteInf>
                         </div>
                     </Aside>
-                    <div className="flex flex-1 flex-col h-full">
+                    <div className="flex flex-col w-full h-full">
                         <Navbar className="top-0 z-10 h-14"></Navbar>
-                        <main className="top-14 flex flex-1 w-full h-full min-h-[calc(100vh-56px)]">
-                            <div className="flex flex-col w-full flex-1">
+                        <main className="top-14 flex w-full h-full min-h-[calc(100vh-56px)]">
+                            <div className="flex flex-col w-full h-full">
                                 <div
-                                    className="flex flex-col flex-1 w-full no-scrollbar
+                                    className="flex flex-col w-full h-full no-scrollbar
                                     bg-custom-color-7 dark:bg-custom-color-dark-7"
                                 >
                                     {children}
