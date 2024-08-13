@@ -56,9 +56,12 @@
     }
 }
 
+* {
+    scrollbar-width: none;
+}
+
 html {
     scroll-behavior: smooth;
-    scrollbar-width: none;
     font-weight: 400;
     color: #3a4a5a;
     font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif,
