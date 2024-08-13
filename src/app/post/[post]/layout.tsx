@@ -13,16 +13,7 @@ export default function PostLayout({
             <div className={`${inter.className} flex flex-col gap-4`}>
                 <div className="flex flex-col p-6">
                     {children}
-                    <div className="flex justify-between text-xs py-8">
-                        <div id="busuanzi_container_page_pv">
-                            <div className="flex gap-1 items-center justify-between">
-                                <EyeOutlined />
-                                浏览数
-                                <span id="busuanzi_value_page_pv" className="flex items-center">
-                                    <LoadingOutlined />
-                                </span>
-                            </div>
-                        </div>
+                    <div className="flex justify-end text-xs py-8">
                         <div className="flex gap-1 items-center">
                             <CopyrightOutlined />
                             <span>允许规范转载</span>
