@@ -34,7 +34,7 @@ export default function RootLayout({
             </head>
             <SiteAnalytics></SiteAnalytics>
             <body
-                className={`${inter.className} relative flex justify-center min-h-screen h-full
+                className={`${inter.className} relative flex justify-center min-h-screen h-full min-w-80
                 bg-custom-color-1 text-font-normal
                 dark:bg-custom-color-dark-1 dark:text-font-normal-dark
                  `}

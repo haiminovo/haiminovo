@@ -27,7 +27,7 @@ export const links: {
     },
     {
         title: '友链',
-        path: '/friendLink',
+        path: '/friendlyLink',
         icon: <TeamOutlined />,
     },
 ];

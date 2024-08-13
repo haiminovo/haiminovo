@@ -1,3 +1,7 @@
 export default function About() {
-    return <div className="flex">about 开发中</div>;
+    return (
+        <div className="flex p-6">
+            <strong className="text-4xl">About me</strong>
+        </div>
+    );
 }
