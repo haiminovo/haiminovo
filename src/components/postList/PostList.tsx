@@ -5,8 +5,6 @@ import PostItem from '../postItem/PostItem';
 import { useEffect, useState } from 'react';
 
 export default function PostList() {
-    // console.log('ap', allPosts);
-    // console.log('ad', allDocuments);
     const router = useRouter();
     const params = useSearchParams();
 
@@ -30,7 +28,7 @@ export default function PostList() {
                     data={item}
                     key={index}
                     onClick={() => {
-                        router.push(`/post/${index}`);
+                        router.push(`/post/${item.slugAsParams}`);
                     }}
                 ></PostItem>
             ))}

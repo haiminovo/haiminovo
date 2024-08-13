@@ -10,8 +10,6 @@ interface IProps {
 export default function PostItem(props: IProps) {
     const { data, className, onClick } = props;
     const { title, description, authors, date, tags, image } = data;
-    console.log(image);
-
     return (
         <div
             style={{ background: `url(${image})`, backgroundPosition: 'center' }}

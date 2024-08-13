@@ -12,23 +12,15 @@ export default function PageNavigator(props: IProps) {
     const [dots, setDots] = useState<{ id: string; text: string; level: number }[]>();
     useEffect(() => {
         const artical: any = document.getElementById('artical');
-        console.log(pathName);
-
-        console.log(artical);
-
         if (artical) {
             const filter = function (node: any) {
                 return node.id ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
             };
             const iterator = document.createTreeWalker(artical, NodeFilter.SHOW_ELEMENT, filter);
-            // console.log('it', iterator);
             let node: any = iterator.nextNode();
             const reg = /^H([1-6])$/;
             const dotArr = [];
             while (node !== null) {
-                // console.log('id', node.id);
-                // console.log('text', node.innerText);
-                // console.log('level', node.tagName.match(reg)[1]);
                 dotArr.push({ id: node.id, text: node.innerText, level: +node.tagName.match(reg)[1] - 1 });
                 node = iterator.nextNode();
             }
