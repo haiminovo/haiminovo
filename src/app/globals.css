@@ -58,7 +58,7 @@
 
 html {
     scroll-behavior: smooth;
-    scrollbar-width: thin;
+    scrollbar-width: none;
     font-weight: 400;
     color: #3a4a5a;
     font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif,

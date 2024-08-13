@@ -21,7 +21,7 @@ export default function PageNavigator(props: IProps) {
             const reg = /^H([1-6])$/;
             const dotArr = [];
             while (node !== null) {
-                dotArr.push({ id: node.id, text: node.innerText, level: +node.tagName.match(reg)[1] - 1 });
+                dotArr.push({ id: node.id, text: node.innerText, level: +node.tagName.match(reg)?.[1] - 1 });
                 node = iterator.nextNode();
             }
             setDots(dotArr);
@@ -32,12 +32,20 @@ export default function PageNavigator(props: IProps) {
     return (
         <>
             {dots && (
-                <div className="sticky top-16 flex flex-col w-full gap-1" {...props}>
+                <div className={`sticky top-16 flex flex-col w-full gap-1 max-h-[50vh] ${props.className}`}>
                     <span className="ml-1 text-font-strong dark:text-font-light-dark font-medium">目录</span>
-                    <div className="flex flex-col gap-3 p-3 w-full shadow-md bg-custom-color-7 dark:bg-custom-color-dark-7 rounded-md">
+                    <div
+                        className="flex flex-col gap-2 p-3 w-full shadow-md rounded-md overflow-auto no-scrollbar
+                         bg-custom-color-7 dark:bg-custom-color-dark-7 "
+                    >
                         {dots.map((item) => {
                             return (
-                                <a key={item.id} href={`#${item.id}`} style={{ paddingLeft: `${item.level * 8}px` }}>
+                                <a
+                                    key={item.id}
+                                    href={`#${item.id}`}
+                                    style={{ marginLeft: `${(item.level - 1) * 6}px` }}
+                                    className="break-all"
+                                >
                                     {item.text}
                                 </a>
                             );

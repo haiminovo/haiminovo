@@ -9,7 +9,6 @@ import SiteAnalytics from '@/components/siteAnalytics/SiteAnalytics';
 import Tags from '@/components/tags/Tags';
 import PageNavigator from '@/components/pageNavigator/PageNavigator';
 import BackToTop from '@/components/backToTop/BackToTop';
-import ImageUploader from '@/components/imageUploader/ImageUploader';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -41,14 +40,13 @@ export default function RootLayout({
             >
                 <div className="flex w-[1440px] shadow-xl">
                     <Aside
-                        className="sticky top-0 flex flex-col justify-between z-50 h-screen 
+                        className="sticky top-0 flex flex-col justify-between z-50 h-screen overflow-auto no-scrollbar
                         bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:hidden"
                     >
                         <div className="flex flex-col gap-3 w-full">
                             <MyInf></MyInf>
-                            <ImageUploader></ImageUploader>
-                            <PageNavigator className="lg:hidden"></PageNavigator>
                             <Tags className="lg:hidden"></Tags>
+                            <PageNavigator className="lg:hidden"></PageNavigator>
                         </div>
                         <div className="flex flex-col gap-3 w-full">
                             <SiteInf></SiteInf>
@@ -65,7 +63,7 @@ export default function RootLayout({
                                     {children}
                                 </div>
                             </div>
-                            <Aside className="relative bg-custom-color-4 dark:bg-custom-color-dark-4 max-lg:hidden">
+                            <Aside className="bg-custom-color-4 dark:bg-custom-color-dark-4 max-lg:hidden">
                                 <Tags></Tags>
                                 <PageNavigator></PageNavigator>
                                 <BackToTop></BackToTop>

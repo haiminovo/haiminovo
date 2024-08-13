@@ -21,9 +21,9 @@ export default function Tags(props: IProps) {
         })
     );
     return (
-        <div className="flex flex-col w-full gap-1" {...props}>
-            <span className="ml-1 text-font-strong dark:text-font-light-dark font-medium">标签</span>
-            <ul className="flex flex-wrap gap-3 p-3 w-full shadow-md bg-custom-color-7 dark:bg-custom-color-dark-7 rounded-md">
+        <div className={`flex flex-col w-full gap-1 ${props.className}`}>
+            <span className="w-full ml-1 text-font-strong dark:text-font-light-dark font-medium">标签</span>
+            <ul className="flex flex-wrap gap-3 p-3 w-full shadow-md rounded-md bg-custom-color-7 dark:bg-custom-color-dark-7 ">
                 {tags.map((item) => {
                     return (
                         <li key={item.tag}>
