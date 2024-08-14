@@ -20,13 +20,11 @@ export default function PostItem(props: IProps) {
                 bg-bottom bg-no-repeat bg-contain ${className}`}
             onClick={onClick}
         >
-            <div className="flex flex-col mix-blend-difference">
+            <div className="flex flex-col mix-blend-exclusion">
                 <div className="flex items-start">
                     <div className="flex flex-col justify-center gap-2 w-full">
-                        <strong className="text-lg font-medium break-all text-font-light-dark">{title}</strong>
-                        <p className="w-full text-ellipsis line-clamp-3 break-all text-font-light-dark">
-                            {description}
-                        </p>
+                        <strong className="text-lg font-medium break-all text-white">{title}</strong>
+                        <p className="w-full text-ellipsis line-clamp-3 break-all text-white">{description}</p>
                     </div>
                 </div>
             </div>

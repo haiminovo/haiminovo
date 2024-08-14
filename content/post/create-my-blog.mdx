@@ -9,16 +9,15 @@ image: 'https://img10.360buyimg.com/ddimg/jfs/t1/86535/11/24318/75037/622032a8E4
 
 ![文章头图](https://img10.360buyimg.com/ddimg/jfs/t1/86535/11/24318/75037/622032a8E4f94d4ae/89703ccc122cf4e0.jpg.webp)
 
-## 博客的技术选型
+## 整体框架
 
 我的毕业设计题目是一个论坛，原本打算完成后面再魔改成博客作为我自己的个人站点，当时选取的是 Nextjs 的 SSR+Koa 后端的方案，文章和评论系统选用的 quill 富文本编辑器，
 后来发现博客与论坛的选型还是有些差别，对于博客这种单向输出内容的站点静态的方案似乎更有优势，也并不太需要后端提供服务，于是放弃了在毕设基础上修改的方案重新开发。
 
-文章展示是博客最核心的内容，用户评论在博客中的重要性相对较弱，因此文章的发布和用户的评论可以拆分出来不需要为用户提供单独的评论模块，可以选用第三方评论系统。
-
 ### 1.项目框架
 
 首先对于我的博客框架有几点要求，首先是支持 SSG，其次是纯手搓不套模版。我的主要技术栈为 React，且之前也有写过 SSR 的 Nextjs 项目，那么直接选用 Nextjs 的 SSG 来开发好了。
+博客的文章展示是最核心的内容，用户评论在博客中的重要性相对较弱，因此文章的发布和用户的评论可以拆分出来不需要为用户提供单独的评论模块，可以选用第三方评论系统。
 
 #### 文章模块
 
@@ -26,16 +25,16 @@ image: 'https://img10.360buyimg.com/ddimg/jfs/t1/86535/11/24318/75037/622032a8E4
 我的博客主要内容应该是技术写作会有较多的代码展示且可能涉及跨平台分享，所以文章内容方案会选用 markdown 实现。
 进一步了解后发现 MDX 可以混合编写 Markdown 和 JSX，并且可以在 Markdown 中导入组件，这意味着我后续可以在文章中插入自定义图表、代码块等功能，能让文章更加生动有趣。
 在寻找内容管理工具时发现了 ContentLayer 这款工具，非常契合我的使用场景，集成完成后发现因为赞助的问题该项目已经暂停维护，但是暂时还没发现有其他方案比 ContentLayer 更加方便
-于是暂时转到了 ContentLayer 的社区管理分支[ContentLayer2](https://github.com/timlrx/contentlayer2),后续如果该项目继续维护或者出现了更好的方案会考虑进行迁移。
+于是暂时转到了 ContentLayer 的社区管理分支[ContentLayer2](https://github.com/timlrx/contentlayer2),如果该项目继续维护或者出现了更好的方案会考虑进行迁移。
 
 #### 评论模块
 
-因为是静态的页面，并且我不想依靠后端来构建评论系统，因此一切需要额外部署服务的评论系统都先排除。看了一下基于 github 的评论实现还挺多的，最后因为文章 action 的原因选择了 Giscus，
-并且其他的评论系统也似乎很久没有更新了，Giscus 上还能看到近几个月的更改。
+因为是静态的页面，并且我不想依靠后端来构建评论系统，虽然带后端的评论系统可以实现邮件推送等功能但是感觉有些臃肿，因此一切需要额外部署服务的评论系统都先排除。看了一下基于 github 的评论实现还挺多的，最后因为文章 action 的原因选择了 Giscus，
+并且其他的评论系统也似乎很久没有更新了，Giscus 上还能看到近几个月的更改。（后续研究一下看能不能让 github 通知有人评论了我的博客，按理来说是可行的）
 
 ### 2.部署方案
 
-大二时薅羊毛一百不到买了十年的轻量应用服务器，放着不用就太浪费了，用来挂个博客绰绰有余，并且做这个博客也是有想上手实操一下 SEO，因此也就不挂到 vercel 或者 githubPages 了。
+大二时薅羊毛一百不到买了十年的轻量应用服务器，放着不用就太浪费了，用来挂个博客绰绰有余，并且做这个博客也是有上手实操一下 SEO 的想法在，因此就不挂到 Vercel 或者 Github Pages 了。
 
 #### 自动化部署
 
@@ -57,7 +56,7 @@ image: 'https://img10.360buyimg.com/ddimg/jfs/t1/86535/11/24318/75037/622032a8E4
 ##### 默认主题
 
 很早之前就想实现一个可以任意调整主题颜色功能，这次实现的思路是根据传入的基础色使用 js 生成由基础色到纯白以及由基础色到纯黑的 1 到 10 十个级别的共 20 种颜色给到 tailwindCSS，
-在需要使用主题色的元素中仅使用这 20 种颜色，这样再更换主题色时只需要调整输入的基础色就可以完成整套颜色样式的更新。
+在需要使用主题色的元素中仅使用这 20 种颜色，这样再更换主题色时只需要调整输入的基础色就可以完成整套颜色样式的更新，以下是控制颜色生成的两个工具函数。
 
 ```ts
 export const generateColor = (str: string, mode: 'dark' | 'light' = 'light') => {
@@ -91,7 +90,43 @@ export const hexToRgb = (str: string) => {
 };
 ```
 
+在 tailwind.config.ts 中将自定义颜色导入
+
+```ts
+const themeColors = {};
+generateColor(basicColor)?.forEach((item, index) => (themeColors[`custom-color-${index + 1}`] = item));
+generateColor(basicColor, 'dark')?.forEach((item, index) => (themeColors[`custom-color-dark-${index + 1}`] = item));
+const config: Config = {
+    darkMode: ['selector'],
+    content: [
+        './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+        './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+        './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    ],
+    theme: {
+        extend: {
+            colors: {
+                'font-light': '#5a6a7a',
+                'font-normal': '#3a4a5a',
+                'font-strong': '#1a2a3a',
+                'font-light-dark': 'rgba(255,255,255,0.9)',
+                'font-normal-dark': 'rgba(255,255,255,0.7)',
+                'font-strong-dark': 'rgba(255,255,255,0.5)',
+                ...themeColors,
+            },
+            backgroundImage: {
+                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+            },
+        },
+    },
+    plugins: [],
+};
+```
+
+按这个方式生成的样式对所选基础色的要求比较高，需要在适当的区间中选择否则会导致深色模式中一团黑，或者浅色模式亮得晃眼睛，后续会考虑重写一下颜色生成的方案并把调色盘放出来。
+
 ##### 暗黑主题
 
-tailwindCSS 有自带的[darkmode 方案](https://tailwindcss.com/docs/dark-mode),这里使用的是和文章中相同的实现，暗黑色时用的也是上文中提到的生成色。对于暗黑模式的字体
+tailwindCSS 有自带的[darkmode 方案](https://tailwindcss.com/docs/dark-mode),这里使用的是相同的实现，暗黑色调用的也是上文中提到的生成色。对于暗黑模式的字体
 我没有像默认主题那样手动指定一套字体颜色而是全部使用纯白，通过字体透明度来控制颜色的亮暗，展示效果也还不错。
