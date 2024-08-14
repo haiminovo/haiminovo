@@ -23,10 +23,9 @@ export const hexToRgb = (str: string) => {
     let hexs = null;
     let reg = /^\#?[0-9A-Fa-f]{6}$/;
     if (!reg.test(str)) return alert('色值不正确');
-    str = str.replace('#', ''); // 去掉#
-    hexs = str.match(/../g); // 切割成数组 409EFF => ['40','9E','FF']
-    // 将切割的色值转换为16进制
-    return hexs?.map((item) => parseInt(item, 16)); // 返回rgb色值[64, 158, 255]
+    str = str.replace('#', '');
+    hexs = str.match(/../g);
+    return hexs?.map((item) => parseInt(item, 16));
 };
 
 export const setLS = (k: string, v: string) => {

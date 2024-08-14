@@ -1,6 +1,6 @@
-import { CopyrightOutlined, EyeOutlined, LikeOutlined, LoadingOutlined, PayCircleOutlined } from '@ant-design/icons';
-import Script from 'next/dist/client/script';
+import { CopyrightOutlined, LikeOutlined, PayCircleOutlined } from '@ant-design/icons';
 import { Inter } from 'next/font/google';
+import Comment from '@/components/comment/Comment';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function PostLayout({
@@ -30,7 +30,7 @@ export default function PostLayout({
                         </button>
                     </div>
                 </div>
-                {/* <Comment></Comment> */}
+                <Comment></Comment>
             </div>
         </>
     );

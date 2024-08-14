@@ -32,12 +32,12 @@ export default function Post({ params }: PageProps) {
     metadata.description = page.description;
     metadata.keywords = page.tags;
     return (
-        <article id="artical" className="container py-6">
-            <div className="space-y-4">
-                <h1 className="inline-block text-4xl break-all">{page.title}</h1>
-                {page.description && <p className="text-xl break-all">{page.description}</p>}
+        <article id="artical" className="container">
+            <div className="py-6">
+                <h1 className="text-4xl font-bold break-all">{page.title}</h1>
+                <hr className="my-4" />
+                {page.description && <p className="text-lg break-all indent-8">{page.description}</p>}
             </div>
-            <hr className="my-4" />
             <Mdx code={page.body.code} />
         </article>
     );

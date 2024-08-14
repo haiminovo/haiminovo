@@ -15,7 +15,7 @@ export default function FriendlyLink() {
                     return (
                         <li
                             key={index}
-                            className="basis-[calc(50%-8px)] h-36 rounded-xl shadow-lg min-w-64 bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:flex-grow"
+                            className="basis-[calc(50%-8px)] h-36 rounded-xl shadow-xl min-w-64 bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:flex-grow"
                         >
                             <a href={item.link} className="flex items-center w-full h-full gap-4 p-4">
                                 <div className="relative h-28 w-28">

@@ -12,8 +12,11 @@ export default function PostItem(props: IProps) {
     const { title, description, authors, date, tags, image } = data;
     return (
         <div
-            style={{ background: `url(${image})`, backgroundPosition: 'center' }}
-            className={`flex flex-col justify-between w-full gap-2 px-6 py-4 shadow-lg rounded-2xl cursor-pointer
+            style={{
+                background: `url(${image})`,
+                backgroundPosition: 'center',
+            }}
+            className={`flex flex-col justify-between w-full gap-2 px-6 py-4 shadow-2xl rounded-2xl cursor-pointer
                 bg-bottom bg-no-repeat bg-contain ${className}`}
             onClick={onClick}
         >

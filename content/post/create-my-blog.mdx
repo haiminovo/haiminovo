@@ -1,34 +1,47 @@
 ---
 title: 使用Nextjs(SSG)+contentLayer2搭建我的blog
-description: 此前用typcho搭配handsome记录过一些文字，但总感觉作为一个前端建站还套模版感觉有点不好意思。本来在做毕业设计时也打算做一个长期维护的站点也因为期间几段实习的辗转与就业的原因草草收场。近几周正好没什么工作安排，于是趁这个机会搓个博客。
+description: 此前用typcho搭配handsome主题记录过一些文字，但没能把写作坚持下来，总感觉作为前端建站套模版感觉有点不好意思。本来毕业设计时便打算做一个长期维护的站点但因为就业的原因让毕设草草收场。近几周正好没什么工作安排，趁这个机会搓个博客。
 authors: [haiminovo]
 date: 2024-07-23
 tags: [开发, Nextjs, SSG]
 image: 'https://img10.360buyimg.com/ddimg/jfs/t1/86535/11/24318/75037/622032a8E4f94d4ae/89703ccc122cf4e0.jpg.webp'
 ---
 
+![文章头图](https://img10.360buyimg.com/ddimg/jfs/t1/86535/11/24318/75037/622032a8E4f94d4ae/89703ccc122cf4e0.jpg.webp)
+
 ## 博客的技术选型
 
-我的毕业设计题目是一个论坛，开题时打算完成后面再魔改成博客作为我自己的个人站点，当时选取的是 Nextjs 的 SSR+Koa 后端的方案，文章和评论系统采用的 quill 富文本编辑器，
-后来发现某位大佬的博客使用的 SSG 和 markdown 方案才顿时感觉路走偏了，奈何大佬的博客并不开源但其文章也有大致描述自己的实现，那么干脆参考这个方案写一个好了。
+我的毕业设计题目是一个论坛，原本打算完成后面再魔改成博客作为我自己的个人站点，当时选取的是 Nextjs 的 SSR+Koa 后端的方案，文章和评论系统选用的 quill 富文本编辑器，
+后来发现博客与论坛的选型还是有些差别，对于博客这种单向输出内容的站点静态的方案似乎更有优势，也并不太需要后端提供服务，于是放弃了在毕设基础上修改的方案重新开发。
+
+文章展示是博客最核心的内容，用户评论在博客中的重要性相对较弱，因此文章的发布和用户的评论可以拆分出来不需要为用户提供单独的评论模块，可以选用第三方评论系统。
 
 ### 1.项目框架
 
-我的主要技术栈为 react 之前实习时也接触过 Nextjs 开发，毕业设计也是 SSR 的 Nextjs，那么不必多说 Nextjs 直接胜出。
+首先对于我的博客框架有几点要求，首先是支持 SSG，其次是纯手搓不套模版。我的主要技术栈为 React，且之前也有写过 SSR 的 Nextjs 项目，那么直接选用 Nextjs 的 SSG 来开发好了。
 
-#### mdx 框架
+#### 文章模块
+
+博客中我不打算集成任何文章编辑器，现有的 vscode + mdx 预览插件已经满足了我的写作需求，但我需要实现文章展示。现有的文本编辑器主要是富文本编辑器和 Markdown 编辑器，
+我的博客主要内容应该是技术写作会有较多的代码展示且可能涉及跨平台分享，所以文章内容方案会选用 markdown 实现。
+进一步了解后发现 MDX 可以混合编写 Markdown 和 JSX，并且可以在 Markdown 中导入组件，这意味着我后续可以在文章中插入自定义图表、代码块等功能，能让文章更加生动有趣。
+在寻找内容管理工具时发现了 ContentLayer 这款工具，非常契合我的使用场景，集成完成后发现因为赞助的问题该项目已经暂停维护，但是暂时还没发现有其他方案比 ContentLayer 更加方便
+于是暂时转到了 ContentLayer 的社区管理分支[ContentLayer2](https://github.com/timlrx/contentlayer2),后续如果该项目继续维护或者出现了更好的方案会考虑进行迁移。
 
 #### 评论模块
 
+因为是静态的页面，并且我不想依靠后端来构建评论系统，因此一切需要额外部署服务的评论系统都先排除。看了一下基于 github 的评论实现还挺多的，最后因为文章 action 的原因选择了 Giscus，
+并且其他的评论系统也似乎很久没有更新了，Giscus 上还能看到近几个月的更改。
+
 ### 2.部署方案
 
-大二时薅羊毛一百不到买了十年的轻量应用服务器，放着不用就太浪费了，用来挂个博客绰绰有余，因此也不需要挂到 vercel 或者 githubPages 了。
+大二时薅羊毛一百不到买了十年的轻量应用服务器，放着不用就太浪费了，用来挂个博客绰绰有余，并且做这个博客也是有想上手实操一下 SEO，因此也就不挂到 vercel 或者 githubPages 了。
 
-#### gitAction 自动化部署
+#### 自动化部署
 
-之前两家实习过的公司都有自动化 git Action 来进行 CI/CD ，虽然之前没有接触过但为了摆脱手动部署的繁琐还是先把自动化流程打通,参考
+大四时两家实习过的公司都有自动化 git Action 来进行 CI/CD ，虽然并不知道是咋么实现的但为了摆脱手动部署的繁琐我还是很有意愿花点时间去研究一下，先把自动化流程打通后续的开发体验也会更好,参考
 [网上教程](https://blog.csdn.net/qq_45634593/article/details/135376877?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-135376877-blog-121345434.235^v43^pc_blog_bottom_relevance_base2&spm=1001.2101.3001.4242.1&utm_relevant_index=3)
-很快就能完成自动化部署的配置，提交代码后自动发布，开发体验真的爽。
+很快就完成了自动化部署的配置，过程也不算复杂。
 
 ### 3.布局及样式
 
@@ -38,7 +51,47 @@ image: 'https://img10.360buyimg.com/ddimg/jfs/t1/86535/11/24318/75037/622032a8E4
 
 #### CSS 方案
 
-毕业前的最后一段实习接触到了 tailwindCSS 这种原子化 CSS，不需要编写样式名，不用遵守又臭又长的 BEM 规范，不用关心一层套一层的样式优先级覆盖，简直爽到嗨。这里不必多说
-直接选用 tailwindCSS，强烈推荐尝试原子化 CSS，绝对是爽到上瘾的程度。
+毕业前的最后一段实习接触到了 tailwindCSS 这种原子化 CSS，不需要编写样式名，不用书写冗长的 BEM 规范，不用关心一层套一层的样式优先级覆盖，简直爽到嗨。这里不必多说
+直接选用 tailwindCSS，没有体验过的强烈推荐尝试一下原子化 CSS。
 
-#### darkmode 方案
+##### 默认主题
+
+很早之前就想实现一个可以任意调整主题颜色功能，这次实现的思路是根据传入的基础色使用 js 生成由基础色到纯白以及由基础色到纯黑的 1 到 10 十个级别的共 20 种颜色给到 tailwindCSS，
+在需要使用主题色的元素中仅使用这 20 种颜色，这样再更换主题色时只需要调整输入的基础色就可以完成整套颜色样式的更新。
+
+```code
+export const generateColor = (str: string, mode: 'dark' | 'light' = 'light') => {
+    let basicColor = hexToRgb(str);
+    if (!basicColor) return;
+    if (mode === 'dark') basicColor = basicColor.map((item) => item - 100);
+    const stepArr = basicColor.map((item) =>
+        mode === 'dark' ? (item / 10).toFixed(0) : ((255 - item) / 10).toFixed(0)
+    );
+    return new Array(10).fill(0).map((item, index) => {
+        const targetColor = basicColor.map((_item, _index) => {
+            return mode === 'dark'
+                ? _item - index * +stepArr[_index] < 0
+                    ? 0
+                    : _item - index * +stepArr[_index]
+                : _item + index * +stepArr[_index] > 255
+                ? 255
+                : _item + index * +stepArr[_index];
+        });
+        return `rgb(${targetColor[0]},${targetColor[1]},${targetColor[2]})`;
+    });
+};
+
+export const hexToRgb = (str: string) => {
+    let hexs = null;
+    let reg = /^\#?[0-9A-Fa-f]{6}$/;
+    if (!reg.test(str)) return alert('色值不正确');
+    str = str.replace('#', '');
+    hexs = str.match(/../g);
+    return hexs?.map((item) => parseInt(item, 16));
+};
+```
+
+##### 暗黑主题
+
+tailwindCSS 有自带的[darkmode 方案](https://tailwindcss.com/docs/dark-mode),这里使用的是和文章中相同的实现，暗黑色时用的也是上文中提到的生成色。对于暗黑模式的字体
+我没有像默认主题那样手动指定一套字体颜色而是全部使用纯白，通过字体透明度来控制颜色的亮暗，展示效果也还不错。
