@@ -59,7 +59,7 @@ image: 'https://img10.360buyimg.com/ddimg/jfs/t1/86535/11/24318/75037/622032a8E4
 很早之前就想实现一个可以任意调整主题颜色功能，这次实现的思路是根据传入的基础色使用 js 生成由基础色到纯白以及由基础色到纯黑的 1 到 10 十个级别的共 20 种颜色给到 tailwindCSS，
 在需要使用主题色的元素中仅使用这 20 种颜色，这样再更换主题色时只需要调整输入的基础色就可以完成整套颜色样式的更新。
 
-```code
+```ts
 export const generateColor = (str: string, mode: 'dark' | 'light' = 'light') => {
     let basicColor = hexToRgb(str);
     if (!basicColor) return;
