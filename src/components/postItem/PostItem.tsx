@@ -16,7 +16,7 @@ export default function PostItem(props: IProps) {
                 background: `#fff url(${image})`,
                 backgroundPosition: 'center',
             }}
-            className={`relative flex flex-col justify-between w-full gap-4 p-4 shadow-2xl rounded-xl cursor-pointer
+            className={`relative flex flex-col justify-between w-full gap-4 p-4 shadow-xl rounded-xl cursor-pointer
                 bg-bottom bg-no-repeat bg-contain ${className}`}
             onClick={onClick}
         >
@@ -47,7 +47,7 @@ export default function PostItem(props: IProps) {
                     {tags?.map((item) => (
                         <li
                             key={item}
-                            className="flex items-center rounded-md gap-2 px-2 py-1 text-xs text-nowrap shadow-md bg-gradient-to-tl 
+                            className="flex items-center rounded-md gap-2 px-2 py-1 text-xs text-nowrap shadow-sm bg-gradient-to-tl 
                                 from-custom-color-1 to-custom-color-9 dark:from-custom-color-dark-10 dark:to-custom-color-dark-5 "
                         >
                             # {item}
@@ -56,8 +56,8 @@ export default function PostItem(props: IProps) {
                 </ul>
                 <ul className="flex items-center flex-wrap gap-2 text-font-strong dark:text-font-light-dark ">
                     <li
-                        className="flex items-center flex-wrap gap-2 rounded-md px-2 py-1 text-xs shadow-md bg-gradient-to-t
-                            from-custom-color-1 to-custom-color-9 dark:from-custom-color-dark-7 dark:to-custom-color-dark-3"
+                        className="flex items-center flex-wrap gap-2 rounded-md px-2 py-1 text-xs shadow-sm bg-gradient-to-t
+                            from-custom-color-1 to-custom-color-9 dark:from-custom-color-dark-10 dark:to-custom-color-dark-5"
                     >
                         <UserOutlined />
                         {authors.map((item) => (
@@ -65,8 +65,8 @@ export default function PostItem(props: IProps) {
                         ))}
                     </li>
                     <li
-                        className="flex items-center gap-2 whitespace-nowrap rounded-md px-2 py-1 text-xs shadow-md bg-gradient-to-t
-                            from-custom-color-1 to-custom-color-9 dark:from-custom-color-dark-7 dark:to-custom-color-dark-3"
+                        className="flex items-center gap-2 whitespace-nowrap rounded-md px-2 py-1 text-xs shadow-sm bg-gradient-to-t
+                            from-custom-color-1 to-custom-color-9 dark:from-custom-color-dark-10 dark:to-custom-color-dark-5"
                     >
                         <ClockCircleOutlined />
                         <div>{date.slice(0, 10)}</div>

@@ -31,7 +31,7 @@ const hexToRgb = (str: string) => {
     return hexs?.map((item) => parseInt(item, 16)); // 返回rgb色值[64, 158, 255]
 };
 
-export const basicColor = '#d0d0d0';
+export const basicColor = '#e2e5e8';
 const themeColors: any = {};
 generateColor(basicColor)?.forEach((item, index) => (themeColors[`custom-color-${index + 1}`] = item));
 generateColor(basicColor, 'dark')?.forEach((item, index) => (themeColors[`custom-color-dark-${index + 1}`] = item));
