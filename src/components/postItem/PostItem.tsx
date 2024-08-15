@@ -23,8 +23,8 @@ export default function PostItem(props: IProps) {
             <div className="flex flex-col mix-blend-exclusion">
                 <div className="flex items-start">
                     <div className="flex flex-col justify-center gap-2 w-full">
-                        <strong className="text-lg font-medium break-all text-white">{title}</strong>
-                        <p className="w-full text-ellipsis line-clamp-3 break-all text-white">{description}</p>
+                        <strong className="text-lg font-medium break-all text-white/80">{title}</strong>
+                        <p className="w-full text-ellipsis line-clamp-3 break-all text-white/80">{description}</p>
                     </div>
                 </div>
             </div>
