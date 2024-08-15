@@ -7,5 +7,9 @@ interface IProps {
 
 export default function Aside(props: IProps) {
     const { children, className } = props;
-    return <aside className={`flex flex-col gap-3 items-center w-56 p-3 text-sm ${className}`}>{children}</aside>;
+    return (
+        <aside className={`flex flex-col flex-shrink-0 gap-3 items-center w-48 p-3 text-sm ${className}`}>
+            {children}
+        </aside>
+    );
 }
