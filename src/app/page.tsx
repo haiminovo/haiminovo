@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 export default function Home() {
     return (
         <Suspense>
-            <div className="flex flex-col gap-4 h-full p-6 max-md:p-4">
+            <div className="flex flex-col gap-8 h-full p-6 max-md:p-4">
                 <Banner></Banner>
                 <div className="flex h-full flex-col items-center">
                     <PostList></PostList>
