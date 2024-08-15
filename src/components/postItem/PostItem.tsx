@@ -28,14 +28,14 @@ export default function PostItem(props: IProps) {
                         <strong
                             className="text-lg indent-2 break-all rounded-xl px-2 py-1 shadow-inner font-black
                             text-black/65 dark:text-white
-                            bg-custom-color-10/80 dark:bg-custom-color-dark-10/80"
+                            bg-custom-color-10/80 dark:bg-custom-color-dark-5/80"
                         >
                             # {title}
                         </strong>
                         <p
                             className="text-ellipsis line-clamp-3 break-all rounded-xl p-2 leading-6 shadow-inner font-semibold
                             text-black/65 dark:text-white
-                            bg-custom-color-7/70 dark:bg-custom-color-dark-7/70"
+                            bg-custom-color-10/80 dark:bg-custom-color-dark-5/80"
                         >
                             {description}
                         </p>
