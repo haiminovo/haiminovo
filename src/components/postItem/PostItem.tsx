@@ -13,7 +13,7 @@ export default function PostItem(props: IProps) {
     return (
         <div
             style={{
-                background: `#888 url(${image})`,
+                background: `#fff url(${image})`,
                 backgroundPosition: 'center',
             }}
             className={`relative flex flex-col justify-between w-full gap-4 p-4 shadow-2xl rounded-xl cursor-pointer
@@ -27,14 +27,14 @@ export default function PostItem(props: IProps) {
                     <div className="flex flex-col justify-center gap-4 w-full">
                         <strong
                             className="text-lg indent-2 break-all rounded-xl px-2 py-1 shadow-inner font-black
-                            text-black/65 dark:text-white
+                            text-black/65 dark:text-white border dark:border-[gray]
                             bg-custom-color-10/80 dark:bg-custom-color-dark-5/80"
                         >
                             # {title}
                         </strong>
                         <p
                             className="text-ellipsis line-clamp-3 break-all rounded-xl p-2 leading-6 shadow-inner font-semibold
-                            text-black/65 dark:text-white
+                            text-black/65 dark:text-white border dark:border-[gray]
                             bg-custom-color-10/80 dark:bg-custom-color-dark-5/80"
                         >
                             {description}
