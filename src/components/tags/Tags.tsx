@@ -18,7 +18,7 @@ export default function Tags(props: IProps) {
             } else {
                 tags.push({ tag: subItem, count: 1 });
             }
-        })
+        }),
     );
     return (
         <div className={`flex flex-col w-full gap-1 ${props.className}`}>

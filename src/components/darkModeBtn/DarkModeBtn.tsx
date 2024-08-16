@@ -52,7 +52,7 @@ export default function DarkModeBtn(props: IProps) {
                 removeLS(darkModeStorageKey);
             }
         },
-        [rootElement?.classList]
+        [rootElement?.classList],
     );
 
     useLayoutEffect(() => {

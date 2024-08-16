@@ -5,7 +5,7 @@ export const generateColor = (str: string, mode: 'dark' | 'light' = 'light') => 
     if (!basicColor) return;
     if (mode === 'dark') basicColor = basicColor.map((item) => item - 100);
     const stepArr = basicColor.map((item) =>
-        mode === 'dark' ? (item / 10).toFixed(0) : ((255 - item) / 10).toFixed(0)
+        mode === 'dark' ? (item / 10).toFixed(0) : ((255 - item) / 10).toFixed(0),
     );
     return new Array(10).fill(undefined).map((item, index) => {
         const targetColor = basicColor.map((_item, _index) => {
@@ -14,8 +14,8 @@ export const generateColor = (str: string, mode: 'dark' | 'light' = 'light') => 
                     ? 0
                     : _item - index * +stepArr[_index]
                 : _item + index * +stepArr[_index] > 255
-                ? 255
-                : _item + index * +stepArr[_index];
+                  ? 255
+                  : _item + index * +stepArr[_index];
         });
         return `rgb(${targetColor[0]},${targetColor[1]},${targetColor[2]})`;
     });

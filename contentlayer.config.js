@@ -46,7 +46,7 @@ export const Post = defineDocumentType(() => ({
         //   default: true,
         // },
         image: {
-            type: "string",
+            type: 'string',
             required: false,
         },
         authors: {

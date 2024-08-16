@@ -1,5 +1,5 @@
 ---
-title: 使用Nextjs(SSG)+contentLayer2搭建我的blog
+title: 使用Nextjs和Contentlayer搭建我的blog
 description: 此前用typcho搭配handsome主题也写过一些博文，但没能把写博客的习惯坚持下来，总感觉作为前端建站套模版感觉有点不好意思。近几周正好手上活不多，趁这个机会搓个博客。
 authors: [haiminovo]
 date: 2024-07-23
@@ -64,7 +64,7 @@ export const generateColor = (str: string, mode: 'dark' | 'light' = 'light') => 
     if (!basicColor) return;
     if (mode === 'dark') basicColor = basicColor.map((item) => item - 100);
     const stepArr = basicColor.map((item) =>
-        mode === 'dark' ? (item / 10).toFixed(0) : ((255 - item) / 10).toFixed(0)
+        mode === 'dark' ? (item / 10).toFixed(0) : ((255 - item) / 10).toFixed(0),
     );
     return new Array(10).fill(0).map((item, index) => {
         const targetColor = basicColor.map((_item, _index) => {
@@ -73,8 +73,8 @@ export const generateColor = (str: string, mode: 'dark' | 'light' = 'light') => 
                     ? 0
                     : _item - index * +stepArr[_index]
                 : _item + index * +stepArr[_index] > 255
-                ? 255
-                : _item + index * +stepArr[_index];
+                  ? 255
+                  : _item + index * +stepArr[_index];
         });
         return `rgb(${targetColor[0]},${targetColor[1]},${targetColor[2]})`;
     });

@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "concurrently \"contentlayer2 dev\" \"next dev\"",
+        "dev": " \"concurrently\" \"npx prettier . -w\" \"contentlayer2 dev\"  \"next dev\" ",
         "build": "contentlayer2 build && next build",
         "start": "next start",
         "lint": "next lint"
@@ -19,8 +19,10 @@
         "@docusaurus/theme-common": "^3.4.0",
         "@giscus/react": "^3.0.0",
         "@types/mdx": "^2.0.13",
+        "autoprefixer": "^10.4.20",
         "concurrently": "^8.2.2",
         "contentlayer2": "^0.4.6",
+        "cssnano": "^7.0.5",
         "next": "14.2.4",
         "next-contentlayer2": "^0.4.6",
         "pnpm": "^9.4.0",
