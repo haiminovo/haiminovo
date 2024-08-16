@@ -7,7 +7,8 @@
 		"build": "contentlayer2 build && next build",
 		"start": "next start",
 		"lint": "next lint",
-		"prepare": "husky install"
+		"prepare": "husky install",
+		"prettier":"npx prettier . -w"
 	},
 	"browserslist": [
 		">0.3%",
