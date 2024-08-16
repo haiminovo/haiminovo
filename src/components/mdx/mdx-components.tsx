@@ -43,7 +43,7 @@ const components: MDXComponents = {
     ),
     img: ({ className, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
         // eslint-disable-next-line @next/next/no-img-element
-        <img className={'rounded-md ' + className} alt={alt} {...props} />
+        <img className={'rounded-md dark:brightness-[.9] ' + className} alt={alt} {...props} />
     ),
     hr: ({ ...props }) => <hr className="my-4" {...props} />,
     table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
