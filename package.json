@@ -8,7 +8,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"prepare": "husky install",
-		"prettier":"npx prettier . -w"
+		"prettier": "npx prettier . -w"
 	},
 	"browserslist": [
 		">0.3%",
