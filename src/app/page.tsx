@@ -3,15 +3,15 @@ import Footer from '@/components/footer/Footer';
 import PostList from '@/components/postList/PostList';
 import { Suspense } from 'react';
 export default function Home() {
-    return (
-        <Suspense>
-            <div className="flex h-full flex-col gap-8 p-6 max-md:p-4">
-                <Banner></Banner>
-                <div className="flex h-full flex-col items-center">
-                    <PostList></PostList>
-                </div>
-            </div>
-            <Footer></Footer>
-        </Suspense>
-    );
+	return (
+		<Suspense>
+			<div className="flex h-full flex-col gap-8 p-6 max-md:p-4">
+				<Banner></Banner>
+				<div className="flex h-full flex-col items-center">
+					<PostList></PostList>
+				</div>
+			</div>
+			<Footer></Footer>
+		</Suspense>
+	);
 }

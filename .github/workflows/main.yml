@@ -1,47 +1,47 @@
 name: CICD
 on:
-    # 代码push的时候触发
-    push:
-        # main 分支的时候触发
-        branches:
-            - main
+  # 代码push的时候触发
+  push:
+    # main 分支的时候触发
+    branches:
+      - main
 jobs:
-    # 定义一个job，名字为CI
-    CI:
-        # 使用github提供给我们的机器去跑
-        runs-on: ubuntu-latest
-        # 步骤
-        steps:
-            # 拉取最新的代码
-            - name: Checkout repository
-              uses: actions/checkout@v3
-              with:
-                  # 克隆的分支
-                  ref: main
-            # 安装node环境
-            - name: Use Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: '18.x'
-            # 安装依赖
-            - name: Installing Dependencies
-              run: npm install --legacy-peer-deps
-            # 打包
-            - name: Build
-              run: npm run build
-            # 产物上传服务器
-            - name: Upload to Deploy Server
-              uses: easingthemes/ssh-deploy@main
-              env:
-                  # 免密登录的秘钥
-                  SSH_PRIVATE_KEY: ${{ secrets.SSH }}
-                  # 服务器登录用户名
-                  REMOTE_USER: ${{ secrets.USER }}
-                  # 服务器的公网IP
-                  REMOTE_HOST: ${{ secrets.IP }}
-                  # 你打包后产物的文件夹
-                  SOURCE: 'out/'
-                  # 先清空目标目录
-                  ARGS: '-avzr --delete'
-                  # 上传到服务器目标目录
-                  TARGET: '/www/wwwroot/haiminovo.cn'
+  # 定义一个job，名字为CI
+  CI:
+    # 使用github提供给我们的机器去跑
+    runs-on: ubuntu-latest
+    # 步骤
+    steps:
+      # 拉取最新的代码
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          # 克隆的分支
+          ref: main
+      # 安装node环境
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      # 安装依赖
+      - name: Installing Dependencies
+        run: npm install --legacy-peer-deps
+      # 打包
+      - name: Build
+        run: npm run build
+      # 产物上传服务器
+      - name: Upload to Deploy Server
+        uses: easingthemes/ssh-deploy@main
+        env:
+          # 免密登录的秘钥
+          SSH_PRIVATE_KEY: ${{ secrets.SSH }}
+          # 服务器登录用户名
+          REMOTE_USER: ${{ secrets.USER }}
+          # 服务器的公网IP
+          REMOTE_HOST: ${{ secrets.IP }}
+          # 你打包后产物的文件夹
+          SOURCE: 'out/'
+          # 先清空目标目录
+          ARGS: '-avzr --delete'
+          # 上传到服务器目标目录
+          TARGET: '/www/wwwroot/haiminovo.cn'

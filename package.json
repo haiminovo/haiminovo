@@ -1,53 +1,53 @@
 {
-    "name": "haiminovo",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "dev": " \"concurrently\" \"npx prettier . -w\" \"contentlayer2 dev\"  \"next dev\" ",
-        "build": "contentlayer2 build && next build",
-        "start": "next start",
-        "lint": "next lint"
-    },
-    "browserslist": [
-        ">0.3%",
-        "not ie 11",
-        "not dead",
-        "not op_mini all"
-    ],
-    "dependencies": {
-        "@ant-design/icons": "^5.3.7",
-        "@docusaurus/theme-common": "^3.4.0",
-        "@giscus/react": "^3.0.0",
-        "@types/mdx": "^2.0.13",
-        "autoprefixer": "^10.4.20",
-        "concurrently": "^8.2.2",
-        "contentlayer2": "^0.4.6",
-        "cssnano": "^7.0.5",
-        "next": "14.2.4",
-        "next-contentlayer2": "^0.4.6",
-        "pnpm": "^9.4.0",
-        "react": "^18",
-        "react-dom": "^18",
-        "rehype-autolink-headings": "^7.1.0",
-        "rehype-pretty-code": "^0.13.2",
-        "rehype-raw": "^7.0.0",
-        "rehype-slug": "^6.0.0",
-        "rehype-stringify": "^10.0.0",
-        "remark-gfm": "^4.0.0",
-        "remark-math": "^6.0.0",
-        "remark-rehype": "^11.1.0",
-        "shiki": "^1.12.1"
-    },
-    "devDependencies": {
-        "@types/node": "^20",
-        "@types/react": "^18",
-        "@types/react-dom": "^18",
-        "eslint": "^8",
-        "eslint-config-next": "14.2.4",
-        "postcss": "^8",
-        "prettier": "^3.3.3",
-        "prettier-plugin-tailwindcss": "^0.6.6",
-        "tailwindcss": "^3.4.1",
-        "typescript": "^5"
-    }
+	"name": "haiminovo",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": " \"concurrently\" \"npx prettier . -w\" \"contentlayer2 dev\"  \"next dev\" ",
+		"build": "contentlayer2 build && next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"browserslist": [
+		">0.3%",
+		"not ie 11",
+		"not dead",
+		"not op_mini all"
+	],
+	"dependencies": {
+		"@ant-design/icons": "^5.3.7",
+		"@docusaurus/theme-common": "^3.4.0",
+		"@giscus/react": "^3.0.0",
+		"@types/mdx": "^2.0.13",
+		"autoprefixer": "^10.4.20",
+		"concurrently": "^8.2.2",
+		"contentlayer2": "^0.4.6",
+		"cssnano": "^7.0.5",
+		"next": "14.2.4",
+		"next-contentlayer2": "^0.4.6",
+		"pnpm": "^9.4.0",
+		"react": "^18",
+		"react-dom": "^18",
+		"rehype-autolink-headings": "^7.1.0",
+		"rehype-pretty-code": "^0.13.2",
+		"rehype-raw": "^7.0.0",
+		"rehype-slug": "^6.0.0",
+		"rehype-stringify": "^10.0.0",
+		"remark-gfm": "^4.0.0",
+		"remark-math": "^6.0.0",
+		"remark-rehype": "^11.1.0",
+		"shiki": "^1.12.1"
+	},
+	"devDependencies": {
+		"@types/node": "^20",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"eslint": "^8",
+		"eslint-config-next": "14.2.4",
+		"postcss": "^8",
+		"prettier": "^3.3.3",
+		"prettier-plugin-tailwindcss": "^0.6.6",
+		"tailwindcss": "^3.4.1",
+		"typescript": "^5"
+	}
 }
