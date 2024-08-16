@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": " \"concurrently\" \"npx prettier . -w\" \"contentlayer2 dev\"  \"next dev\" ",
+		"dev": " concurrently  contentlayer2 dev  next dev",
 		"build": "contentlayer2 build && next build",
 		"start": "next start",
 		"lint": "next lint",
@@ -25,6 +25,7 @@
 		"contentlayer2": "^0.4.6",
 		"next": "14.2.5",
 		"next-contentlayer2": "^0.4.6",
+		"npx": "^10.2.2",
 		"pnpm": "^9.4.0",
 		"react": "^18",
 		"react-dom": "^18",
