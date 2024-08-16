@@ -5,7 +5,7 @@ const config = {
 	plugins: {
 		tailwindcss: {},
 		autoprefixer: {},
-		cssnano: {},
+		// cssnano: {},
 	},
 };
 
