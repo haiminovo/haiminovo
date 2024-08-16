@@ -3,10 +3,11 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": " \"concurrently\" \"npx prettier . -w\" \"contentlayer2 dev\"  \"next dev\" ",
+		"dev": " \"concurrently\" \"contentlayer2 dev\"  \"next dev\" ",
 		"build": "contentlayer2 build && next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"prepare": "husky install"
 	},
 	"browserslist": [
 		">0.3%",
@@ -46,6 +47,7 @@
 		"prettier": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.6",
 		"tailwindcss": "^3.4.1",
-		"typescript": "^5"
+		"typescript": "^5",
+		"husky": "^8.0.0"
 	}
 }
