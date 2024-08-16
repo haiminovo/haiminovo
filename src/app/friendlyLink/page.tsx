@@ -1,5 +1,11 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import bird0 from 'public/bird0.svg';
+export const metadata: Metadata = {
+	title: '友情链接|巅峰之路',
+	description: '一个记录开发收获和日常生活的个人站点,主要涉及前端开发,web技术相关内容',
+	keywords: ['haimin', 'haiminovo', 'road to top', 'road to the top', '巅峰之路', '巅峰路', '前端'],
+};
 export default function FriendlyLink() {
 	const friendLinks: any[] = [
 		{

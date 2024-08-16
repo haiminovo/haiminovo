@@ -13,8 +13,8 @@ import BackToTop from '@/components/backToTop/BackToTop';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: '巅峰之路',
-	description: 'haimin的巅峰之路',
+	title: '巅峰之路-haimin的互联网自留地',
+	description: '一个记录开发收获和日常生活的个人站点,主要涉及前端开发,web技术相关内容',
 	keywords: ['haimin', 'haiminovo', 'road to top', 'road to the top', '巅峰之路', '巅峰路', '前端'],
 };
 

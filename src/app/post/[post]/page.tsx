@@ -23,12 +23,16 @@ export async function generateStaticParams(): Promise<PageProps['params'][]> {
 	}));
 }
 
-export const metadata: Metadata = {};
+export const metadata: Metadata = {
+	title: '｜巅峰之路',
+	description: '一个记录开发收获和日常生活的个人站点,主要涉及前端开发,web技术相关内容',
+	keywords: ['haimin', 'haiminovo', 'road to top', 'road to the top', '巅峰之路', '巅峰路', '前端'],
+};
 
 export default function Post({ params }: PageProps) {
 	const page = getPageFromParams(params);
 	if (!page) notFound();
-	metadata.title = page.title;
+	metadata.title = page.title + (metadata?.title || '');
 	metadata.description = page.description;
 	metadata.keywords = page.tags;
 	return (
