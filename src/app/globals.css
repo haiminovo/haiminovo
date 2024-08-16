@@ -59,8 +59,8 @@ html {
     scroll-behavior: smooth;
     font-weight: 400;
     color: #3a4a5a;
-    font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif,
-        monospace !important;
+    font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial,
+        Sans-serif, monospace !important;
 
     transition: --scroll-position 0.15s linear;
     [data-id='--scroll-position']::before {

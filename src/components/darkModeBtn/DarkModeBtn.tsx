@@ -65,7 +65,7 @@ export default function DarkModeBtn(props: IProps) {
 
     return (
         <div
-            className="flex items-center cursor-pointer p-2 text-sm"
+            className="flex cursor-pointer items-center p-2 text-sm"
             onClick={() => {
                 setIsDark(!isDark);
                 applyCustomDarkModeSettings(toggleCustomDarkMode());

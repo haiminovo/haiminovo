@@ -74,7 +74,12 @@ export default makeSource({
                     theme: 'github-dark',
                     onVisitLine(node) {
                         if (node.children.length === 0) {
-                            node.children = [{ type: 'text', value: ' ' }];
+                            node.children = [
+                                {
+                                    type: 'text',
+                                    value: ' ',
+                                },
+                            ];
                         }
                     },
                     onVisitHighlightedLine(node) {

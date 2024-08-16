@@ -33,8 +33,12 @@ const hexToRgb = (str: string) => {
 
 export const basicColor = '#e2e5e8';
 const themeColors: any = {};
-generateColor(basicColor)?.forEach((item, index) => (themeColors[`custom-color-${index + 1}`] = item));
-generateColor(basicColor, 'dark')?.forEach((item, index) => (themeColors[`custom-color-dark-${index + 1}`] = item));
+generateColor(basicColor)?.forEach(
+    (item, index) => (themeColors[`custom-color-${index + 1}`] = item),
+);
+generateColor(basicColor, 'dark')?.forEach(
+    (item, index) => (themeColors[`custom-color-dark-${index + 1}`] = item),
+);
 const config: Config = {
     darkMode: ['selector'],
     content: [
@@ -55,7 +59,8 @@ const config: Config = {
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                'gradient-conic':
+                    'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
             },
         },
     },

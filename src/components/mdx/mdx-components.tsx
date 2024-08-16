@@ -13,33 +13,59 @@ const components: MDXComponents = {
     ),
     h2: ({ className, ...props }) => (
         <h2
-            className={'mt-10 scroll-m-20 border-b pb-1 text-3xl font-black tracking-tight first:mt-0 ' + className}
+            className={
+                'mt-10 scroll-m-20 border-b pb-1 text-3xl font-black tracking-tight first:mt-0 ' +
+                className
+            }
             {...props}
         />
     ),
     h3: ({ className, ...props }) => (
-        <h3 className={'mt-8 scroll-m-20 text-2xl pl-3 font-extrabold tracking-tight ' + className} {...props} />
+        <h3
+            className={'mt-8 scroll-m-20 pl-3 text-2xl font-extrabold tracking-tight ' + className}
+            {...props}
+        />
     ),
     h4: ({ className, ...props }) => (
-        <h4 className={'mt-8 scroll-m-20 text-xl pl-6 font-bold tracking-tight ' + className} {...props} />
+        <h4
+            className={'mt-8 scroll-m-20 pl-6 text-xl font-bold tracking-tight ' + className}
+            {...props}
+        />
     ),
     h5: ({ className, ...props }) => (
-        <h5 className={'mt-8 scroll-m-20 text-lg pl-9 font-semibold tracking-tight ' + className} {...props} />
+        <h5
+            className={'mt-8 scroll-m-20 pl-9 text-lg font-semibold tracking-tight ' + className}
+            {...props}
+        />
     ),
     h6: ({ className, ...props }) => (
-        <h6 className={'mt-8 scroll-m-20 text-base pl-12 font-normal tracking-tight ' + className} {...props} />
+        <h6
+            className={'mt-8 scroll-m-20 pl-12 text-base font-normal tracking-tight ' + className}
+            {...props}
+        />
     ),
     a: ({ className, ...props }) => (
-        <a target="_blank" className={'font-medium underline underline-offset-4 ' + className} {...props} />
+        <a
+            target="_blank"
+            className={'font-medium underline underline-offset-4 ' + className}
+            {...props}
+        />
     ),
     p: ({ className, ...props }) => (
-        <p className={'leading-7 indent-8 [&:not(:first-child)]:mt-6 ' + className} {...props} />
+        <p className={'indent-8 leading-7 [&:not(:first-child)]:mt-6 ' + className} {...props} />
     ),
-    ul: ({ className, ...props }) => <ul className={'my-6 ml-6 list-disc ' + className} {...props} />,
-    ol: ({ className, ...props }) => <ol className={'my-6 ml-6 list-decimal ' + className} {...props} />,
+    ul: ({ className, ...props }) => (
+        <ul className={'my-6 ml-6 list-disc ' + className} {...props} />
+    ),
+    ol: ({ className, ...props }) => (
+        <ol className={'my-6 ml-6 list-decimal ' + className} {...props} />
+    ),
     li: ({ className, ...props }) => <li className={'mt-2 ' + className} {...props} />,
     blockquote: ({ className, ...props }) => (
-        <blockquote className={'mt-6 border-l-2 pl-6 italic [&>*]:text-muted-foreground ' + className} {...props} />
+        <blockquote
+            className={'[&>*]:text-muted-foreground mt-6 border-l-2 pl-6 italic ' + className}
+            {...props}
+        />
     ),
     img: ({ className, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
         // eslint-disable-next-line @next/next/no-img-element
@@ -52,7 +78,7 @@ const components: MDXComponents = {
         </div>
     ),
     tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
-        <tr className={'m-0 border-t p-0 even:bg-muted ' + className} {...props} />
+        <tr className={'even:bg-muted m-0 border-t p-0 ' + className} {...props} />
     ),
     th: ({ className, ...props }) => (
         <th
@@ -66,7 +92,8 @@ const components: MDXComponents = {
     td: ({ className, ...props }) => (
         <td
             className={
-                'border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right ' + className
+                'border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right ' +
+                className
             }
             {...props}
         />
@@ -75,7 +102,10 @@ const components: MDXComponents = {
         <pre className={'mb-4 mt-6 overflow-x-auto rounded-lg ' + className} {...props} />
     ),
     code: ({ className, ...props }) => (
-        <code className={'relative rounded max-w-[280px] p-2 font-mono text-sm ' + className} {...props} />
+        <code
+            className={'relative max-w-[280px] rounded p-2 font-mono text-sm ' + className}
+            {...props}
+        />
     ),
     Image,
     Callout,

@@ -9,15 +9,18 @@ export default function FriendlyLink() {
         },
     ];
     return (
-        <div className="flex flex-col items-center h-full p-6 max-md:p-4">
-            <ul className="flex flex-wrap w-full gap-4">
+        <div className="flex h-full flex-col items-center p-6 max-md:p-4">
+            <ul className="flex w-full flex-wrap gap-4">
                 {friendLinks.map((item, index) => {
                     return (
                         <li
                             key={index}
-                            className="basis-[calc(50%-8px)] h-36 rounded-xl shadow-xl min-w-64 bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:flex-grow"
+                            className="h-36 min-w-64 basis-[calc(50%-8px)] rounded-xl bg-custom-color-4 shadow-xl max-md:flex-grow dark:bg-custom-color-dark-4"
                         >
-                            <a href={item.link} className="flex items-center w-full h-full gap-4 p-4">
+                            <a
+                                href={item.link}
+                                className="flex h-full w-full items-center gap-4 p-4"
+                            >
                                 <div className="relative h-28 w-28">
                                     <Image
                                         className="rounded-xl"
@@ -26,9 +29,11 @@ export default function FriendlyLink() {
                                         fill
                                     ></Image>
                                 </div>
-                                <div className="flex-1 flex flex-col gap-2 h-full">
+                                <div className="flex h-full flex-1 flex-col gap-2">
                                     <strong className="text-xl">{item.title}</strong>
-                                    <p className="text-ellipsis break-all line-clamp-3">{item.desc}</p>
+                                    <p className="line-clamp-3 text-ellipsis break-all">
+                                        {item.desc}
+                                    </p>
                                 </div>
                             </a>
                         </li>

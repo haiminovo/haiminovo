@@ -8,7 +8,7 @@ interface IProps {
 
 export default function MyInf(props: IProps) {
     return (
-        <div className="flex items-center w-full h-28 p-3 gap-3 cursor-pointer" {...props}>
+        <div className="flex h-28 w-full cursor-pointer items-center gap-3 p-3" {...props}>
             <Link href={'/about'} className="flex">
                 <Image
                     alt="用户头像"

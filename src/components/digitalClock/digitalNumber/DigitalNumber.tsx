@@ -20,22 +20,26 @@ export default function DigitalNumber(props: IProps) {
     const { value = 8 } = props;
     if (value === ':') {
         return (
-            <div className="flex flex-col gap-8 p-4 justify-center items-center">
-                <div className={`h-3 w-3 rounded-md bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
-                <div className={`h-3 w-3 rounded-md bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
+            <div className="flex flex-col items-center justify-center gap-8 p-4">
+                <div
+                    className={`h-3 w-3 rounded-md bg-custom-color-dark-4 dark:bg-custom-color-4`}
+                ></div>
+                <div
+                    className={`h-3 w-3 rounded-md bg-custom-color-dark-4 dark:bg-custom-color-4`}
+                ></div>
             </div>
         );
     }
     return (
         <div className="w-14">
-            <div className="relative flex flex-col w-36 translate-x-2">
+            <div className="relative flex w-36 translate-x-2 flex-col">
                 <BaseStick direction="top" active={!!stickActiveMap[0][value]}></BaseStick>
-                <div className="flex m-4 translate-x-[-40px]">
+                <div className="m-4 flex translate-x-[-40px]">
                     <BaseStick direction="left" active={!!stickActiveMap[1][value]}></BaseStick>
                     <BaseStick direction="right" active={!!stickActiveMap[2][value]}></BaseStick>
                 </div>
                 <BaseStick direction="mid" active={!!stickActiveMap[3][value]}></BaseStick>
-                <div className="flex m-4 translate-x-[-40px]">
+                <div className="m-4 flex translate-x-[-40px]">
                     <BaseStick direction="left" active={!!stickActiveMap[4][value]}></BaseStick>
                     <BaseStick direction="right" active={!!stickActiveMap[5][value]}></BaseStick>
                 </div>

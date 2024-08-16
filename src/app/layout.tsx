@@ -15,7 +15,15 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
     title: '巅峰之路',
     description: 'haimin的巅峰之路',
-    keywords: ['haimin', 'haiminovo', 'road to top', 'road to the top', '巅峰之路', '巅峰路', '前端'],
+    keywords: [
+        'haimin',
+        'haiminovo',
+        'road to top',
+        'road to the top',
+        '巅峰之路',
+        '巅峰路',
+        '前端',
+    ],
 };
 
 export default function RootLayout({
@@ -33,37 +41,28 @@ export default function RootLayout({
             </head>
             <SiteAnalytics></SiteAnalytics>
             <body
-                className={`${inter.className} relative flex justify-center min-h-screen h-full min-w-80
-                bg-custom-color-1 text-font-normal
-                dark:bg-custom-color-dark-1 dark:text-font-normal-dark
-                 `}
+                className={`${inter.className} relative flex h-full min-h-screen min-w-80 justify-center bg-custom-color-1 text-font-normal dark:bg-custom-color-dark-1 dark:text-font-normal-dark`}
             >
                 <div className="flex w-[1440px] shadow-xl">
-                    <Aside
-                        className="sticky top-0 flex flex-col justify-between z-50 h-screen overflow-auto no-scrollbar
-                        bg-custom-color-4 dark:bg-custom-color-dark-4 max-md:hidden"
-                    >
-                        <div className="flex flex-col gap-3 w-full">
+                    <Aside className="no-scrollbar sticky top-0 z-50 flex h-screen flex-col justify-between overflow-auto bg-custom-color-4 max-md:hidden dark:bg-custom-color-dark-4">
+                        <div className="flex w-full flex-col gap-3">
                             <MyInf></MyInf>
                             <Tags className="lg:hidden"></Tags>
                             <PageNavigator className="lg:hidden"></PageNavigator>
                         </div>
-                        <div className="flex flex-col gap-3 w-full">
+                        <div className="flex w-full flex-col gap-3">
                             <SiteInf></SiteInf>
                         </div>
                     </Aside>
-                    <div className="flex flex-col w-full h-full">
+                    <div className="flex h-full w-full flex-col">
                         <Navbar className="top-0 z-10 h-14"></Navbar>
-                        <main className="top-14 flex w-full h-full min-h-[calc(100vh-56px)]">
-                            <div className="flex flex-col w-full h-full">
-                                <div
-                                    className="flex flex-col w-full h-full no-scrollbar
-                                    bg-custom-color-7 dark:bg-custom-color-dark-7"
-                                >
+                        <main className="top-14 flex h-full min-h-[calc(100vh-56px)] w-full">
+                            <div className="flex h-full w-full flex-col">
+                                <div className="no-scrollbar flex h-full w-full flex-col bg-custom-color-7 dark:bg-custom-color-dark-7">
                                     {children}
                                 </div>
                             </div>
-                            <Aside className="bg-custom-color-4 dark:bg-custom-color-dark-4 max-lg:hidden">
+                            <Aside className="bg-custom-color-4 max-lg:hidden dark:bg-custom-color-dark-4">
                                 <Tags></Tags>
                                 <PageNavigator></PageNavigator>
                                 <BackToTop></BackToTop>

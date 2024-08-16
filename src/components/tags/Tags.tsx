@@ -21,13 +21,22 @@ export default function Tags(props: IProps) {
         }),
     );
     return (
-        <div className={`flex flex-col w-full gap-1 ${props.className}`}>
-            <span className="w-full ml-1 text-font-strong dark:text-font-light-dark font-medium">标签</span>
-            <ul className="flex flex-wrap gap-3 p-3 w-full shadow-md rounded-md bg-custom-color-7 dark:bg-custom-color-dark-7 ">
+        <div className={`flex w-full flex-col gap-1 ${props.className}`}>
+            <span className="ml-1 w-full font-medium text-font-strong dark:text-font-light-dark">
+                标签
+            </span>
+            <ul className="flex w-full flex-wrap gap-3 rounded-md bg-custom-color-7 p-3 shadow-md dark:bg-custom-color-dark-7">
                 {tags.map((item) => {
                     return (
                         <li key={item.tag}>
-                            <Link href={{ pathname: '/post', query: { tag: item.tag } }}>
+                            <Link
+                                href={{
+                                    pathname: '/post',
+                                    query: {
+                                        tag: item.tag,
+                                    },
+                                }}
+                            >
                                 {item.tag}({item.count})
                             </Link>
                         </li>

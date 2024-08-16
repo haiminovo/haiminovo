@@ -13,8 +13,8 @@ export default function PostLayout({
             <div className={`${inter.className} flex flex-col gap-4`}>
                 <div className="flex flex-col p-6">
                     {children}
-                    <div className="flex justify-end text-xs py-8">
-                        <div className="flex gap-1 items-center">
+                    <div className="flex justify-end py-8 text-xs">
+                        <div className="flex items-center gap-1">
                             <CopyrightOutlined />
                             <span>允许规范转载</span>
                         </div>
