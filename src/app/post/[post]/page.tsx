@@ -34,7 +34,7 @@ export default function Post({ params }: PageProps) {
 	return (
 		<article id="artical" className="container">
 			<div className="py-6">
-				<h1 className="text-2xl font-black break-all ">{page.title}</h1>
+				<h1 className="break-all text-2xl font-black">{page.title}</h1>
 				<hr className="my-4" />
 				{page.description && <p className="break-all indent-8 text-lg">{page.description}</p>}
 			</div>
