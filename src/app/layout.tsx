@@ -25,7 +25,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="zh-Hans-CN" className="flex justify-center">
+		<html lang="zh-Hans-CN" className="relative flex justify-center">
 			<head>
 				<meta
 					name="viewport"
@@ -34,18 +34,16 @@ export default function RootLayout({
 			</head>
 			<SiteAnalytics></SiteAnalytics>
 			<body
-				className={`${inter.className} flex h-full min-h-screen w-full min-w-80 flex-col items-center bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark`}
+				className={`${inter.className} flex min-h-screen w-full min-w-80 flex-col items-center bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark`}
 			>
-				<Navbar className="top-0 z-10 h-14 w-full"></Navbar>
-				<main className="top-14 flex min-h-[calc(100vh-88px)] w-full max-w-[1440px] justify-center">
-					<Aside className="sticky top-14 flex justify-between bg-custom-color-7 py-6 max-md:hidden dark:bg-custom-color-dark-7">
-						<div className="flex w-full flex-col gap-3">
+				<Navbar className="top-0 z-10 h-10 w-full"></Navbar>
+				<main className="flex h-full w-full max-w-[1440px] justify-center">
+					<Aside className="h-full min-h-[calc(100vh-40px)] bg-custom-color-7 max-md:hidden dark:bg-custom-color-dark-7">
+						<div className="flex h-full w-full flex-1 flex-col gap-3 pt-5">
 							<MyInf></MyInf>
 							<Tags className="lg:hidden"></Tags>
-							<PageNavigator className="sticky top-16 lg:hidden"></PageNavigator>
-						</div>
-						<div className="flex w-full flex-col gap-3">
 							<SiteInf></SiteInf>
+							<PageNavigator className="sticky top-16 lg:hidden"></PageNavigator>
 						</div>
 					</Aside>
 					<div className="flex w-full flex-1 flex-col">
