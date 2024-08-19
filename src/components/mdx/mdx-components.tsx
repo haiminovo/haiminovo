@@ -71,10 +71,11 @@ const components: MDXComponents = {
 	),
 	pre: ({ className, ...props }) => {
 		return (
-			<pre className={'mb-4 mt-6 overflow-x-auto rounded-lg ' + className} {...props}>
-				<CopyButton text={''}></CopyButton>
-				{props.children}
-			</pre>
+			<CopyButton>
+				<pre className={'pointer-events-none mb-4 mt-6 overflow-x-auto rounded-lg ' + className} {...props}>
+					{props.children}
+				</pre>
+			</CopyButton>
 		);
 	},
 	code: ({ className, ...props }) => (
