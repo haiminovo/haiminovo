@@ -6,6 +6,7 @@ import type { MDXComponents } from 'mdx/types';
 
 import { Callout } from '@/components/mdx/callout';
 import { MdxCard } from '@/components/mdx/mdx-card';
+import { CopyButton } from './copyButton';
 
 const components: MDXComponents = {
 	h1: ({ className, ...props }) => (
@@ -68,7 +69,14 @@ const components: MDXComponents = {
 			{...props}
 		/>
 	),
-	pre: ({ className, ...props }) => <pre className={'mb-4 mt-6 overflow-x-auto rounded-lg ' + className} {...props} />,
+	pre: ({ className, ...props }) => {
+		return (
+			<pre className={'mb-4 mt-6 overflow-x-auto rounded-lg ' + className} {...props}>
+				<CopyButton text={''}></CopyButton>
+				{props.children}
+			</pre>
+		);
+	},
 	code: ({ className, ...props }) => (
 		<code className={'relative max-w-[280px] rounded p-2 font-mono text-sm ' + className} {...props} />
 	),
