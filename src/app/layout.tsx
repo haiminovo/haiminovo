@@ -9,6 +9,7 @@ import SiteAnalytics from '@/components/siteAnalytics/SiteAnalytics';
 import Tags from '@/components/tags/Tags';
 import PageNavigator from '@/components/pageNavigator/PageNavigator';
 import BackToTop from '@/components/backToTop/BackToTop';
+import Footer from '@/components/footer/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="zh-Hans-CN">
+		<html lang="zh-Hans-CN" className="flex justify-center">
 			<head>
 				<meta
 					name="viewport"
@@ -33,35 +34,32 @@ export default function RootLayout({
 			</head>
 			<SiteAnalytics></SiteAnalytics>
 			<body
-				className={`${inter.className} relative flex h-full min-h-screen min-w-80 justify-center bg-custom-color-1 text-font-normal dark:bg-custom-color-dark-1 dark:text-font-normal-dark`}
+				className={`${inter.className} flex h-full min-h-screen w-full min-w-80 flex-col items-center bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark`}
 			>
-				<div className="flex w-[1440px] shadow-xl">
-					<Aside className="no-scrollbar sticky top-0 z-50 flex h-screen flex-col justify-between overflow-auto bg-custom-color-4 max-md:hidden dark:bg-custom-color-dark-4">
+				<Navbar className="top-0 z-10 h-14 w-full"></Navbar>
+				<main className="top-14 flex min-h-[calc(100vh-88px)] w-full max-w-[1440px] justify-center">
+					<Aside className="sticky top-14 flex justify-between bg-custom-color-7 py-6 max-md:hidden dark:bg-custom-color-dark-7">
 						<div className="flex w-full flex-col gap-3">
 							<MyInf></MyInf>
 							<Tags className="lg:hidden"></Tags>
-							<PageNavigator className="lg:hidden"></PageNavigator>
+							<PageNavigator className="sticky top-16 lg:hidden"></PageNavigator>
 						</div>
 						<div className="flex w-full flex-col gap-3">
 							<SiteInf></SiteInf>
 						</div>
 					</Aside>
-					<div className="flex h-full w-full flex-col">
-						<Navbar className="top-0 z-10 h-14"></Navbar>
-						<main className="top-14 flex h-full min-h-[calc(100vh-56px)] w-full">
-							<div className="flex h-full w-full flex-col">
-								<div className="no-scrollbar flex h-full w-full flex-col bg-custom-color-7 dark:bg-custom-color-dark-7">
-									{children}
-								</div>
-							</div>
-							<Aside className="bg-custom-color-4 max-lg:hidden dark:bg-custom-color-dark-4">
-								<Tags></Tags>
-								<PageNavigator></PageNavigator>
-								<BackToTop></BackToTop>
-							</Aside>
-						</main>
+					<div className="flex w-full flex-1 flex-col">
+						<div className="no-scrollbar flex h-full w-full flex-col bg-custom-color-7 dark:bg-custom-color-dark-7">
+							{children}
+						</div>
 					</div>
-				</div>
+					<Aside className="bg-custom-color-7 max-lg:hidden dark:bg-custom-color-dark-7">
+						<Tags></Tags>
+						<PageNavigator></PageNavigator>
+						<BackToTop></BackToTop>
+					</Aside>
+				</main>
+				<Footer></Footer>
 			</body>
 		</html>
 	);

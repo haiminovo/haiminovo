@@ -16,7 +16,7 @@ export default function PostItem(props: IProps) {
 				background: `rgba(0,0,0,0.2) url(${image})`,
 				backgroundPosition: 'center',
 			}}
-			className={`relative flex w-full cursor-pointer flex-col justify-between gap-4 rounded-xl border bg-contain bg-bottom bg-no-repeat p-4 shadow-xl dark:border-custom-color-dark-4 dark:bg-blend-darken ${className}`}
+			className={`relative flex w-full cursor-pointer flex-col justify-between gap-4 rounded-xl border bg-contain bg-bottom bg-no-repeat p-4 shadow-lg dark:border-custom-color-dark-4 dark:bg-blend-darken ${className}`}
 			onClick={onClick}
 		>
 			<div className="absolute -left-1 -top-1 z-20 scale-150">📎</div>

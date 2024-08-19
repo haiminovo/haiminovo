@@ -8,6 +8,8 @@ interface IProps {
 export default function Aside(props: IProps) {
 	const { children, className } = props;
 	return (
-		<aside className={`flex w-48 flex-shrink-0 flex-col items-center gap-3 p-3 text-sm ${className}`}>{children}</aside>
+		<aside className={`relative flex w-48 flex-shrink-0 flex-col items-center gap-3 p-3 text-sm ${className}`}>
+			{children}
+		</aside>
 	);
 }

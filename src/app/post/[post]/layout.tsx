@@ -11,7 +11,7 @@ export default function PostLayout({
 	return (
 		<>
 			<div className={`${inter.className} flex flex-col gap-4`}>
-				<div className="flex flex-col p-6">
+				<div className="flex flex-col p-4">
 					{children}
 					<div className="flex justify-end py-8 text-xs">
 						<div className="flex items-center gap-1">
@@ -29,7 +29,7 @@ export default function PostLayout({
                             点赞
                         </button>
                     </div> */}
-					{/* <Comment></Comment> */}
+					<Comment></Comment>
 				</div>
 			</div>
 		</>

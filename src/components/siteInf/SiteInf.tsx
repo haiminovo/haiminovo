@@ -6,13 +6,13 @@ import { useLayoutEffect, useState } from 'react';
 export default function SiteInf() {
 	const [runtime, setRuntime] = useState<string>();
 	useLayoutEffect(() => {
-		setRuntime(((new Date().getTime() - new Date('2024-07-25').getTime()) / 86400000).toFixed(2) + '天');
+		setRuntime(((new Date().getTime() - new Date('2024-07-25').getTime()) / 86400000).toFixed(0) + ' 天');
 	}, []);
 	const blogInfos = [
 		{
 			title: '文章总计',
 			icon: <FileTextOutlined />,
-			value: allPosts.length,
+			value: allPosts.length + ' 篇',
 		},
 		{
 			title: '运行时长',
@@ -24,7 +24,7 @@ export default function SiteInf() {
 	return (
 		<div className="flex w-full flex-col gap-1">
 			<span className="ml-1 font-medium text-font-strong dark:text-font-light-dark">站点信息</span>
-			<ul className="flex w-full flex-1 flex-col justify-center gap-3 rounded-md bg-custom-color-7 p-3 shadow-md dark:bg-custom-color-dark-7">
+			<ul className="flex w-full flex-1 flex-col justify-center gap-3 rounded-xl bg-custom-color-9 p-3 shadow-md dark:bg-custom-color-dark-9">
 				{blogInfos.map((item) => {
 					return (
 						<li key={item.title} className="flex flex-1 items-center">

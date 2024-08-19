@@ -37,11 +37,9 @@ export default function Post({ params }: PageProps) {
 	metadata.keywords = page.tags;
 	return (
 		<article id="artical" className="container">
-			<div className="py-6">
-				<h1 className="break-all text-2xl font-black">{page.title}</h1>
-				<hr className="my-4" />
-				{page.description && <p className="break-all indent-8 text-lg">{page.description}</p>}
-			</div>
+			<h1 className="break-all text-2xl font-black">{page.title}</h1>
+			<hr className="my-4" />
+			{page.description && <p className="break-all indent-8 text-lg">{page.description}</p>}
 			<Mdx code={page.body.code} />
 		</article>
 	);
