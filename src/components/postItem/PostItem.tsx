@@ -13,7 +13,7 @@ export default function PostItem(props: IProps) {
 	let { title, description, authors, date, tags, image } = data;
 	return (
 		<div
-			className={`relative flex w-full cursor-pointer flex-col justify-between gap-4 rounded-xl border bg-custom-color-9 p-4 shadow-lg dark:border-custom-color-dark-4 dark:bg-custom-color-dark-9 ${className}`}
+			className={`relative flex w-full cursor-pointer flex-col justify-between gap-4 rounded-xl border bg-custom-color-9 p-4 shadow-md dark:border-custom-color-dark-4 dark:bg-custom-color-dark-9 ${className}`}
 			onClick={onClick}
 		>
 			<div className="flex rounded-xl border bg-custom-color-7/80 text-black/80 shadow-inner max-lg:flex-col dark:border-custom-color-dark-7 dark:bg-custom-color-dark-7/80 dark:text-white">

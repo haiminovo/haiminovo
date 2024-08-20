@@ -36,7 +36,7 @@ export default function RootLayout({
 			<body
 				className={`${inter.className} flex min-h-screen w-full min-w-80 flex-col items-center bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark`}
 			>
-				<Navbar className="top-0 z-10 h-10 w-full"></Navbar>
+				<Navbar className="top-0 z-10 h-10 w-full border shadow-sm dark:border-custom-color-dark-7"></Navbar>
 				<main className="flex h-full w-full max-w-[1440px] justify-center">
 					<Aside className="h-full min-h-[calc(100vh-40px)] bg-custom-color-7 max-md:hidden dark:bg-custom-color-dark-7">
 						<div className="flex h-full w-full flex-1 flex-col gap-3 pt-5">

@@ -22,9 +22,9 @@ export default function SiteInf() {
 	];
 
 	return (
-		<div className="flex w-full flex-col gap-1">
-			<span className="ml-1 font-medium text-font-strong dark:text-font-light-dark">站点信息</span>
-			<ul className="flex w-full flex-1 flex-col justify-center gap-3 rounded-xl bg-custom-color-9 p-3 shadow-md dark:bg-custom-color-dark-9">
+		<div className="flex w-full flex-col">
+			<span className="p-1 font-medium text-font-strong dark:text-font-light-dark">站点信息</span>
+			<ul className="flex w-full flex-1 flex-col justify-center gap-3 rounded-xl border bg-custom-color-9 p-3 shadow-md dark:border-custom-color-dark-7 dark:bg-custom-color-dark-9">
 				{blogInfos.map((item) => {
 					return (
 						<li key={item.title} className="flex flex-1 items-center">
