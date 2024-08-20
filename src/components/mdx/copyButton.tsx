@@ -36,7 +36,7 @@ export const CopyButton = ({ children }: ICopyToClipboard) => {
 					aria-label="Copy code"
 					type="button"
 					className={clsx(
-						'absolute right-2 top-2 h-8 w-8 rounded border-2 bg-gray-700 p-1 text-font-light-dark dark:bg-gray-800',
+						'absolute right-2 top-2 z-10 h-8 w-8 rounded border-2 bg-gray-700 p-1 text-font-light-dark dark:bg-gray-800',
 						{
 							'border-green-400': copied,
 							'hover:border-gray-300': !copied,
