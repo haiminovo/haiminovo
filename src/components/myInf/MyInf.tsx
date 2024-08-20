@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import haimin from 'public/haimin.jpg';
 
 interface IProps {
 	className?: string;
@@ -13,13 +14,7 @@ export default function MyInf(props: IProps) {
 			{...props}
 		>
 			<Link href={'/about'} className="flex">
-				<Image
-					alt="用户头像"
-					src={'http://haiminovo.cn:8088/haimin.jpg'}
-					width={56}
-					height={56}
-					className="rounded-3xl"
-				></Image>
+				<Image alt="用户头像" src={haimin} width={56} height={56} className="rounded-3xl"></Image>
 			</Link>
 
 			<div className="flex flex-1 flex-col justify-center">
