@@ -31,6 +31,8 @@ export default function RootLayout({
 					name="viewport"
 					content="width=device-width, user-scalable=1, initial-scale=1.0, minimum-scale=1, maximum-scale=10"
 				/>
+				{/* 百度资源验证 */}
+				<meta name="baidu-site-verification" content="codeva-IDE8CkNHDF" />
 			</head>
 			<SiteAnalytics></SiteAnalytics>
 			<body
