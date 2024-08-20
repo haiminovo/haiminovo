@@ -1,5 +1,6 @@
 import { ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
 import type { Post } from 'contentlayer/generated';
+import Image from 'next/image';
 
 interface IProps {
 	data: Post;
@@ -12,16 +13,21 @@ export default function PostItem(props: IProps) {
 	let { title, description, authors, date, tags, image } = data;
 	return (
 		<div
-			style={{
-				background: `rgba(0,0,0,0.2) url(${image})`,
-				backgroundPosition: 'center',
-			}}
-			className={`relative flex w-full cursor-pointer flex-col justify-between gap-4 rounded-xl border bg-contain bg-bottom bg-no-repeat p-4 shadow-lg dark:border-custom-color-dark-4 dark:bg-blend-darken ${className}`}
+			className={`relative flex w-full cursor-pointer flex-col justify-between gap-4 rounded-xl border bg-custom-color-9 p-4 shadow-lg dark:border-custom-color-dark-4 dark:bg-custom-color-dark-9 ${className}`}
 			onClick={onClick}
 		>
-			<div className="absolute -left-1 -top-1 z-20 scale-150">📎</div>
-			<div className="flex flex-col">
-				<div className="flex w-full flex-col justify-center gap-1 rounded-xl border bg-custom-color-5/80 p-2 text-black/80 shadow-inner dark:border-custom-color-dark-7 dark:bg-custom-color-dark-5/80 dark:text-white">
+			<div className="flex rounded-xl border bg-custom-color-7/80 text-black/80 shadow-inner max-lg:flex-col dark:border-custom-color-dark-7 dark:bg-custom-color-dark-7/80 dark:text-white">
+				{image && (
+					<div className="relative h-full min-h-32 w-[38.2%] rounded-t-2xl max-lg:min-h-64 max-lg:w-full">
+						<Image
+							className="rounded-l-xl object-cover max-lg:rounded-t-xl max-lg:rounded-bl-none dark:brightness-90"
+							alt="文章头图"
+							src={image || ''}
+							fill
+						></Image>
+					</div>
+				)}
+				<div className="flex flex-1 flex-col justify-center gap-1 p-2">
 					<strong className="break-all indent-2 text-lg font-black underline underline-offset-4">
 						{`# ${title} `}
 					</strong>

@@ -32,7 +32,8 @@ export default function RootLayout({
 					content="width=device-width, user-scalable=1, initial-scale=1.0, minimum-scale=1, maximum-scale=10"
 				/>
 			</head>
-			<SiteAnalytics></SiteAnalytics>
+			{/* 埋点使用第三方cookie，影响lighthouse得分，暂时移除 */}
+			{/* <SiteAnalytics></SiteAnalytics> */}
 			<body
 				className={`${inter.className} flex min-h-screen w-full min-w-80 flex-col items-center bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark`}
 			>
