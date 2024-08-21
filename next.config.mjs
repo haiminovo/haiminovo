@@ -8,14 +8,6 @@ const nextConfig = {
 		loader: 'akamai',
 		path: '',
 		unoptimized: true,
-		remotePatterns: [
-			{
-				protocol: 'http',
-				hostname: 'haiminovo.cn',
-				port: '8088',
-				pathname: '**',
-			},
-		],
 	},
 };
 

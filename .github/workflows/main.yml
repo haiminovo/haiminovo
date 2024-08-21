@@ -44,4 +44,4 @@ jobs:
           # 先清空目标目录
           ARGS: '-avzr --delete'
           # 上传到服务器目标目录
-          TARGET: '/www/wwwroot/haiminovo.cn'
+          TARGET: '/www/wwwroot/roadto.top'
