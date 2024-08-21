@@ -9,7 +9,7 @@ interface IProps {
 
 export default function PageNavigator(props: IProps) {
 	const pathName = usePathname();
-	const [dots, setDots] = useState<{ id: string; text: string; level: number }[]>();
+	const [dots, setDots] = useState<{ id: string; text: string; level: number; visible: boolean; offsetY: number }[]>();
 	useEffect(() => {
 		const artical: any = document.getElementById('artical');
 		if (artical) {
@@ -20,11 +20,15 @@ export default function PageNavigator(props: IProps) {
 			let node: any = iterator.nextNode();
 			const reg = /^H([1-6])$/;
 			const dotArr = [];
+
 			while (node !== null) {
+				console.log(node.offsetTop);
 				dotArr.push({
 					id: node.id,
 					text: node.innerText,
 					level: +node.tagName.match(reg)?.[1] - 1,
+					visible: false,
+					offsetY: node.offsetTop,
 				});
 				node = iterator.nextNode();
 			}
@@ -33,6 +37,28 @@ export default function PageNavigator(props: IProps) {
 			setDots(undefined);
 		}
 	}, [pathName]);
+
+	useEffect(() => {
+		if (!dots) return;
+		const handleScroll = () => {
+			let minRange = Infinity;
+			for (const item of dots) {
+				const range = Math.abs(item.offsetY - window.scrollY);
+				if (range <= minRange) {
+					item.visible = true;
+					minRange = range;
+					setDots([...dots]);
+				} else {
+					item.visible = false;
+				}
+			}
+		};
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, [dots?.length]);
+
 	return (
 		<>
 			{dots && (
@@ -45,6 +71,7 @@ export default function PageNavigator(props: IProps) {
 									key={item.id}
 									href={`#${item.id}`}
 									style={{
+										color: item.visible ? 'green' : '',
 										marginLeft: `${(item.level - 1) * 6}px`,
 									}}
 									className="break-all"
