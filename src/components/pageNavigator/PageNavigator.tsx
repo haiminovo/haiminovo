@@ -43,8 +43,8 @@ export default function PageNavigator(props: IProps) {
 		const handleScroll = () => {
 			let minRange = Infinity;
 			for (const item of dots) {
-				const range = Math.abs(item.offsetY - window.scrollY);
-				if (range <= minRange) {
+				const range = item.offsetY - window.scrollY;
+				if (range <= minRange && range > 0) {
 					item.visible = true;
 					minRange = range;
 					setDots([...dots]);
