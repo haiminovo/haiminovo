@@ -33,6 +33,8 @@ export default function RootLayout({
 				/>
 				{/* 百度资源验证 */}
 				<meta name="baidu-site-verification" content="codeva-IDE8CkNHDF" />
+				{/* bing资源验证 */}
+				<meta name="msvalidate.01" content="078ED44B766D08ACBE91D7855C8966BF" />
 			</head>
 			<SiteAnalytics></SiteAnalytics>
 			<body
