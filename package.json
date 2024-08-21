@@ -23,6 +23,7 @@
 		"@types/mdx": "^2.0.13",
 		"concurrently": "^8.2.2",
 		"contentlayer2": "^0.4.6",
+		"lodash": "^4.17.21",
 		"next": "14.2.5",
 		"next-contentlayer2": "^0.4.6",
 		"npx": "^10.2.2",
@@ -40,6 +41,7 @@
 		"shiki": "^1.12.1"
 	},
 	"devDependencies": {
+		"@types/lodash": "^4.17.7",
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",

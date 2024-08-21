@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { debounce } from 'lodash';
 
 interface IProps {
 	className?: string;
@@ -22,7 +23,6 @@ export default function PageNavigator(props: IProps) {
 			const dotArr = [];
 
 			while (node !== null) {
-				console.log(node.offsetTop);
 				dotArr.push({
 					id: node.id,
 					text: node.innerText,
@@ -40,7 +40,7 @@ export default function PageNavigator(props: IProps) {
 
 	useEffect(() => {
 		if (!dots) return;
-		const handleScroll = () => {
+		const handleScroll = debounce(() => {
 			let minRange = Infinity;
 			for (const item of dots) {
 				const range = item.offsetY - window.scrollY;
@@ -52,7 +52,7 @@ export default function PageNavigator(props: IProps) {
 					item.visible = false;
 				}
 			}
-		};
+		}, 200);
 		window.addEventListener('scroll', handleScroll);
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
