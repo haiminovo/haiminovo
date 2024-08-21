@@ -71,7 +71,7 @@ export default function PageNavigator(props: IProps) {
 									key={item.id}
 									href={`#${item.id}`}
 									style={{
-										color: item.visible ? 'green' : '',
+										color: item.visible ? '#369ccf' : '',
 										marginLeft: `${(item.level - 1) * 6}px`,
 									}}
 									className="break-all"
