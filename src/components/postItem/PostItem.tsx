@@ -28,9 +28,7 @@ export default function PostItem(props: IProps) {
 					</div>
 				)}
 				<div className="flex flex-1 flex-col justify-center gap-1 p-2">
-					<strong className="break-all indent-2 text-lg font-black underline underline-offset-4">
-						{`# ${title} `}
-					</strong>
+					<h1 className="break-all indent-2 text-lg font-black underline underline-offset-4">{`# ${title} `}</h1>
 					<p className="line-clamp-3 text-ellipsis break-all indent-6 font-semibold">{description}</p>
 				</div>
 			</div>
