@@ -25,6 +25,7 @@ export default function PostList() {
 		<div className="flex w-full flex-col gap-4">
 			{posts.map((item, index) => (
 				<PostItem
+					index={index}
 					data={item}
 					key={index}
 					onClick={() => {

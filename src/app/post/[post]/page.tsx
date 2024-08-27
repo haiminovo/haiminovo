@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 import { Mdx } from '@/components/mdx/mdx-components';
 import { Metadata } from 'next';
+import Image from 'next/image';
 interface PageProps {
 	params: {
 		post: string;
@@ -36,10 +37,20 @@ export default function Post({ params }: PageProps) {
 	metadata.description = page.description;
 	metadata.keywords = page.tags;
 	return (
-		<article id="artical" className="container">
+		<article id="artical" className="container flex flex-col">
 			<h1 className="break-all text-2xl font-black">{page.title}</h1>
 			<hr className="my-4" />
 			{page.description && <p className="break-all indent-8 text-lg">{page.description}</p>}
+			<div className="block w-full py-4 dark:brightness-[.9]">
+				<Image
+					className="rounded-md object-contain"
+					src={page.image || ''}
+					alt={page.title + '头图'}
+					layout="responsive"
+					width={100}
+					height={100}
+				></Image>
+			</div>
 			<Mdx code={page.body.code} />
 		</article>
 	);
