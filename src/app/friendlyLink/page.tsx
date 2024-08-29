@@ -9,9 +9,14 @@ export const metadata: Metadata = {
 export default function FriendlyLink() {
 	const friendLinks: any[] = [
 		{
-			title: 'test的blog',
-			desc: '测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容测试内容，测试内容，测试内容',
-			link: 'http://roadto.top',
+			title: 'shenwweili的blog',
+			desc: '暂无描述',
+			link: 'https://shenwweili.github.io',
+		},
+		{
+			title: 'haimin的blog',
+			desc: '暂无描述',
+			link: 'https://roadto.top',
 		},
 	];
 	return (
