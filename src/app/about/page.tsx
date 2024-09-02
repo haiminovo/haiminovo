@@ -1,7 +1,9 @@
 export default function About() {
 	return (
 		<div className="flex p-6">
-			<strong className="text-4xl">About me</strong>
+			<div className="inline-block">
+				<h1 className="w-0 overflow-hidden border-r border-gray-400">Hi,I`m Haimin</h1>
+			</div>
 		</div>
 	);
 }

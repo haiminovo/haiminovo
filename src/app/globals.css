@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes typing-frame {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+
+@keyframes blink {
+	from {
+		border-color: transparent;
+	}
+	to {
+		border-color: orange;
+	}
+}
+
 @layer utilities {
 	.zoom-15 {
 		zoom: 0.15;
@@ -12,6 +30,18 @@
 	.zoom-25 {
 		zoom: 0.25;
 	}
+
+	.typing-20 {
+		overflow: hidden;
+		border-right: 0.15em solid orange;
+		white-space: nowrap;
+		font-size: 1.6rem;
+		width: 0;
+		animation:
+			typing-frame 1.5s steps(20, end) forwards,
+			blink 1s infinite;
+	}
+
 	/* Hide scrollbar for Chrome, Safari and Opera */
 	.no-scrollbar::-webkit-scrollbar {
 		display: none;
