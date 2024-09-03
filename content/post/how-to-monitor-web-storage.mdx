@@ -1,0 +1,38 @@
+---
+title: 我该如何监听localStorage和sessionStorage?
+description: 尝试监听页面的localStorage时发现同页无法触发绑定的事件，记录一下解决方案。
+authors: [haiminovo]
+date: 2024-09-03
+tags: [开发, 前端, WebStorage]
+---
+
+## 遇到的问题
+
+使用以下代码尝试监听页面的localStorage,但是在同页面中无法触发
+
+```ts
+window.addEventListener('storage', () => {
+	// 一些操作
+});
+```
+
+打开两个tab页用localStorage.setItem()测试，发现当前tab页未触发监听，另一个页面的控制台则显示触发了监听事件。
+
+使用sessionStorage.setItem()测试发现当前页无法触发，sessionStorge跨tab页不共享自然也无法触发。
+
+## 解决方案
+
+修改window上的setItem方法，在调用方法时新派发一个事件来传递storage被修改的信息，通过监听新事件实现。
+
+```ts
+const orignSetItem = window.localStorage.setItem;
+window.localStorage.setItem = function (key, newValue) {
+	const eventTemp = new Event('自定义事件名');
+	// 一些操作
+	window.dispatchEvent(eventTemp);
+	orignSetItem.apply(this, [key, newValue]);
+};
+
+// 监听事件
+window.addEventListener('自定义事件名', handleFunc);
+```
