@@ -56,7 +56,19 @@ export default function DarkModeBtn(props: IProps) {
 	);
 
 	useLayoutEffect(() => {
+		const orignSetItem = window.localStorage.setItem;
+		window.localStorage.setItem = function (key, newValue) {
+			if (key === 'user-color-scheme') {
+				var setThemeColor: any = new Event('setThemeColor');
+				setThemeColor.newValue = newValue;
+				window.dispatchEvent(setThemeColor); // 抛出自定义事件切换主题
+			}
+			orignSetItem.apply(this, [key, newValue]);
+		};
 		setRootElement(document.documentElement);
+		return () => {
+			window.localStorage.setItem = orignSetItem;
+		};
 	}, []);
 
 	useLayoutEffect(() => {

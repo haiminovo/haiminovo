@@ -96,10 +96,10 @@ html {
 		font-size: medium;
 		content: counter(scroll-position);
 	}
-}
 
-body {
-	:is(.dark *) {
-		color: rgba(255, 255, 255, 0.7);
+	body {
+		:is(.dark *) {
+			color: rgba(255, 255, 255, 0.7);
+		}
 	}
 }

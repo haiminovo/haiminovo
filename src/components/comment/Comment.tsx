@@ -1,8 +1,21 @@
 'use client';
 import { getLS } from '@/utils';
 import Giscus from '@giscus/react';
+import { useEffect, useState } from 'react';
 
 export default function Comment() {
+	const [theme, setTheme] = useState(getLS('user-color-scheme') || 'light');
+	const handleThemeChange = function (e: any) {
+		setTheme(e.newValue);
+	};
+	const sign = new AbortController().signal;
+	useEffect(() => {
+		// 监听自定义事件切换主题
+		window.addEventListener('setThemeColor', handleThemeChange);
+		return () => {
+			window.removeEventListener('setThemeColor', handleThemeChange, true);
+		};
+	}, []);
 	return (
 		<Giscus
 			id="comments"
@@ -14,7 +27,7 @@ export default function Comment() {
 			reactionsEnabled="1"
 			emitMetadata="0"
 			inputPosition="top"
-			theme={getLS('user-color-scheme') || 'noborder_light'}
+			theme={theme}
 			lang="zh-CN"
 			loading="lazy"
 		/>
