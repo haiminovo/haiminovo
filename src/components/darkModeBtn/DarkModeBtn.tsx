@@ -59,7 +59,7 @@ export default function DarkModeBtn(props: IProps) {
 		const orignSetItem = window.localStorage.setItem;
 		window.localStorage.setItem = function (key, newValue) {
 			if (key === 'user-color-scheme') {
-				var setThemeColor: any = new Event('setThemeColor');
+				const setThemeColor: any = new Event('setThemeColor');
 				setThemeColor.newValue = newValue;
 				window.dispatchEvent(setThemeColor); // 抛出自定义事件切换主题
 			}

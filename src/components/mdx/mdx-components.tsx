@@ -14,7 +14,9 @@ const components: MDXComponents = {
 	),
 	h2: ({ className, ...props }) => (
 		<h2
-			className={'mt-10 scroll-m-20 border-b pb-1 text-3xl font-black tracking-tight first:mt-0 ' + className}
+			className={
+				'mt-10 scroll-m-20 border-b border-gray-500/50 pb-2 text-3xl font-black tracking-tight first:mt-0 ' + className
+			}
 			{...props}
 		/>
 	),

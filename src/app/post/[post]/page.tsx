@@ -38,18 +38,19 @@ export default function Post({ params }: PageProps) {
 	metadata.keywords = page.tags;
 	return (
 		<article id="artical" className="container flex flex-col">
-			<h1 className="break-all text-2xl font-black">{page.title}</h1>
-			<hr className="my-4" />
+			<h1 className="my-4 break-all border-b border-gray-500/50 pb-2 text-4xl font-black">{page.title}</h1>
 			{page.description && <p className="break-all indent-8 text-lg">{page.description}</p>}
 			<div className="block w-full py-4 dark:brightness-[.9]">
-				<Image
-					className="rounded-md object-contain"
-					src={page.image || ''}
-					alt={page.title + '头图'}
-					layout="responsive"
-					width={100}
-					height={100}
-				></Image>
+				{page.image && (
+					<Image
+						className="rounded-md object-contain"
+						src={page.image || ''}
+						alt={page.title + '头图'}
+						layout="responsive"
+						width={100}
+						height={100}
+					></Image>
+				)}
 			</div>
 			<Mdx code={page.body.code} />
 		</article>
