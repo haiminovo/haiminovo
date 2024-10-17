@@ -11,27 +11,27 @@ export const links: {
 	path: string;
 	icon?: any;
 }[] = [
-	{
-		title: '首页',
-		path: '/',
-		icon: <HomeOutlined />,
-	},
-	{
-		title: '文章',
-		path: '/post',
-		icon: <FileTextOutlined />,
-	},
-	{
-		title: '友链',
-		path: '/friendlyLink',
-		icon: <TeamOutlined />,
-	},
-	{
-		title: '测试',
-		path: '/test',
-		icon: <ToolOutlined />,
-	},
-];
+		{
+			title: '首页',
+			path: '/',
+			icon: <HomeOutlined />,
+		},
+		{
+			title: '文章',
+			path: '/post',
+			icon: <FileTextOutlined />,
+		},
+		{
+			title: '友链',
+			path: '/friendlyLink',
+			icon: <TeamOutlined />,
+		},
+		{
+			title: '测试',
+			path: '/test',
+			icon: <ToolOutlined />,
+		},
+	];
 
 export default function Links(props: IProps) {
 	return (
@@ -41,7 +41,7 @@ export default function Links(props: IProps) {
 					onClick={() => setTimeout(() => scroll(0, 0), 0)}
 					key={item.title}
 					href={item.path}
-					className="flex items-center gap-1 rounded-lg px-2 py-1 font-normal hover:bg-custom-color-5 hover:shadow-md dark:hover:bg-custom-color-dark-2"
+					className="flex items-center gap-1 rounded-lg px-2 py-1 font-normal hover:bg-custom-color-5/30 hover:shadow-md dark:hover:bg-custom-color-dark-2/30"
 				>
 					<div className="text-xs">{item.icon}</div>
 					<div className="text-sm">{item.title}</div>
