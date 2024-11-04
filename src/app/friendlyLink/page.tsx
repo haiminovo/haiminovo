@@ -8,21 +8,21 @@ export const metadata: Metadata = {
 };
 export default function FriendlyLink() {
 	const friendLinks: any[] = [
-		{
-			title: 'shenwweili的blog',
-			desc: '暂无描述',
-			link: 'https://shenwweili.github.io',
-		},
-		{
-			title: 'haimin的blog',
-			desc: '暂无描述',
-			link: 'https://roadto.top',
-		},
+		// {
+		// 	title: 'shenwweili的blog',
+		// 	desc: '暂无描述',
+		// 	link: 'https://shenwweili.github.io',
+		// },
+		// {
+		// 	title: 'haimin的blog',
+		// 	desc: '暂无描述',
+		// 	link: 'https://roadto.top',
+		// },
 	];
 	return (
 		<div className="flex h-full flex-col items-center p-6 max-md:p-4">
 			<ul className="flex w-full flex-wrap gap-4">
-				{friendLinks.map((item, index) => {
+				{friendLinks?.map((item, index) => {
 					return (
 						<li
 							key={index}

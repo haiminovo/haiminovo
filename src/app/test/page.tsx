@@ -1,4 +1,5 @@
 'use client';
+import LineBallCanvas from '@/components/lineBallCanvas';
 import { useRef } from 'react';
 
 export default function Test() {
@@ -6,8 +7,8 @@ export default function Test() {
 
 	return (
 		<div ref={ref} className="flex h-full flex-col items-center p-6 max-md:p-4">
-			<div className="">
-				<p className="">test</p>
+			<div className="relative">
+				<LineBallCanvas></LineBallCanvas>
 			</div>
 		</div>
 	);
