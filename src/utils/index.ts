@@ -22,10 +22,7 @@ export function getRandom(min: number, max: number) {
     return Math.floor(Math.random() * (max + 1 - min) + min);
 }
 
-export function getRandomColor() {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-	const b = Math.floor(Math.random() * 256);
-	const a = Math.random();
-    return `rgba(${r},${g},${b},${a})`;
+export function getRandomColor(): string {
+    const randomRGB = () => Math.floor(Math.random() * 256);
+    return `rgba(${randomRGB()},${randomRGB()},${randomRGB()},${Math.random().toFixed(2)})`;
 }
