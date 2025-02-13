@@ -4,7 +4,11 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import PostItem from '../postItem/PostItem';
 import { useEffect, useState } from 'react';
 
-export default function PostList() {
+interface IProps {
+	size?: number,
+}
+
+export default function PostList({ size = -1 }: IProps) {
 	const router = useRouter();
 	const params = useSearchParams();
 
@@ -17,7 +21,7 @@ export default function PostList() {
 			});
 			setPosts(filterPosts);
 		} else {
-			setPosts(allPosts);
+			setPosts(size ? allPosts.slice(0, size) : allPosts);
 		}
 	}, [params]);
 

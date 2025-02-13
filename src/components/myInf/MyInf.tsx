@@ -10,12 +10,12 @@ interface IProps {
 export default function MyInf(props: IProps) {
 	return (
 		<div
-			className="flex h-24 w-full cursor-pointer items-center gap-3 rounded-xl border bg-custom-color-9 p-3 shadow-md dark:border-custom-color-dark-7 dark:bg-custom-color-dark-9"
+			className="flex h-24 w-full items-center gap-3 rounded-xl border bg-custom-color-9 p-3 shadow-md dark:border-custom-color-dark-7 dark:bg-custom-color-dark-9"
 			{...props}
 		>
-			<Link href={'/about'} className="flex">
-				<Image alt="用户头像" src={haimin} width={56} height={56} className="rounded-3xl"></Image>
-			</Link>
+			{/* <Link href={'/about'} className="flex"> */}
+			<Image alt="用户头像" src={haimin} width={56} height={56} className="rounded-3xl"></Image>
+			{/* </Link> */}
 
 			<div className="flex flex-1 flex-col justify-center">
 				<p className="text-sm font-bold">haimin</p>

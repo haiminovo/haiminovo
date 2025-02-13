@@ -35,7 +35,7 @@ export const links: {
 
 export default function Links(props: IProps) {
 	return (
-		<div className="flex h-full items-center gap-4 text-nowrap px-3" {...props}>
+		<div className="flex h-full items-center gap-2 text-nowrap px-1" {...props}>
 			{links.map((item) => (
 				<Link
 					onClick={() => setTimeout(() => scroll(0, 0), 0)}
