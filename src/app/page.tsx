@@ -12,13 +12,13 @@ export default function Home() {
 					<img className="w-32 h-32 rounded-full -translate-y-16 shadow-md"
 						src="https://pic1.imgdb.cn/item/67ada9bdd0e0a243d4fed3a3.jpg"
 						alt="" />
-					<p className="font-bold text-xl -translate-y-8 typing-20 w-0 max-w-min">
-						Hi👋，我是haimin，我会在这里分享我的生活。
+					<p className="font-bold text-xl -translate-y-8 typing-20 w-0 max-w-min text-wrap break-words break-all">
+						Hi👋，我是haimin。
 					</p>
 				</div>
 			</div>
-			<div className='flex flex-col gap-1'>
-				<span className='px-2 font-bold text-[#66ccff]'>近期更新:</span>
+			<div className='flex flex-col gap-1 p-2'>
+				<span className='px-2 font-bold text-[#91b0f9]'>近期更新:</span>
 				<PostList size={3}></PostList>
 			</div>
 		</Suspense>
