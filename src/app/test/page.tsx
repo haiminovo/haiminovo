@@ -83,7 +83,7 @@ export default function ScheduleSystem() {
 		localStorage.setItem('schedule-items', JSON.stringify(scheduleItems));
 	}, [scheduleItems]);
 
-	// 生成从开始时间起24小时内的排班项
+	// 生成从开始时间起24小时内的项
 	const generateScheduleItems = (patient: Patient): ScheduleItem[] => {
 		const items: ScheduleItem[] = [];
 
@@ -138,7 +138,7 @@ export default function ScheduleSystem() {
 		return hours < 12 ? '上午' : hours < 18 ? '下午' : '晚上';
 	};
 
-	// 添加病人并生成排班
+	// 添加病人并生成
 	const addPatient = () => {
 		if (!formData.name || !formData.startDate || !formData.startTime || !formData.interval) {
 			alert('请填写所有必填字段');
@@ -164,10 +164,10 @@ export default function ScheduleSystem() {
 		const newPatients = [...patients, newPatient];
 		setPatients(newPatients);
 
-		// 为新病人生成排班项
+		// 为新病人生成项
 		const newScheduleItems = generateScheduleItems(newPatient);
 
-		// 合并所有排班项并按日期时间排序
+		// 合并所有项并按日期时间排序
 		const allItems = [...scheduleItems, ...newScheduleItems].sort((a, b) => {
 			return a.dateTime.localeCompare(b.dateTime);
 		});
@@ -184,7 +184,7 @@ export default function ScheduleSystem() {
 		});
 	};
 
-	// 删除病人及其所有排班项
+	// 删除病人及其所有项
 	const deletePatient = (patientId: string) => {
 		const newPatients = patients.filter(p => p.id !== patientId);
 		const newScheduleItems = scheduleItems.filter(item => item.patientId !== patientId);
@@ -194,7 +194,7 @@ export default function ScheduleSystem() {
 		setDeleteConfirm(null);
 	};
 
-	// 删除单个排班项
+	// 删除单个项
 	const deleteScheduleItem = (itemId: string) => {
 		const newScheduleItems = scheduleItems.filter(item => item.id !== itemId);
 		setScheduleItems(newScheduleItems);
@@ -211,7 +211,7 @@ export default function ScheduleSystem() {
 		}
 	};
 
-	// 按日期分组排班项
+	// 按日期分组项
 	const groupedScheduleItems = scheduleItems.reduce((groups, item) => {
 		const date = item.date;
 		if (!groups[date]) {
@@ -241,7 +241,7 @@ export default function ScheduleSystem() {
 			{/* 添加病人表单 */}
 			<div className="bg-white rounded-lg shadow-md p-6 mb-6">
 				<div className="flex justify-between items-center mb-4">
-					<h2 className="text-xl font-bold">添加病人排班</h2>
+					<h2 className="text-xl font-bold">添加病人</h2>
 					{patients.length > 0 && (
 						<button
 							onClick={clearAllData}
@@ -322,7 +322,7 @@ export default function ScheduleSystem() {
 					onClick={addPatient}
 					className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-md transition-colors"
 				>
-					添加排班
+					添加
 				</button>
 			</div>
 
@@ -349,7 +349,7 @@ export default function ScheduleSystem() {
 								</div>
 								<button
 									onClick={() => setDeleteConfirm(patient.id)}
-									className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+									className="bg-red-500 hover:bg-red-600 text-white p-1 rounded text-xs whitespace-nowrap"
 								>
 									删除
 								</button>
@@ -359,18 +359,18 @@ export default function ScheduleSystem() {
 				</div>
 			)}
 
-			{/* 排班时间表 */}
+			{/* 时间表 */}
 			<div className="bg-white rounded-lg shadow-md p-6 flex-1">
 				<div className="flex justify-between items-center mb-4">
-					<h2 className="text-xl font-bold">排班时间表</h2>
+					<h2 className="text-xl font-bold">时间表</h2>
 					<div className="text-sm text-gray-500">
-						共 {scheduleItems.length} 个排班项
+						共 {scheduleItems.length} 个项
 					</div>
 				</div>
 
 				{scheduleItems.length === 0 ? (
 					<div className="text-center text-gray-500 py-8">
-						暂无排班数据，请添加病人排班
+						暂无数据，请添加病人
 					</div>
 				) : (
 					<div className="space-y-6 max-h-[600px] overflow-y-auto">
@@ -387,40 +387,39 @@ export default function ScheduleSystem() {
 										{items.map(item => (
 											<div
 												key={item.id}
-												className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 border-l-4"
+												className="flex items-center justify-between p-1 rounded-lg hover:bg-gray-50 border-l-2 border"
 												style={{ borderLeftColor: item.color }}
 											>
-												<div className="flex items-center space-x-4">
-													<div className="flex items-center space-x-2">
-														<span className="text-xs text-gray-400 w-8">
+												<div className="flex items-center space-x-1 w-full gap-2">
+													<div className="flex items-center space-x-1">
+														<span className="text-xs text-gray-400">
 															{getTimeLabel(item.time)}
 														</span>
 														<span
-															className="font-mono text-white px-2 py-1 rounded min-w-16 text-center font-semibold"
+															className="font-mono text-white px-3 py-1 rounded  text-xs text-center font-semibold"
 															style={{ backgroundColor: item.color }}
 														>
 															{item.time}
 														</span>
 													</div>
-													<div className="flex items-center space-x-3">
-														<div
-															className="w-3 h-3 rounded-full"
-															style={{ backgroundColor: item.color }}
-														/>
-														<div>
-															<span className="font-medium">{item.patientName}</span>
+													<div className="flex items-center space-x-1">
+														<div className='flex flex-col justify-center flex-1 gap-2 items-center'>
+															<span className="font-medium ">{item.patientName}</span>
 															<div className="text-xs text-gray-500">
-																开始于 {item.originalStartDate} {item.originalStartTime} · 间隔 {item.interval}分钟
+																{item.originalStartDate} {item.originalStartTime}
+															</div>
+															<div className="text-xs text-gray-500">
+																每 {item.interval}分钟
 															</div>
 														</div>
 													</div>
 													{item.note && (
-														<span className="text-gray-500 text-sm">({item.note})</span>
+														<span className="text-gray-500 text-sm">{item.note}</span>
 													)}
 												</div>
 												<button
 													onClick={() => setDeleteConfirm(item.id)}
-													className="text-red-500 hover:text-red-700 text-sm px-2 py-1 rounded hover:bg-red-50"
+													className="text-red-500 hover:text-red-700 text-xs whitespace-nowrap p-1 rounded hover:bg-red-50"
 												>
 													删除
 												</button>
@@ -432,24 +431,6 @@ export default function ScheduleSystem() {
 					</div>
 				)}
 			</div>
-
-			{/* 颜色图例 */}
-			{patients.length > 0 && (
-				<div className="bg-white rounded-lg shadow-md p-4 mt-4">
-					<h3 className="font-semibold text-gray-800 mb-3">颜色图例</h3>
-					<div className="flex flex-wrap gap-3">
-						{patients.map(patient => (
-							<div key={patient.id} className="flex items-center space-x-2">
-								<div
-									className="w-4 h-4 rounded-full"
-									style={{ backgroundColor: patient.color }}
-								/>
-								<span className="text-sm text-gray-700">{patient.name}</span>
-							</div>
-						))}
-					</div>
-				</div>
-			)}
 
 			{/* 删除确认对话框 */}
 			{deleteConfirm && (
