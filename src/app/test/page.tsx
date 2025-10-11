@@ -329,22 +329,22 @@ export default function ScheduleSystem() {
 			{/* 病人列表 */}
 			{patients.length > 0 && (
 				<div className="bg-white rounded-lg shadow-md p-4 mb-4">
-					<h2 className="text-xl font-bold mb-4">病人列表 ({patients.length}人)</h2>
+					<h2 className="text-sm font-bold mb-4">病人列表 ({patients.length}人)</h2>
 					<div className="space-y-3">
 						{patients.map(patient => (
 							<div key={patient.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-								<div className="flex items-center space-x-3">
+								<div className="flex items-center space-x-2">
 									<div
 										className="w-4 h-4 rounded-full"
 										style={{ backgroundColor: patient.color }}
 									/>
-									<span className="font-medium">{patient.name}</span>
-									<span className="text-gray-600">
+									<span className="text-sm font-medium whitespace-nowrap">{patient.name}</span>
+									<span className="text-sm text-gray-600">
 										{formatDate(patient.startDate)} {patient.startTime}
 									</span>
-									<span className="text-gray-600">间隔: {patient.interval}分钟</span>
+									<span className="text-sm text-gray-600"> {patient.interval}分钟</span>
 									{patient.note && (
-										<span className="text-gray-500">备注: {patient.note}</span>
+										<span className="text-sm text-gray-500"> {patient.note}</span>
 									)}
 								</div>
 								<button
@@ -396,16 +396,16 @@ export default function ScheduleSystem() {
 															{getTimeLabel(item.time)}
 														</span>
 														<span
-															className="font-mono text-white px-3 py-1 rounded  text-xs text-center font-semibold"
+															className="font-mono text-white px-1 py-1 rounded text-xs text-center font-semibold"
 															style={{ backgroundColor: item.color }}
 														>
 															{item.time}
 														</span>
 													</div>
 													<div className="flex items-center space-x-1">
-														<div className='flex flex-col justify-center flex-1 gap-2 items-center'>
+														<div className='flex flex-col justify-center flex-1 gap-2 items-center w-full'>
 															<span className="font-medium ">{item.patientName}</span>
-															<div className="text-xs text-gray-500">
+															<div className="text-xs text-gray-500 whitespace-nowrap">
 																{item.originalStartDate} {item.originalStartTime}
 															</div>
 															<div className="text-xs text-gray-500">
