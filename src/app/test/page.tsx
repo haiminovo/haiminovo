@@ -7,38 +7,42 @@ interface Patient {
 	startDate: string; // YYYY-MM-DD
 	startTime: string; // HH:mm
 	interval: number; // 分钟
-	note: string;
-	color: string; // 新增颜色字段
+	color: string;
 }
 
 interface ScheduleItem {
 	id: string;
 	patientId: string;
 	patientName: string;
-	dateTime: string; // ISO 格式
-	date: string; // YYYY-MM-DD
-	time: string; // HH:mm
-	note: string;
+	dateTime: string; // ISO 格式（用于排序）
+	date: string; // YYYY-MM-DD（本地时间）
+	time: string; // HH:mm 格式（本地时间）
+	displayTime: string; // 显示格式 18:00
 	originalStartDate: string;
 	originalStartTime: string;
 	interval: number;
-	color: string; // 新增颜色字段
+	color: string;
 }
 
-// 预定义的颜色列表
+// 丰富的颜色列表
 const COLOR_PALETTE = [
-	'#3B82F6', // blue-500
-	'#EF4444', // red-500
-	'#10B981', // emerald-500
-	'#F59E0B', // amber-500
-	'#8B5CF6', // violet-500
-	'#EC4899', // pink-500
-	'#06B6D4', // cyan-500
-	'#84CC16', // lime-500
-	'#F97316', // orange-500
-	'#6366F1', // indigo-500
-	'#14B8A6', // teal-500
-	'#EAB308', // yellow-500
+	'#3B82F6', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6',
+	'#EC4899', '#06B6D4', '#84CC16', '#F97316', '#6366F1',
+	'#14B8A6', '#EAB308', '#DC2626', '#65A30D', '#7C3AED',
+	'#DB2777', '#0D9488', '#EA580C', '#4338CA', '#BE123C',
+	'#0F766E', '#B45309', '#3730A3', '#9D174D', '#134E4A',
+	'#92400E', '#312E81', '#831843', '#115E59', '#78350F',
+	'#1E40AF', '#9F1239', '#0E7490', '#854D0E', '#1E1B4B',
+	'#701A75', '#164E63', '#713F12', '#312E81', '#500724',
+	'#1A365D', '#3C096C', '#00509D', '#6A040F', '#3A0CA3',
+	'#7209B7', '#560BAD', '#480CA8', '#3A0CA3', '#4CC9F0'
+];
+
+// 间隔时间选项
+const INTERVAL_OPTIONS = [
+	{ value: '240', label: 'q4h (4小时)' },
+	{ value: '360', label: 'q6h (6小时)' },
+	{ value: '480', label: 'q8h (8小时)' }
 ];
 
 export default function ScheduleSystem() {
@@ -48,11 +52,19 @@ export default function ScheduleSystem() {
 	const [formData, setFormData] = useState({
 		name: '',
 		startDate: '',
-		startTime: '',
-		interval: '',
-		note: ''
+		startTime: '18:00', // 默认18:00
+		interval: '240', // 默认q4h
 	});
 	const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
+
+	// 获取今天的日期字符串（本地时间）
+	const getTodayDateString = () => {
+		const now = new Date();
+		const year = now.getFullYear();
+		const month = String(now.getMonth() + 1).padStart(2, '0'); // 月份0-11，需+1
+		const day = String(now.getDate()).padStart(2, '0');
+		return `${year}-${month}-${day}`;
+	};
 
 	// 获取下一个可用的颜色
 	const getNextColor = (): string => {
@@ -74,6 +86,16 @@ export default function ScheduleSystem() {
 		}
 	}, []);
 
+	// 设置默认开始日期为今天（本地时间）
+	useEffect(() => {
+		if (!formData.startDate) {
+			setFormData(prev => ({
+				...prev,
+				startDate: getTodayDateString()
+			}));
+		}
+	}, []);
+
 	// 保存数据到localStorage
 	useEffect(() => {
 		localStorage.setItem('schedule-patients', JSON.stringify(patients));
@@ -83,62 +105,69 @@ export default function ScheduleSystem() {
 		localStorage.setItem('schedule-items', JSON.stringify(scheduleItems));
 	}, [scheduleItems]);
 
-	// 生成从开始时间起24小时内的项
+	// 修复核心：基于本地时间生成排班项，彻底解决时区偏差
 	const generateScheduleItems = (patient: Patient): ScheduleItem[] => {
 		const items: ScheduleItem[] = [];
-
-		// 解析开始日期时间
-		const startDateTime = new Date(`${patient.startDate}T${patient.startTime}`);
 		const intervalMs = patient.interval * 60 * 1000; // 转换为毫秒
-		const endTime = new Date(startDateTime.getTime() + 24 * 60 * 60 * 1000); // 开始时间后24小时
 
-		let currentTime = startDateTime.getTime();
-		let index = 0;
+		// 解析患者的开始时间（本地时间）
+		const [startYear, startMonth, startDay] = patient.startDate.split('-').map(Number);
+		const [startHour, startMinute] = patient.startTime.split(':').map(Number);
+		// 注意：Date的月份是0-11，所以startMonth需要-1
+		let currentDateTime = new Date(startYear, startMonth - 1, startDay, startHour, startMinute);
 
-		while (currentTime < endTime.getTime()) {
-			const date = new Date(currentTime);
-			const dateString = date.toISOString().split('T')[0]; // YYYY-MM-DD
-			const timeString = date.toTimeString().slice(0, 5); // HH:mm
-			const dateTimeString = date.toISOString();
+		// 生成6个排班项（覆盖24小时周期）
+		for (let index = 0; index < 6; index++) {
+			// 1. 获取本地时间的年/月/日（解决时区问题的关键）
+			const year = currentDateTime.getFullYear();
+			const month = String(currentDateTime.getMonth() + 1).padStart(2, '0'); // 转回1-12月
+			const day = String(currentDateTime.getDate()).padStart(2, '0');
+			const dateString = `${year}-${month}-${day}`;
+
+			// 2. 获取本地时间的时/分
+			const hour = String(currentDateTime.getHours()).padStart(2, '0');
+			const minute = String(currentDateTime.getMinutes()).padStart(2, '0');
+			const timeString = `${hour}:${minute}`;
+
+			// 3. 保留ISO格式时间（仅用于排序，不用于显示）
+			const dateTimeISO = currentDateTime.toISOString();
 
 			items.push({
 				id: `${patient.id}-${index}`,
 				patientId: patient.id,
 				patientName: patient.name,
-				dateTime: dateTimeString,
-				date: dateString,
-				time: timeString,
-				note: patient.note,
+				dateTime: dateTimeISO, // 用于排序
+				date: dateString, // 本地时间日期（用于显示）
+				time: timeString, // 本地时间（用于显示）
+				displayTime: timeString,
 				originalStartDate: patient.startDate,
 				originalStartTime: patient.startTime,
 				interval: patient.interval,
 				color: patient.color
 			});
 
-			currentTime += intervalMs;
-			index++;
+			// 更新时间：基于本地时间加间隔（自动处理跨天）
+			currentDateTime = new Date(currentDateTime.getTime() + intervalMs);
 		}
 
 		return items;
 	};
 
-	// 格式化日期显示
-	const formatDate = (dateString: string) => {
-		const date = new Date(dateString);
-		return date.toLocaleDateString('zh-CN', {
+	// 格式化日期时间显示（纯本地时间）
+	const formatDateTime = (dateString: string, timeString: string) => {
+		const [year, month, day] = dateString.split('-').map(Number);
+		// 注意：Date的月份是0-11
+		const date = new Date(year, month - 1, day);
+		// 用toLocaleDateString直接获取本地日期格式（如"10月11日 周六"）
+		const localDate = date.toLocaleDateString('zh-CN', {
 			month: '2-digit',
 			day: '2-digit',
 			weekday: 'short'
-		}).replace('/', '月').replace('/', '月');
+		}).replace('/', '月').replace('/', '日');
+		return `${localDate} ${timeString}`;
 	};
 
-	// 获取时间显示标签（上午/下午）
-	const getTimeLabel = (time: string) => {
-		const [hours] = time.split(':').map(Number);
-		return hours < 12 ? '上午' : hours < 18 ? '下午' : '晚上';
-	};
-
-	// 添加病人并生成
+	// 添加病人并生成排班
 	const addPatient = () => {
 		if (!formData.name || !formData.startDate || !formData.startTime || !formData.interval) {
 			alert('请填写所有必填字段');
@@ -157,17 +186,16 @@ export default function ScheduleSystem() {
 			startDate: formData.startDate,
 			startTime: formData.startTime,
 			interval: interval,
-			note: formData.note,
 			color: getNextColor()
 		};
 
 		const newPatients = [...patients, newPatient];
 		setPatients(newPatients);
 
-		// 为新病人生成项
+		// 生成新排班项（本地时间逻辑）
 		const newScheduleItems = generateScheduleItems(newPatient);
 
-		// 合并所有项并按日期时间排序
+		// 合并并按ISO时间排序（确保全局顺序正确）
 		const allItems = [...scheduleItems, ...newScheduleItems].sort((a, b) => {
 			return a.dateTime.localeCompare(b.dateTime);
 		});
@@ -175,13 +203,10 @@ export default function ScheduleSystem() {
 		setScheduleItems(allItems);
 
 		// 重置表单
-		setFormData({
-			name: '',
-			startDate: '',
-			startTime: '',
-			interval: '',
-			note: ''
-		});
+		setFormData(prev => ({
+			...prev,
+			name: ''
+		}));
 	};
 
 	// 删除病人及其所有项
@@ -190,13 +215,6 @@ export default function ScheduleSystem() {
 		const newScheduleItems = scheduleItems.filter(item => item.patientId !== patientId);
 
 		setPatients(newPatients);
-		setScheduleItems(newScheduleItems);
-		setDeleteConfirm(null);
-	};
-
-	// 删除单个项
-	const deleteScheduleItem = (itemId: string) => {
-		const newScheduleItems = scheduleItems.filter(item => item.id !== itemId);
 		setScheduleItems(newScheduleItems);
 		setDeleteConfirm(null);
 	};
@@ -211,30 +229,25 @@ export default function ScheduleSystem() {
 		}
 	};
 
-	// 按日期分组项
-	const groupedScheduleItems = scheduleItems.reduce((groups, item) => {
-		const date = item.date;
-		if (!groups[date]) {
-			groups[date] = [];
-		}
-		groups[date].push(item);
-		return groups;
-	}, {} as Record<string, ScheduleItem[]>);
+	// 按日期时间分组排班项（基于本地时间）
+	const getGroupedScheduleItems = () => {
+		const groups: Record<string, ScheduleItem[]> = {};
 
-	// 获取今天的日期字符串
-	const getTodayDateString = () => {
-		return new Date().toISOString().split('T')[0];
+		scheduleItems.forEach(item => {
+			const key = `${item.date}T${item.time}`; // 本地时间的日期+时间作为分组键
+			if (!groups[key]) {
+				groups[key] = [];
+			}
+			groups[key].push(item);
+		});
+
+		// 按分组键排序（确保时间顺序正确）
+		return Object.entries(groups).sort(([keyA], [keyB]) => {
+			return keyA.localeCompare(keyB);
+		});
 	};
 
-	// 设置默认开始日期为今天
-	useEffect(() => {
-		if (!formData.startDate) {
-			setFormData(prev => ({
-				...prev,
-				startDate: getTodayDateString()
-			}));
-		}
-	}, []);
+	const groupedScheduleItems = getGroupedScheduleItems();
 
 	return (
 		<div ref={formRef} className="flex h-full flex-col p-6 max-md:p-4">
@@ -252,7 +265,7 @@ export default function ScheduleSystem() {
 					)}
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
 					<div>
 						<label className="block text-sm font-medium text-gray-700 mb-1">
 							病人姓名 *
@@ -292,29 +305,19 @@ export default function ScheduleSystem() {
 
 					<div>
 						<label className="block text-sm font-medium text-gray-700 mb-1">
-							间隔时长 (分钟) *
+							间隔时长 *
 						</label>
-						<input
-							type="number"
+						<select
 							value={formData.interval}
 							onChange={(e) => setFormData({ ...formData, interval: e.target.value })}
 							className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-							placeholder="例如：30"
-							min="1"
-						/>
-					</div>
-
-					<div>
-						<label className="block text-sm font-medium text-gray-700 mb-1">
-							备注
-						</label>
-						<input
-							type="text"
-							value={formData.note}
-							onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-							className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-							placeholder="备注信息"
-						/>
+						>
+							{INTERVAL_OPTIONS.map(option => (
+								<option key={option.value} value={option.value}>
+									{option.label}
+								</option>
+							))}
+						</select>
 					</div>
 				</div>
 
@@ -330,26 +333,28 @@ export default function ScheduleSystem() {
 			{patients.length > 0 && (
 				<div className="bg-white rounded-lg shadow-md p-4 mb-4">
 					<h2 className="text-sm font-bold mb-4">病人列表 ({patients.length}人)</h2>
-					<div className="space-y-3">
+					<div className="flex flex-wrap gap-3">
 						{patients.map(patient => (
-							<div key={patient.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-								<div className="flex items-center space-x-2">
-									<div
-										className="w-4 h-4 rounded-full"
-										style={{ backgroundColor: patient.color }}
-									/>
-									<span className="text-sm font-medium whitespace-nowrap">{patient.name}</span>
-									<span className="text-sm text-gray-600">
-										{formatDate(patient.startDate)} {patient.startTime}
-									</span>
-									<span className="text-sm text-gray-600"> {patient.interval}分钟</span>
-									{patient.note && (
-										<span className="text-sm text-gray-500"> {patient.note}</span>
-									)}
-								</div>
+							<div key={patient.id} className="flex items-center space-x-2 p-2 border border-gray-200 rounded-lg">
+								<div
+									className="w-4 h-4 rounded-full"
+									style={{ backgroundColor: patient.color }}
+								/>
+								<span
+									className="text-sm font-medium whitespace-nowrap"
+									style={{ color: patient.color }}
+								>
+									{patient.name}
+								</span>
+								<span className="text-xs text-gray-600">
+									{formatDateTime(patient.startDate, patient.startTime)}
+								</span>
+								<span className="text-xs text-gray-600">
+									{INTERVAL_OPTIONS.find(opt => opt.value === patient.interval.toString())?.label.split(' ')[0]}
+								</span>
 								<button
 									onClick={() => setDeleteConfirm(patient.id)}
-									className="bg-red-500 hover:bg-red-600 text-white p-1 rounded text-xs whitespace-nowrap"
+									className="text-red-500 hover:text-red-700 text-xs p-1 rounded hover:bg-red-50"
 								>
 									删除
 								</button>
@@ -373,61 +378,40 @@ export default function ScheduleSystem() {
 						暂无数据，请添加病人
 					</div>
 				) : (
-					<div className="space-y-6 max-h-[600px] overflow-y-auto">
-						{Object.entries(groupedScheduleItems)
-							.sort(([dateA], [dateB]) => dateA.localeCompare(dateB))
-							.map(([date, items]) => (
-								<div key={date} className="border border-gray-200 rounded-lg">
-									<div className="bg-gray-50 px-4 py-2 border-b border-gray-200">
-										<h3 className="font-semibold text-gray-800">
-											{formatDate(date)}
-										</h3>
+					<div className="space-y-3 max-h-[600px] overflow-y-auto">
+						{groupedScheduleItems.map(([key, items]) => {
+							const firstItem = items[0];
+							const dateTimeDisplay = formatDateTime(firstItem.date, firstItem.time);
+
+							return (
+								<div key={key} className="flex items-center space-x-6 p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+									<div className="w-40">
+										<span className="text-lg font-bold text-gray-800">
+											{dateTimeDisplay}
+										</span>
 									</div>
-									<div className="space-y-2 p-2">
+									<div className="flex flex-wrap gap-4 flex-1">
 										{items.map(item => (
-											<div
-												key={item.id}
-												className="flex items-center justify-between p-1 rounded-lg hover:bg-gray-50 border-l-2 border"
-												style={{ borderLeftColor: item.color }}
-											>
-												<div className="flex items-center space-x-1 w-full gap-2">
-													<div className="flex items-center space-x-1">
-														<span className="text-xs text-gray-400">
-															{getTimeLabel(item.time)}
-														</span>
-														<span
-															className="font-mono text-white px-1 py-1 rounded text-xs text-center font-semibold"
-															style={{ backgroundColor: item.color }}
-														>
-															{item.time}
-														</span>
-													</div>
-													<div className="flex items-center space-x-1">
-														<div className='flex flex-col justify-center flex-1 gap-2 items-center w-full'>
-															<span className="font-medium ">{item.patientName}</span>
-															<div className="text-xs text-gray-500 whitespace-nowrap">
-																{item.originalStartDate} {item.originalStartTime}
-															</div>
-															<div className="text-xs text-gray-500">
-																每 {item.interval}分钟
-															</div>
-														</div>
-													</div>
-													{item.note && (
-														<span className="text-gray-500 text-sm">{item.note}</span>
-													)}
-												</div>
-												<button
-													onClick={() => setDeleteConfirm(item.id)}
-													className="text-red-500 hover:text-red-700 text-xs whitespace-nowrap p-1 rounded hover:bg-red-50"
+											<div key={item.id} className="flex items-center space-x-2">
+												<div
+													className="w-4 h-4 rounded-full"
+													style={{ backgroundColor: item.color }}
+												/>
+												<span
+													className="text-lg font-medium"
+													style={{ color: item.color }}
 												>
-													删除
-												</button>
+													{item.patientName}
+												</span>
 											</div>
 										))}
 									</div>
+									<div className="text-sm text-gray-500">
+										{items.length} 个患者
+									</div>
 								</div>
-							))}
+							);
+						})}
 					</div>
 				)}
 			</div>
@@ -437,15 +421,11 @@ export default function ScheduleSystem() {
 				<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
 					<div className="bg-white rounded-lg p-6 max-w-sm w-full">
 						<h3 className="text-lg font-bold mb-2">确认删除</h3>
-						<p className="text-gray-600 mb-4">确定要删除这个项目吗？此操作不可撤销。</p>
+						<p className="text-gray-600 mb-4">确定要删除这个病人及其所有排班项吗？此操作不可撤销。</p>
 						<div className="flex space-x-3">
 							<button
 								onClick={() => {
-									if (deleteConfirm.includes('-')) {
-										deleteScheduleItem(deleteConfirm);
-									} else {
-										deletePatient(deleteConfirm);
-									}
+									deletePatient(deleteConfirm);
 								}}
 								className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded flex-1"
 							>
