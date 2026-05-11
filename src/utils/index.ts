@@ -19,10 +19,10 @@ export const getLS = (k: string) => {
 };
 
 export function getRandom(min: number, max: number) {
-    return Math.floor(Math.random() * (max + 1 - min) + min);
+	return Math.floor(Math.random() * (max + 1 - min) + min);
 }
 
 export function getRandomColor(): string {
-    const randomRGB = () => Math.floor(Math.random() * 256);
-    return `rgba(${randomRGB()},${randomRGB()},${randomRGB()},${Math.random().toFixed(2)})`;
+	const randomRGB = () => Math.floor(Math.random() * 256);
+	return `rgba(${randomRGB()},${randomRGB()},${randomRGB()},${Math.random().toFixed(2)})`;
 }

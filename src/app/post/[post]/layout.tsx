@@ -1,4 +1,4 @@
-import { CopyrightOutlined, LikeOutlined, PayCircleOutlined } from '@ant-design/icons';
+import { CopyrightOutlined } from '@ant-design/icons';
 import { Inter } from 'next/font/google';
 import Comment from '@/components/comment/Comment';
 const inter = Inter({ subsets: ['latin'] });

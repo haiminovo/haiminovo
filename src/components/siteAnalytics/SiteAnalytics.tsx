@@ -1,8 +1,10 @@
 'use client';
 import Script from 'next/script';
+
 const SiteAnalytics = () => {
 	return (
 		<>
+			<Script async src="https://www.googletagmanager.com/gtag/js?id=G-NNFGZDLC24" strategy="afterInteractive" />
 			<Script
 				id="googleAnalytics"
 				strategy="afterInteractive"
@@ -20,4 +22,5 @@ const SiteAnalytics = () => {
 		</>
 	);
 };
+
 export default SiteAnalytics;

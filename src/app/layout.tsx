@@ -36,13 +36,13 @@ export default function RootLayout({
 				{/* bing资源验证 */}
 				<meta name="msvalidate.01" content="078ED44B766D08ACBE91D7855C8966BF" />
 			</head>
-			<SiteAnalytics></SiteAnalytics>
 			<body
-				className={`${inter.className} flex min-h-screen w-full min-w-80 flex-col items-center bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark`}
+				className={`${inter.className} bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark flex min-h-screen w-full min-w-80 flex-col items-center`}
 			>
-				<Navbar className="top-0 z-10 h-10 w-full shadow-sm dark:border-custom-color-dark-7"></Navbar>
+				<SiteAnalytics></SiteAnalytics>
+				<Navbar className="dark:border-custom-color-dark-7 top-0 z-10 h-10 w-full shadow-sm"></Navbar>
 				<main className="flex h-full w-full max-w-[1440px] justify-center">
-					<Aside className="h-full min-h-[calc(100vh-40px)] bg-custom-color-7 max-md:hidden dark:bg-custom-color-dark-7">
+					<Aside className="bg-custom-color-7 dark:bg-custom-color-dark-7 h-full min-h-[calc(100vh-40px)] max-md:hidden">
 						<div className="flex h-full w-full flex-1 flex-col gap-3 pt-5">
 							<MyInf></MyInf>
 							<Tags className="lg:hidden"></Tags>
@@ -51,11 +51,11 @@ export default function RootLayout({
 						</div>
 					</Aside>
 					<div className="flex w-full flex-1 flex-col">
-						<div className="no-scrollbar flex h-full w-full flex-col bg-custom-color-7 dark:bg-custom-color-dark-7">
+						<div className="no-scrollbar bg-custom-color-7 dark:bg-custom-color-dark-7 flex h-full w-full flex-col">
 							{children}
 						</div>
 					</div>
-					<Aside className="bg-custom-color-7 max-lg:hidden dark:bg-custom-color-dark-7">
+					<Aside className="bg-custom-color-7 dark:bg-custom-color-dark-7 max-lg:hidden">
 						<Tags></Tags>
 						<PageNavigator></PageNavigator>
 						<BackToTop></BackToTop>

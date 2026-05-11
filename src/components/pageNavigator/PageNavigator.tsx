@@ -1,88 +1,98 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
-import { debounce } from 'lodash';
+import { useEffect, useState } from 'react';
 
 interface IProps {
 	className?: string;
 }
 
+interface HeadingItem {
+	id: string;
+	text: string;
+	level: number;
+	offsetY: number;
+}
+
 export default function PageNavigator(props: IProps) {
 	const pathName = usePathname();
-	const [dots, setDots] = useState<{ id: string; text: string; level: number; visible: boolean; offsetY: number }[]>();
-	useEffect(() => {
-		const artical: any = document.getElementById('artical');
-		if (artical) {
-			const filter = function (node: any) {
-				return node.id ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
-			};
-			const iterator = document.createTreeWalker(artical, NodeFilter.SHOW_ELEMENT, filter);
-			let node: any = iterator.nextNode();
-			const reg = /^H([1-6])$/;
-			const dotArr = [];
+	const [headings, setHeadings] = useState<HeadingItem[]>([]);
+	const [activeId, setActiveId] = useState<string>();
 
-			while (node !== null) {
-				dotArr.push({
-					id: node.id,
-					text: node.innerText,
-					level: +node.tagName.match(reg)?.[1] - 1,
-					visible: false,
-					offsetY: node.offsetTop,
-				});
-				node = iterator.nextNode();
-			}
-			setDots(dotArr);
-		} else {
-			setDots(undefined);
+	useEffect(() => {
+		const article = document.getElementById('article');
+		if (!article) {
+			setHeadings([]);
+			setActiveId(undefined);
+			return;
 		}
+
+		const headingNodes = Array.from(
+			article.querySelectorAll<HTMLElement>('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
+		);
+		const nextHeadings = headingNodes.map((node) => ({
+			id: node.id,
+			text: node.innerText,
+			level: Number(node.tagName.slice(1)),
+			offsetY: node.offsetTop,
+		}));
+
+		setHeadings(nextHeadings);
+		setActiveId(nextHeadings[0]?.id);
 	}, [pathName]);
 
 	useEffect(() => {
-		if (!dots) return;
-		const handleScroll = debounce(() => {
-			let minRange = Infinity;
-			for (const item of dots) {
-				const range = item.offsetY - window.scrollY;
-				if (range <= minRange && range > 0) {
-					item.visible = true;
-					minRange = range;
-					setDots([...dots]);
+		if (headings.length === 0) return;
+
+		const updateActiveHeading = () => {
+			const scrollPosition = window.scrollY + 96;
+			let currentId = headings[0]?.id;
+
+			for (const heading of headings) {
+				if (heading.offsetY <= scrollPosition) {
+					currentId = heading.id;
 				} else {
-					item.visible = false;
+					break;
 				}
 			}
-		}, 200);
-		window.addEventListener('scroll', handleScroll);
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
+
+			setActiveId((prev) => (prev === currentId ? prev : currentId));
 		};
-	}, [dots?.length]);
+
+		updateActiveHeading();
+		window.addEventListener('scroll', updateActiveHeading, { passive: true });
+		window.addEventListener('resize', updateActiveHeading);
+
+		return () => {
+			window.removeEventListener('scroll', updateActiveHeading);
+			window.removeEventListener('resize', updateActiveHeading);
+		};
+	}, [headings]);
+
+	if (headings.length === 0) return null;
 
 	return (
-		<>
-			{dots && (
-				<div className={`sticky top-16 flex max-h-[50vh] w-full flex-col ${props.className}`}>
-					<span className="p-1 font-medium text-font-strong dark:text-font-light-dark">目录</span>
-					<div className="no-scrollbar flex w-full flex-col gap-2 overflow-auto rounded-xl bg-custom-color-9 p-3 shadow-md dark:border-custom-color-dark-7 dark:bg-custom-color-dark-9">
-						{dots.map((item) => {
-							return (
-								<a
-									key={item.id}
-									href={`#${item.id}`}
-									style={{
-										color: item.visible ? '#369ccf' : '',
-										marginLeft: `${(item.level - 1) * 6}px`,
-									}}
-									className="break-all"
-								>
-									{item.text}
-								</a>
-							);
-						})}
-					</div>
-				</div>
-			)}
-		</>
+		<div className={clsx('sticky top-16 flex max-h-[50vh] w-full flex-col', props.className)}>
+			<span className="text-font-strong dark:text-font-light-dark p-1 font-medium">目录</span>
+			<div className="no-scrollbar bg-custom-color-9 dark:border-custom-color-dark-7 dark:bg-custom-color-dark-9 flex w-full flex-col gap-2 overflow-auto rounded-xl p-3 shadow-md">
+				{headings.map((item) => {
+					return (
+						<a
+							key={item.id}
+							href={`#${item.id}`}
+							style={{
+								marginLeft: `${Math.max(item.level - 2, 0) * 10}px`,
+							}}
+							className={clsx('break-all transition-colors hover:text-[#369ccf]', {
+								'text-[#369ccf]': item.id === activeId,
+							})}
+						>
+							{item.text}
+						</a>
+					);
+				})}
+			</div>
+		</div>
 	);
 }

@@ -8,7 +8,6 @@ export default function Comment() {
 	const handleThemeChange = function (e: any) {
 		setTheme(e.newValue);
 	};
-	const sign = new AbortController().signal;
 	useEffect(() => {
 		// 监听自定义事件切换主题
 		window.addEventListener('setThemeColor', handleThemeChange);

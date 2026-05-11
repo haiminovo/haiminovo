@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import haimin from 'public/haimin.jpg';
 
 interface IProps {
@@ -10,7 +9,7 @@ interface IProps {
 export default function MyInf(props: IProps) {
 	return (
 		<div
-			className="flex h-24 w-full items-center gap-3 rounded-xl bg-custom-color-9 p-3 shadow-md dark:border-custom-color-dark-7 dark:bg-custom-color-dark-9"
+			className="bg-custom-color-9 dark:border-custom-color-dark-7 dark:bg-custom-color-dark-9 flex h-24 w-full items-center gap-3 rounded-xl p-3 shadow-md"
 			{...props}
 		>
 			{/* <Link href={'/about'} className="flex"> */}

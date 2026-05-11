@@ -2,7 +2,7 @@ const hexToRgb = (str) => {
 	let hexs = null;
 	const reg = /^\#?[0-9A-Fa-f]{6}$/;
 	if (!reg.test(str)) {
-		throw new Error('Invalid color value in tailwind.config.js');
+		throw new Error('Invalid color value in tailwind.config.mjs');
 	}
 	str = str.replace('#', '');
 	hexs = str.match(/../g);

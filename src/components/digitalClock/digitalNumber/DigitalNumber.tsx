@@ -21,8 +21,8 @@ export default function DigitalNumber(props: IProps) {
 	if (value === ':') {
 		return (
 			<div className="flex flex-col items-center justify-center gap-8 p-4">
-				<div className={`h-3 w-3 rounded-md bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
-				<div className={`h-3 w-3 rounded-md bg-custom-color-dark-4 dark:bg-custom-color-4`}></div>
+				<div className={`bg-custom-color-dark-4 dark:bg-custom-color-4 h-3 w-3 rounded-md`}></div>
+				<div className={`bg-custom-color-dark-4 dark:bg-custom-color-4 h-3 w-3 rounded-md`}></div>
 			</div>
 		);
 	}

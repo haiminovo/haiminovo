@@ -1,90 +1,69 @@
 'use client';
-import { removeLS, getLS, setLS } from '@/utils';
+
+import { getLS, setLS } from '@/utils';
 import { MoonFilled, SunFilled } from '@ant-design/icons';
-import React, { useCallback, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 interface IProps {
 	className?: string;
 }
 
+type ThemeMode = 'dark' | 'light';
+
+interface ThemeChangeEvent extends Event {
+	newValue?: ThemeMode;
+}
+
+const DARK_MODE_STORAGE_KEY = 'user-color-scheme';
+
 export default function DarkModeBtn(props: IProps) {
-	const [rootElement, setRootElement] = useState<any>();
 	const [isDark, setIsDark] = useState(false);
-	const darkModeStorageKey = 'user-color-scheme';
 
-	const invertDarkModeObj: any = {
-		dark: 'light',
-		light: 'dark',
+	const applyTheme = (mode: ThemeMode) => {
+		document.documentElement.classList.toggle('dark', mode === 'dark');
+		setIsDark(mode === 'dark');
 	};
-
-	const getModeFromClassList = () => {
-		const res = rootElement?.classList.contains('dark');
-		return res ? 'dark' : 'light';
-	};
-
-	const toggleCustomDarkMode = () => {
-		let currentSetting: any = getLS(darkModeStorageKey);
-		if (currentSetting) {
-			currentSetting = invertDarkModeObj[currentSetting];
-		} else if (currentSetting === null) {
-			currentSetting = invertDarkModeObj[getModeFromClassList()];
-		} else {
-			return;
-		}
-		setLS(darkModeStorageKey, currentSetting);
-
-		return currentSetting;
-	};
-
-	const applyCustomDarkModeSettings = useCallback(
-		(mode?: any) => {
-			const currentSetting = mode || getLS(darkModeStorageKey);
-			if (currentSetting) {
-				if (currentSetting === 'light') {
-					setIsDark(false);
-					rootElement?.classList.remove('dark');
-				} else {
-					rootElement?.classList.add('dark');
-				}
-			} else {
-				setIsDark(true);
-				rootElement?.classList.remove('dark');
-				removeLS(darkModeStorageKey);
-			}
-		},
-		[rootElement?.classList]
-	);
 
 	useLayoutEffect(() => {
-		const orignSetItem = window.localStorage.setItem;
+		const initialTheme = getLS(DARK_MODE_STORAGE_KEY) === 'dark' ? 'dark' : 'light';
+		applyTheme(initialTheme);
+
+		const originalSetItem = window.localStorage.setItem;
 		window.localStorage.setItem = function (key, newValue) {
-			if (key === 'user-color-scheme') {
-				const setThemeColor: any = new Event('setThemeColor');
-				setThemeColor.newValue = newValue;
-				window.dispatchEvent(setThemeColor); // 抛出自定义事件切换主题
+			if (key === DARK_MODE_STORAGE_KEY) {
+				const setThemeColor = new Event('setThemeColor') as ThemeChangeEvent;
+				setThemeColor.newValue = newValue === 'dark' ? 'dark' : 'light';
+				window.dispatchEvent(setThemeColor);
 			}
-			orignSetItem.apply(this, [key, newValue]);
+			originalSetItem.apply(this, [key, newValue]);
 		};
-		setRootElement(document.documentElement);
+
+		const handleThemeChange = (event: Event) => {
+			const nextTheme = (event as ThemeChangeEvent).newValue === 'dark' ? 'dark' : 'light';
+			applyTheme(nextTheme);
+		};
+
+		window.addEventListener('setThemeColor', handleThemeChange);
+
 		return () => {
-			window.localStorage.setItem = orignSetItem;
+			window.removeEventListener('setThemeColor', handleThemeChange);
+			window.localStorage.setItem = originalSetItem;
 		};
 	}, []);
 
-	useLayoutEffect(() => {
-		if (rootElement) applyCustomDarkModeSettings();
-	}, [applyCustomDarkModeSettings, rootElement]);
-
 	return (
-		<div
+		<button
+			type="button"
+			aria-label={isDark ? '切换到浅色模式' : '切换到深色模式'}
 			className="flex cursor-pointer items-center p-2 text-sm"
 			onClick={() => {
-				setIsDark(!isDark);
-				applyCustomDarkModeSettings(toggleCustomDarkMode());
+				const nextTheme: ThemeMode = isDark ? 'light' : 'dark';
+				setLS(DARK_MODE_STORAGE_KEY, nextTheme);
+				applyTheme(nextTheme);
 			}}
 			{...props}
 		>
 			{isDark ? <SunFilled /> : <MoonFilled />}
-		</div>
+		</button>
 	);
 }
