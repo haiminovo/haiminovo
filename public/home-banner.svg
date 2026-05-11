@@ -1,0 +1,51 @@
+<svg width="1600" height="640" viewBox="0 0 1600 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="124" y1="56" x2="1439" y2="561" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF7EF"/>
+      <stop offset="0.5" stop-color="#E2F0DD"/>
+      <stop offset="1" stop-color="#CBDDBE"/>
+    </linearGradient>
+    <pattern id="forestTexture" width="148" height="148" patternUnits="userSpaceOnUse">
+      <g opacity="0.12" stroke="#6D8E6B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M24 34C36 14 60 15 72 34C61 56 36 60 24 34Z"/>
+        <path d="M48 23L50 47"/>
+        <path d="M88 62C100 43 123 44 135 62C124 84 101 88 88 62Z"/>
+        <path d="M112 51L114 75"/>
+        <path d="M50 102C62 83 85 84 96 102C86 124 62 128 50 102Z"/>
+        <path d="M74 91L76 115"/>
+      </g>
+    </pattern>
+    <filter id="soft" x="0" y="0" width="1600" height="640" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="640" rx="28" fill="url(#bg)"/>
+  <rect width="1600" height="640" rx="28" fill="url(#forestTexture)"/>
+  <g opacity="0.6" filter="url(#soft)">
+    <circle cx="1379" cy="119" r="94" fill="#FCEFC8"/>
+    <circle cx="260" cy="137" r="114" fill="#D5E6D0"/>
+  </g>
+  <circle cx="1400" cy="108" r="68" fill="#FFF2D4" fill-opacity="0.84"/>
+  <ellipse cx="1032" cy="146" rx="240" ry="76" fill="#F8FCF6" fill-opacity="0.72"/>
+  <path d="M0 392C175 301 339 255 494 255C740 255 875 407 1109 407C1267 407 1430 343 1600 238V640H0V392Z" fill="#B9D2B6" fill-opacity="0.58"/>
+  <path d="M0 470C173 378 336 332 489 332C724 332 891 481 1123 481C1271 481 1429 427 1600 337V640H0V470Z" fill="#88A985" fill-opacity="0.72"/>
+  <path d="M0 548C166 469 319 430 460 430C682 430 862 563 1102 563C1287 563 1447 509 1600 423V640H0V548Z" fill="#5E815F"/>
+  <path d="M0 596C162 529 309 495 438 495C650 495 824 608 1042 608C1261 608 1433 555 1600 482V640H0V596Z" fill="#466A49"/>
+  <path d="M132 112C241 145 310 212 339 312" stroke="#6E966C" stroke-width="14" stroke-linecap="round" opacity="0.85"/>
+  <path d="M1470 100C1368 134 1303 198 1264 296" stroke="#658B64" stroke-width="14" stroke-linecap="round" opacity="0.85"/>
+  <g opacity="0.92" fill="#537D57">
+    <path d="M122 84C160 92 187 116 198 156C162 151 136 132 122 84Z"/>
+    <path d="M164 116C207 125 236 154 245 200C205 191 176 168 164 116Z"/>
+    <path d="M1453 80C1416 90 1390 115 1380 154C1416 148 1441 130 1453 80Z"/>
+    <path d="M1412 112C1369 122 1340 149 1330 196C1370 188 1399 165 1412 112Z"/>
+  </g>
+  <g opacity="0.88">
+    <path d="M468 165C577 111 676 94 768 94C901 94 1014 130 1124 202" stroke="#9ABA95" stroke-width="12" stroke-linecap="round"/>
+    <path d="M436 256C535 217 634 208 734 231C834 254 925 304 1018 388" stroke="#B1CCAB" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <g fill="#F5FBF2" opacity="0.9">
+    <circle cx="878" cy="229" r="7"/>
+    <circle cx="905" cy="214" r="5"/>
+    <circle cx="925" cy="237" r="5"/>
+  </g>
+</svg>

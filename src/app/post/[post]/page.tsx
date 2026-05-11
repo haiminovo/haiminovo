@@ -55,23 +55,26 @@ export default async function Post({ params }: PageProps) {
 	const imageSrc = page.image?.trim();
 
 	return (
-		<article id="article" className="container flex flex-col">
-			<h1 className="my-4 border-b border-gray-500/50 pb-2 text-4xl font-black break-all">{page.title}</h1>
-			{page.description && <p className="indent-8 text-lg break-all">{page.description}</p>}
-			<div className="block w-full py-4 dark:brightness-[.9]">
-				{imageSrc && (
-					<Image
-						className="rounded-md object-contain"
-						src={imageSrc}
-						alt={page.title + '头图'}
-						width={1200}
-						height={675}
-						priority
-						sizes="(max-width: 1280px) 100vw, 1200px"
-					></Image>
-				)}
+		<article id="article" className="container flex flex-col gap-4">
+			<div className="paper-reading-panel flex flex-col">
+				<h1 className="my-4 border-b border-gray-500/50 pb-2 text-4xl font-black break-all">{page.title}</h1>
+				{page.description && <p className="indent-8 text-lg break-all">{page.description}</p>}
+				<div className="block w-full py-4 dark:brightness-[.9]">
+					{imageSrc && (
+						<div className="bg-custom-color-8 dark:bg-custom-color-dark-8 relative aspect-[5/3] w-full overflow-hidden rounded-xl">
+							<Image
+								className="object-contain"
+								src={imageSrc}
+								alt={page.title + '头图'}
+								fill
+								priority
+								sizes="(max-width: 1280px) 100vw, 1200px"
+							></Image>
+						</div>
+					)}
+				</div>
+				<Mdx code={page.body.code} />
 			</div>
-			<Mdx code={page.body.code} />
 		</article>
 	);
 }

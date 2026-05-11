@@ -13,36 +13,58 @@ interface IProps {
 export default function PostItem(props: IProps) {
 	const { index, data, className } = props;
 	let { title, description, authors, date, tags, image } = data;
+	const hasImage = Boolean(image?.trim());
 	return (
 		<Link
 			href={`/post/${data.slugAsParams}`}
-			className={`bg-custom-color-9 dark:border-custom-color-dark-4 dark:bg-custom-color-dark-9 relative flex w-full cursor-pointer flex-col justify-between gap-4 rounded-xl p-4 shadow-md ${className}`}
+			className={`bg-custom-color-9 dark:border-custom-color-dark-4 dark:bg-custom-color-dark-9 relative flex w-full cursor-pointer flex-col justify-between gap-2 rounded-xl p-3 shadow-md ${className}`}
 		>
 			<div
 				className={clsx(
-					'bg-custom-color-7/80 dark:border-custom-color-dark-7 dark:bg-custom-color-dark-7/80 flex rounded-xl text-black/80 shadow-inner transition-transform duration-200 hover:-translate-y-0.5 max-lg:flex-col dark:text-white',
+					'bg-custom-color-7/80 dark:border-custom-color-dark-7 dark:bg-custom-color-dark-7/80 flex overflow-hidden rounded-xl text-black/80 shadow-inner transition-transform duration-200 hover:-translate-y-0.5 max-lg:flex-col dark:text-white',
 					{
 						'flex-row-reverse': index % 2 === 1,
+						'max-lg:flex-col': hasImage,
 					}
 				)}
 			>
-				{image && (
-					<div className="relative h-full min-h-32 w-[33%] rounded-t-2xl max-lg:min-h-64 max-lg:w-full">
-						<Image
-							className={clsx('object-cover max-lg:rounded-t-xl max-lg:rounded-b-none dark:brightness-90', {
-								'rounded-r-xl': index % 2 === 1,
-								'rounded-l-xl': index % 2 === 0,
-							})}
-							alt="文章头图"
-							src={image || ''}
-							fill
-							sizes="(max-width: 1024px) 100vw, 33vw"
-						></Image>
+				{hasImage && (
+					<div
+						className={clsx(
+							'bg-custom-color-8 dark:bg-custom-color-dark-8 relative w-[34%] shrink-0 overflow-hidden max-lg:w-full',
+							{
+								'rounded-r-xl rounded-l-none max-lg:rounded-t-xl max-lg:rounded-b-none': index % 2 === 1,
+								'rounded-l-xl rounded-r-none max-lg:rounded-t-xl max-lg:rounded-b-none': index % 2 === 0,
+							}
+						)}
+					>
+						<div className="relative aspect-[16/9] w-full">
+							<Image className="object-cover dark:brightness-90" alt="文章头图" src={image || ''} fill sizes="(max-width: 1024px) 100vw, 34vw"></Image>
+						</div>
 					</div>
 				)}
-				<div className="flex flex-1 flex-col justify-center gap-1 p-4">
-					<h1 className="indent-2 text-base font-black break-all">{`# ${title} `}</h1>
-					<p className="line-clamp-3 indent-4 text-sm font-normal break-all text-ellipsis">{description}</p>
+				<div
+					className={clsx('flex flex-1 flex-col justify-center break-words', {
+						'min-h-[156px] gap-3 px-5 py-4 max-lg:min-h-0': hasImage,
+						'min-h-[96px] gap-2 px-4 py-3': !hasImage,
+					})}
+				>
+					<h1
+						className={clsx('font-black break-words text-slate-700 dark:text-slate-100', {
+							'line-clamp-2 text-lg leading-7': hasImage,
+							'line-clamp-2 text-base leading-6': !hasImage,
+						})}
+					>
+						{title}
+					</h1>
+					<p
+						className={clsx('font-normal break-words text-slate-600 dark:text-slate-300', {
+							'line-clamp-3 max-w-[58ch] text-sm leading-7': hasImage,
+							'line-clamp-2 max-w-[72ch] text-sm leading-6': !hasImage,
+						})}
+					>
+						{description}
+					</p>
 				</div>
 			</div>
 			<div className="bottom-2 left-1/2 flex w-full flex-wrap justify-between gap-2 max-[424px]:flex-col">

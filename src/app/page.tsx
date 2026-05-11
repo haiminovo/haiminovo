@@ -1,37 +1,37 @@
 import Image from 'next/image';
 import PostList from '@/components/postList/PostList';
 import { Suspense } from 'react';
+
 export default function Home() {
 	return (
 		<Suspense>
-			<div className="flex flex-col items-center p-8">
-				<div className="flex w-full flex-col items-center text-center">
-					<div className="relative h-32 w-full overflow-hidden rounded-md">
-						<Image
-							className="object-cover"
-							src="https://pic1.imgdb.cn/item/67ada71dd0e0a243d4fed276.webp"
-							alt="首页横幅"
-							fill
-							priority
-							sizes="100vw"
-						/>
+			<div className="flex flex-col gap-4 px-5 pb-4 pt-5 max-md:px-4 max-md:pt-4">
+				<section className="home-hero">
+					<div className="home-hero__content">
+						<div className="home-hero__avatar-shell">
+							<div className="home-hero__avatar-ring">
+								<Image
+									className="h-full w-full rounded-full object-cover"
+									src="/haimin.jpg"
+									alt="haimin 头像"
+									width={136}
+									height={136}
+									priority
+								/>
+							</div>
+						</div>
+						<div className="home-hero__copy">
+							<h1 className="home-hero__title">Hi，我是 haimin。</h1>
+							<p className="home-hero__intro">记录前端实现、设计想法，以及一些值得留住的生活片段。</p>
+						</div>
 					</div>
-					<Image
-						className="-translate-y-16 rounded-full shadow-md"
-						src="https://pic1.imgdb.cn/item/67ada9bdd0e0a243d4fed3a3.jpg"
-						alt="haimin 头像"
-						width={128}
-						height={128}
-						priority
-					/>
-					<p className="typing-20 w-0 max-w-min -translate-y-8 text-xl font-bold text-wrap break-words break-all">
-						Hi👋，我是haimin。
-					</p>
-				</div>
-			</div>
-			<div className="flex flex-col gap-1 p-2">
-				<span className="px-2 font-bold text-[#91b0f9]">近期更新:</span>
-				<PostList size={3}></PostList>
+				</section>
+				<section className="flex flex-col gap-2">
+					<div className="flex flex-col gap-1 px-1">
+						<h2 className="text-font-strong dark:text-font-light-dark text-2xl font-black">近期更新</h2>
+					</div>
+					<PostList size={3}></PostList>
+				</section>
 			</div>
 		</Suspense>
 	);

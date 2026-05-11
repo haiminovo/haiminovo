@@ -100,6 +100,241 @@ html {
 	font-family:
 		'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif, monospace !important;
 	transition: --scroll-position 0.15s linear;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+	display: none;
+}
+
+body,
+* {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.circuit-texture-canvas {
+	background-image: url('/circuit-board-texture.svg');
+	background-position: center top;
+	background-repeat: repeat;
+	background-size: 320px 320px;
+	background-attachment: fixed;
+}
+
+html.dark .circuit-texture-canvas {
+	background-size: 336px 336px;
+}
+
+.paper-reading-panel {
+	position: relative;
+	background-color: rgb(246 247 244 / 0.9);
+	background-image:
+		radial-gradient(circle at 1px 1px, rgb(82 94 106 / 0.035) 0.7px, transparent 0.9px),
+		radial-gradient(circle at 3px 3px, rgb(255 255 255 / 0.38) 0.6px, transparent 0.9px),
+		repeating-linear-gradient(0deg, rgb(255 255 255 / 0.06) 0 2px, transparent 2px 6px),
+		repeating-linear-gradient(90deg, rgb(82 94 106 / 0.018) 0 1px, transparent 1px 5px);
+	background-size: 14px 14px, 18px 18px, 100% 9px, 7px 100%;
+	border: 1px solid rgb(58 74 90 / 0.08);
+	border-radius: 2px;
+	box-shadow:
+		0 1px 0 rgb(255 255 255 / 0.65),
+		0 10px 24px rgb(58 74 90 / 0.06),
+		0 18px 40px rgb(58 74 90 / 0.05),
+		inset 0 1px 0 rgb(255 255 255 / 0.45);
+	padding: 1.75rem 1.5rem 2rem;
+}
+
+html.dark .paper-reading-panel {
+	background-color: rgb(58 62 65 / 0.9);
+	background-image:
+		radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.045) 0.7px, transparent 0.9px),
+		radial-gradient(circle at 3px 3px, rgb(0 0 0 / 0.1) 0.6px, transparent 0.9px),
+		repeating-linear-gradient(0deg, rgb(255 255 255 / 0.025) 0 2px, transparent 2px 6px),
+		repeating-linear-gradient(90deg, rgb(0 0 0 / 0.05) 0 1px, transparent 1px 5px);
+	background-size: 14px 14px, 18px 18px, 100% 9px, 7px 100%;
+	border-color: rgb(255 255 255 / 0.06);
+	box-shadow:
+		0 1px 0 rgb(255 255 255 / 0.04),
+		0 12px 28px rgb(0 0 0 / 0.18),
+		0 22px 46px rgb(0 0 0 / 0.12),
+		inset 0 1px 0 rgb(255 255 255 / 0.03);
+}
+
+.home-hero {
+	position: relative;
+	overflow: hidden;
+	border: 1px solid rgb(122 149 113 / 0.12);
+	border-radius: 22px;
+	background:
+		radial-gradient(circle at top left, rgb(225 237 222 / 0.9), transparent 46%),
+		radial-gradient(circle at right 18% top 14%, rgb(207 224 202 / 0.7), transparent 28%),
+		linear-gradient(135deg, rgb(244 248 241 / 0.96), rgb(235 242 232 / 0.94));
+	box-shadow:
+		0 14px 34px rgb(85 115 93 / 0.07),
+		inset 0 1px 0 rgb(255 255 255 / 0.7);
+}
+
+.home-hero::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(circle at 15% 22%, rgb(124 159 120 / 0.18) 0 8px, transparent 9px),
+		radial-gradient(circle at 78% 28%, rgb(124 159 120 / 0.12) 0 6px, transparent 7px),
+		radial-gradient(circle at 66% 78%, rgb(255 255 255 / 0.3) 0 10px, transparent 11px);
+	background-size: 220px 220px, 260px 260px, 320px 320px;
+	opacity: 0.8;
+	pointer-events: none;
+}
+
+.home-hero::after {
+	content: '';
+	position: absolute;
+	inset: auto -10% -42% 26%;
+	height: 72%;
+	border-radius: 999px;
+	background:
+		linear-gradient(180deg, rgb(128 156 118 / 0.18), rgb(128 156 118 / 0.06)),
+		linear-gradient(90deg, rgb(255 255 255 / 0.28), transparent);
+	transform: rotate(-8deg);
+	filter: blur(0.5px);
+	pointer-events: none;
+}
+
+.home-hero__content {
+	position: relative;
+	z-index: 1;
+	display: grid;
+	grid-template-columns: 112px minmax(0, 1fr);
+	align-items: center;
+	gap: 1.35rem;
+	padding: 1.35rem 1.6rem;
+}
+
+.home-hero__avatar-shell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.home-hero__avatar-ring {
+	display: flex;
+	height: 96px;
+	width: 96px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	padding: 6px;
+	background:
+		linear-gradient(145deg, rgb(255 255 255 / 0.96), rgb(230 238 228 / 0.94)),
+		linear-gradient(180deg, rgb(128 156 118 / 0.12), transparent);
+	box-shadow:
+		0 10px 22px rgb(87 112 86 / 0.12),
+		0 2px 5px rgb(255 255 255 / 0.58) inset;
+}
+
+.home-hero__copy {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.48rem;
+}
+
+.home-hero__title {
+	margin: 0;
+	font-size: clamp(1.55rem, 3vw, 2.5rem);
+	line-height: 1.08;
+	font-weight: 900;
+	letter-spacing: -0.04em;
+	color: rgb(54 72 66);
+	text-wrap: balance;
+}
+
+.home-hero__intro {
+	max-width: 38rem;
+	font-size: 0.96rem;
+	line-height: 1.75;
+	color: rgb(72 92 86 / 0.88);
+	text-wrap: pretty;
+}
+
+html.dark .home-hero {
+	border-color: rgb(188 209 183 / 0.08);
+	background:
+		radial-gradient(circle at top left, rgb(69 84 73 / 0.76), transparent 48%),
+		radial-gradient(circle at right 18% top 14%, rgb(82 104 85 / 0.46), transparent 30%),
+		linear-gradient(135deg, rgb(46 57 49 / 0.95), rgb(39 49 42 / 0.94));
+	box-shadow:
+		0 14px 34px rgb(0 0 0 / 0.14),
+		inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+
+html.dark .home-hero::before {
+	background:
+		radial-gradient(circle at 15% 22%, rgb(152 190 146 / 0.12) 0 8px, transparent 9px),
+		radial-gradient(circle at 78% 28%, rgb(152 190 146 / 0.08) 0 6px, transparent 7px),
+		radial-gradient(circle at 66% 78%, rgb(255 255 255 / 0.05) 0 10px, transparent 11px);
+}
+
+html.dark .home-hero::after {
+	background:
+		linear-gradient(180deg, rgb(133 169 124 / 0.16), rgb(133 169 124 / 0.02)),
+		linear-gradient(90deg, rgb(255 255 255 / 0.05), transparent);
+}
+
+html.dark .home-hero__avatar-ring {
+	background:
+		linear-gradient(145deg, rgb(88 104 90 / 0.96), rgb(58 70 61 / 0.94)),
+		linear-gradient(180deg, rgb(176 206 166 / 0.08), transparent);
+	box-shadow:
+		0 12px 28px rgb(0 0 0 / 0.2),
+		0 2px 6px rgb(255 255 255 / 0.03) inset;
+}
+
+html.dark .home-hero__title {
+	color: rgb(236 243 236 / 0.94);
+}
+
+html.dark .home-hero__intro {
+	color: rgb(216 226 216 / 0.78);
+}
+
+@media (max-width: 768px) {
+	.home-hero {
+		border-radius: 18px;
+	}
+
+	.home-hero__content {
+		grid-template-columns: 1fr;
+		justify-items: center;
+		gap: 1rem;
+		padding: 1.2rem 1rem 1.1rem;
+		text-align: center;
+	}
+
+	.home-hero__avatar-ring {
+		height: 84px;
+		width: 84px;
+		padding: 5px;
+	}
+
+	.home-hero__copy {
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.home-hero__intro {
+		font-size: 0.9rem;
+		line-height: 1.65;
+	}
+
+	.paper-reading-panel {
+		border-radius: 2px;
+		padding: 1.25rem 1rem 1.5rem;
+	}
 }
 
 [data-id='--scroll-position']::before {

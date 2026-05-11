@@ -17,6 +17,13 @@ export const metadata: Metadata = {
 	title: '巅峰之路-haimin的互联网自留地',
 	description: '一个记录开发收获和日常生活的个人站点,主要涉及前端开发,web技术相关内容',
 	keywords: ['haimin', 'haiminovo', 'road to top', 'road to the top', '巅峰之路', '巅峰路', '前端'],
+	icons: {
+		icon: [
+			{ url: '/favicon.ico', sizes: 'any' },
+			{ url: '/icon.png', type: 'image/png', sizes: '512x512' },
+		],
+		apple: [{ url: '/apple-icon.png', sizes: '180x180' }],
+	},
 };
 
 export default function RootLayout({
@@ -37,12 +44,12 @@ export default function RootLayout({
 				<meta name="msvalidate.01" content="078ED44B766D08ACBE91D7855C8966BF" />
 			</head>
 			<body
-				className={`${inter.className} bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark flex min-h-screen w-full min-w-80 flex-col items-center`}
+				className={`${inter.className} circuit-texture-canvas bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark flex min-h-screen w-full min-w-80 flex-col items-center`}
 			>
 				<SiteAnalytics></SiteAnalytics>
 				<Navbar className="dark:border-custom-color-dark-7 top-0 z-10 h-10 w-full shadow-sm"></Navbar>
 				<main className="flex h-full w-full max-w-[1440px] justify-center">
-					<Aside className="bg-custom-color-7 dark:bg-custom-color-dark-7 h-full min-h-[calc(100vh-40px)] max-md:hidden">
+					<Aside className="h-full min-h-[calc(100vh-40px)] max-md:hidden">
 						<div className="flex h-full w-full flex-1 flex-col gap-3 pt-5">
 							<MyInf></MyInf>
 							<Tags className="lg:hidden"></Tags>
@@ -51,11 +58,11 @@ export default function RootLayout({
 						</div>
 					</Aside>
 					<div className="flex w-full flex-1 flex-col">
-						<div className="no-scrollbar bg-custom-color-7 dark:bg-custom-color-dark-7 flex h-full w-full flex-col">
+						<div className="no-scrollbar flex h-full w-full flex-col">
 							{children}
 						</div>
 					</div>
-					<Aside className="bg-custom-color-7 dark:bg-custom-color-dark-7 max-lg:hidden">
+					<Aside className="max-lg:hidden">
 						<Tags></Tags>
 						<PageNavigator></PageNavigator>
 						<BackToTop></BackToTop>

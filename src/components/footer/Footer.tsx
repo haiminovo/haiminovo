@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Footer() {
 	return (
-		<footer className="bg-custom-color-8 text-font-light dark:bg-custom-color-dark-8 dark:text-font-light-dark flex w-full items-center justify-center gap-1 p-2 text-xs whitespace-nowrap max-md:flex-wrap">
+		<footer className="text-font-light dark:text-font-light-dark border-t border-black/5 dark:border-white/5 flex w-full items-center justify-center gap-1 bg-transparent p-2 text-xs whitespace-nowrap max-md:flex-wrap">
 			<a
 				className="flex gap-1"
 				target="_blank"
