@@ -1,13 +1,17 @@
 'use client';
 import { CalendarOutlined, FileTextOutlined, LoadingOutlined } from '@ant-design/icons';
 import { allPosts } from 'contentlayer/generated';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function SiteInf() {
 	const [runtime, setRuntime] = useState<string>();
-	useLayoutEffect(() => {
-		setRuntime(((new Date().getTime() - new Date('2024-07-25').getTime()) / 86400000).toFixed(0) + ' 天');
+
+	useEffect(() => {
+		const launchDate = new Date('2024-07-25');
+		const runtimeDays = Math.floor((Date.now() - launchDate.getTime()) / 86400000);
+		setRuntime(`${runtimeDays} 天`);
 	}, []);
+
 	const blogInfos = [
 		{
 			title: '文章总计',

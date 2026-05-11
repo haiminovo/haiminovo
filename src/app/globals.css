@@ -54,6 +54,18 @@
 	}
 }
 
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	.typing-20 {
+		animation: none;
+		border-right: 0;
+		width: auto;
+	}
+}
+
 @property --scroll-position {
 	syntax: '<number>';
 	inherits: true;
@@ -81,26 +93,16 @@
 	}
 }
 
-* {
-	scrollbar-width: none;
-}
-
 html {
 	scroll-behavior: smooth;
 	font-weight: 400;
 	color: #3a4a5a;
 	font-family:
 		'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif, monospace !important;
-
 	transition: --scroll-position 0.15s linear;
-	[data-id='--scroll-position']::before {
-		font-size: medium;
-		content: counter(scroll-position);
-	}
+}
 
-	body {
-		:is(.dark *) {
-			color: rgba(255, 255, 255, 0.7);
-		}
-	}
+[data-id='--scroll-position']::before {
+	font-size: medium;
+	content: counter(scroll-position);
 }

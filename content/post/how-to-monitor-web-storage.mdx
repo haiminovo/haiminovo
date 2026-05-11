@@ -1,6 +1,6 @@
 ---
 title: 我该如何监听localStorage和sessionStorage?
-description: 尝试监听页面的localStorage时发现同页无法触发绑定的事件，记录一下解决方案。
+description: 尝试监听页面的localStorage时发现同页无法触发绑定的事件，记录一下问题原因、解决方案以及几个容易忽略的知识点。
 authors: [haiminovo]
 date: 2024-09-03
 tags: [开发, 前端, WebStorage]
@@ -8,7 +8,7 @@ tags: [开发, 前端, WebStorage]
 
 ## 遇到的问题
 
-使用以下代码尝试监听页面的localStorage,但是在同页面中无法触发
+做博客暗黑模式切换时，我把主题状态存在了 `localStorage` 里。最开始很自然地想到直接监听 `storage` 事件，代码大概像下面这样：
 
 ```ts
 window.addEventListener('storage', () => {
@@ -16,23 +16,298 @@ window.addEventListener('storage', () => {
 });
 ```
 
-打开两个tab页用localStorage.setItem()测试，发现当前tab页未触发监听，另一个页面的控制台则显示触发了监听事件。
+结果测试时发现有点怪。打开两个 tab 页，用 `localStorage.setItem()` 修改值后，当前页面完全没有触发监听，另一个同源页面的控制台倒是能收到事件。
 
-使用sessionStorage.setItem()测试发现当前页无法触发，sessionStorge跨tab页不共享自然也无法触发。
+再换成 `sessionStorage.setItem()` 试了一下，当前页同样不触发，而多 tab 场景下也基本没有任何反应。
+
+如果只是想快速记结论，其实就一句话：
+
+- `storage` 事件默认不会在“发起修改的当前页面”触发。
+- `localStorage` 更适合跨 tab 同步。
+- `sessionStorage` 本身就不是给跨 tab 共享用的。
+
+下面把原因和解决方案拆开说一下。
+
+## 先说结论：为什么监听不到
+
+### 1. `storage` 事件不会在当前页面触发
+
+很多人第一次用 Web Storage 都会踩这个坑。`window.addEventListener('storage')` 监听到的并不是“我调用了 `setItem`”，而是“另一个同源文档里的 storage 发生了变化”。
+
+也就是说：
+
+- 当前页面调用 `localStorage.setItem()`，当前页面自己收不到 `storage` 事件。
+- 其它同源页面可以收到这次变化。
+
+可以简单理解成，浏览器默认认为“你既然亲手改了这个值，那你自己当然知道发生了变化”，所以没有必要再给当前页面重复广播一次。
+
+### 2. `localStorage` 和 `sessionStorage` 的共享范围不一样
+
+`localStorage` 和 `sessionStorage` 都属于 Web Storage，但它们的作用范围并不相同。
+
+`localStorage`：
+
+- 同源下长期保存。
+- 不同 tab、不同窗口之间可以共享。
+- 所以更适合做多页面状态同步。
+
+`sessionStorage`：
+
+- 生命周期通常跟当前会话页绑定。
+- 默认不会像 `localStorage` 那样在多个 tab 间共享。
+- 所以普通多 tab 测试场景下几乎看不到同步效果。
+
+也正因为这个差异，`storage` 事件在 `sessionStorage` 上看起来会更“像没生效一样”。
+
+## `storage` 事件到底会在什么时候触发
+
+这个事件本身并不是不能用，只是触发条件和很多人直觉不一样。
+
+### 两种场景先分开看
+
+常见场景可以这么理解：
+
+### 监听 `localStorage`
+
+- A 页面执行 `localStorage.setItem('theme', 'dark')`
+- A 页面自己不会触发 `storage`
+- 同源的 B 页面、C 页面可以收到 `storage`
+
+### 监听 `sessionStorage`
+
+- A 页面执行 `sessionStorage.setItem('theme', 'dark')`
+- A 页面自己不会触发 `storage`
+- 普通新开的 B tab 通常也收不到，因为它和 A tab 并不共享这份 `sessionStorage`
+
+所以如果你的需求是：
+
+- “同页面中某个组件改了 storage，另一个组件要立刻响应”
+- “当前页面本身也要立即拿到变化通知”
+
+那只靠原生 `storage` 事件是不够的。
 
 ## 解决方案
 
-修改window上的setItem方法，在调用方法时新派发一个事件来传递storage被修改的信息，通过监听新事件实现。
+既然浏览器不会给当前页面派发 `storage` 事件，那最直接的思路就是自己补一个事件。
+
+也就是在调用 `setItem`、`removeItem`、`clear` 这些方法时，手动派发一个自定义事件，把这次变更的信息带出去，然后页面里统一监听这个自定义事件。
+
+### 最简单的做法
+
+最开始我的实现思路其实很简单，就是重写 `setItem`：
 
 ```ts
-const orignSetItem = window.localStorage.setItem;
+const originalSetItem = window.localStorage.setItem;
+
 window.localStorage.setItem = function (key, newValue) {
-	const eventTemp = new Event('自定义事件名');
-	// 一些操作
+	const eventTemp = new Event('setThemeColor');
 	window.dispatchEvent(eventTemp);
-	orignSetItem.apply(this, [key, newValue]);
+	originalSetItem.apply(this, [key, newValue]);
 };
 
-// 监听事件
-window.addEventListener('自定义事件名', handleFunc);
+window.addEventListener('setThemeColor', handleFunc);
 ```
+
+这样做已经能解决“同页监听不到”的问题了，不过如果想写成一篇完整的知识分享，这个方案还可以再扩展一下。
+
+## 更完整一点的封装
+
+如果只是重写 `setItem`，其实还有几个问题没有处理：
+
+- `removeItem` 改值时怎么办
+- `clear` 清空时怎么办
+- 监听函数怎么知道是哪一个 key 变了
+- 变更前后的值是什么
+- `localStorage` 和 `sessionStorage` 要不要统一处理
+
+所以更推荐的方式是派发一个带 `detail` 的 `CustomEvent`，把变化信息一起传出去。
+
+```ts
+type StorageType = 'localStorage' | 'sessionStorage';
+
+interface WebStorageChangeDetail {
+	type: StorageType;
+	key: string | null;
+	oldValue: string | null;
+	newValue: string | null;
+}
+
+const WEB_STORAGE_CHANGE_EVENT = 'web-storage-change';
+
+function dispatchStorageChange(detail: WebStorageChangeDetail) {
+	window.dispatchEvent(
+		new CustomEvent<WebStorageChangeDetail>(WEB_STORAGE_CHANGE_EVENT, {
+			detail,
+		})
+	);
+}
+
+function patchStorage(storage: Storage, type: StorageType) {
+	const originalSetItem = storage.setItem;
+	const originalRemoveItem = storage.removeItem;
+	const originalClear = storage.clear;
+
+	storage.setItem = function (key, value) {
+		const oldValue = storage.getItem(key);
+		originalSetItem.call(this, key, value);
+		dispatchStorageChange({
+			type,
+			key,
+			oldValue,
+			newValue: value,
+		});
+	};
+
+	storage.removeItem = function (key) {
+		const oldValue = storage.getItem(key);
+		originalRemoveItem.call(this, key);
+		dispatchStorageChange({
+			type,
+			key,
+			oldValue,
+			newValue: null,
+		});
+	};
+
+	storage.clear = function () {
+		originalClear.call(this);
+		dispatchStorageChange({
+			type,
+			key: null,
+			oldValue: null,
+			newValue: null,
+		});
+	};
+}
+
+patchStorage(window.localStorage, 'localStorage');
+patchStorage(window.sessionStorage, 'sessionStorage');
+```
+
+监听时就可以拿到更完整的上下文：
+
+```ts
+window.addEventListener(WEB_STORAGE_CHANGE_EVENT, (event) => {
+	const { detail } = event as CustomEvent<WebStorageChangeDetail>;
+
+	console.log('storage 类型:', detail.type);
+	console.log('变化的 key:', detail.key);
+	console.log('旧值:', detail.oldValue);
+	console.log('新值:', detail.newValue);
+});
+```
+
+这样一来，不管你监听的是主题切换、登录态缓存、还是某个表单草稿状态，处理起来都会清晰很多。
+
+## 如果还想监听跨 tab 呢
+
+这里要区分两个方向：
+
+### 1. 监听当前页自己的变更
+
+用上面这种“重写 storage 方法 + 自定义事件”的方式。
+
+### 2. 监听其它 tab 的变更
+
+继续使用浏览器原生的 `storage` 事件。
+
+也就是说在实际项目里，这两种监听方式往往是一起存在的：
+
+```ts
+window.addEventListener('storage', (event) => {
+	console.log('其它页面触发的 storage 变化:', event.key, event.newValue);
+});
+
+window.addEventListener(WEB_STORAGE_CHANGE_EVENT, (event) => {
+	const { detail } = event as CustomEvent<WebStorageChangeDetail>;
+	console.log('当前页面触发的 storage 变化:', detail.key, detail.newValue);
+});
+```
+
+一个负责“别的页面改了什么”，一个负责“我自己这个页面刚刚改了什么”，两者职责并不冲突。
+
+## 延伸知识点
+
+### 1. `storage` 事件里能拿到什么
+
+原生 `StorageEvent` 常用字段有这些：
+
+- `key`：被修改的 key
+- `oldValue`：修改前的值
+- `newValue`：修改后的值
+- `storageArea`：本次变化对应的是 `localStorage` 还是 `sessionStorage`
+- `url`：触发这次修改的文档地址
+
+如果是 `clear()`，那么 `key`、`oldValue`、`newValue` 通常都会是 `null`。
+
+### 2. `setItem` 的值只能是字符串
+
+无论你传进去的是数字、布尔值还是对象，最终都会变成字符串。对象一般都要自己 `JSON.stringify()`，取值后再 `JSON.parse()`。
+
+```ts
+localStorage.setItem('user', JSON.stringify({ name: 'haimin' }));
+
+const user = JSON.parse(localStorage.getItem('user') || '{}');
+```
+
+所以如果你监听到某个值变化后要进一步处理，别忘了先考虑数据格式。
+
+### 3. 不是所有“设置”都会真的触发变化
+
+如果你多次把同一个 key 设置成完全相同的值，从语义上讲 storage 并没有真的变化。实际开发里如果你发现事件没有按预期触发，也要先看看是不是写入了相同内容。
+
+### 4. 重写原生方法要注意只做一次
+
+这个点很重要。如果你把 patch 逻辑写在某个 React 组件里，而且组件可能重复挂载，那么就有机会出现：
+
+- 同一个方法被重复重写
+- 事件被重复派发
+- 卸载时恢复不干净
+
+所以更好的做法通常是：
+
+- 在应用初始化阶段只 patch 一次
+- 或者干脆自己封装一层统一的 storage 工具函数
+- 以后所有读写都走你自己的工具，而不是到处直接 `localStorage.setItem()`
+
+我博客里暗黑模式切换那块，其实就是用“修改 `localStorage.setItem` 后派发自定义事件”的思路来同步评论区主题的。
+
+### 5. 如果需求是跨 tab 实时通信，也可以看看 `BroadcastChannel`
+
+严格来说，`localStorage + storage` 更像是一种“顺便可以做同步”的能力，而不是专门为实时通信设计的方案。
+
+如果后面遇到更复杂的多 tab 通信需求，比如：
+
+- 多页面之间同步登录状态
+- 实时通知某个 tab 刷新数据
+- 多页面共享操作队列
+
+那 `BroadcastChannel` 往往会比 `storage` 事件更直接。不过如果只是轻量状态同步，`localStorage + storage + 自定义事件` 已经够用了。
+
+## 我的实际使用场景
+
+### 以暗黑模式切换为例
+
+前面提到的博客暗黑模式切换，就是一个很典型的例子：
+
+- 主题状态存在 `localStorage`
+- 当前页面切换主题时，需要立刻让页面和评论区一起更新
+- 只靠原生 `storage` 事件不够，因为当前页面收不到
+
+所以我最后的做法是：
+
+- 切换主题时写入 `localStorage`
+- 同时派发一个自定义事件
+- 页面内其它依赖主题的组件监听这个事件并同步状态
+
+这个方案不算多高级，但非常实用，也足够应付大多数前端项目里的 storage 同步需求。
+
+## 小结
+
+回到文章标题这个问题，`localStorage` 和 `sessionStorage` 当然可以“监听”，只是要先分清楚你到底想监听哪一种变化。
+
+- 如果你想监听其它同源页面的变化，用原生 `storage` 事件。
+- 如果你想监听当前页面自己的变化，需要自己补一个自定义事件。
+- 如果你还想兼顾 `removeItem`、`clear` 和更完整的上下文，最好做一次统一封装。
+
+一开始我只是想解决“为什么监听不到”的问题，后来回头看才发现，这其实是个很典型的前端知识点：API 本身并不难，难的是把它的触发边界和使用场景真正搞清楚。

@@ -1,7 +1,6 @@
 {
 	"compilerOptions": {
 		"baseUrl": "./",
-		"outDir": "./",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -32,7 +31,6 @@
 		".next/types/**/*.ts",
 		".contentlayer/generated",
 		"contentlayer.config.js",
-		"compilerOptions.baseUrl",
 		".next/dev/types/**/*.ts"
 	],
 	"exclude": ["node_modules", "dist"]
