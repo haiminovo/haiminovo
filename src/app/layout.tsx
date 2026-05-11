@@ -48,13 +48,13 @@ export default function RootLayout({
 			>
 				<SiteAnalytics></SiteAnalytics>
 				<Navbar className="dark:border-custom-color-dark-7 top-0 z-10 h-10 w-full shadow-sm"></Navbar>
-				<main className="flex h-full w-full max-w-[1440px] justify-center">
-					<Aside className="h-full min-h-[calc(100vh-40px)] max-md:hidden">
+				<main className="flex h-full w-full max-w-[1440px] justify-center gap-2 px-3 max-xl:px-2 max-lg:px-0">
+					<Aside className="h-full min-h-[calc(100vh-40px)] max-lg:hidden">
 						<div className="flex h-full w-full flex-1 flex-col gap-3 pt-5">
 							<MyInf></MyInf>
-							<Tags className="lg:hidden"></Tags>
+							<Tags className="hidden"></Tags>
 							<SiteInf></SiteInf>
-							<PageNavigator className="sticky top-16 lg:hidden"></PageNavigator>
+							<PageNavigator className="hidden"></PageNavigator>
 						</div>
 					</Aside>
 					<div className="flex w-full flex-1 flex-col">
@@ -62,7 +62,7 @@ export default function RootLayout({
 							{children}
 						</div>
 					</div>
-					<Aside className="max-lg:hidden">
+					<Aside className="max-xl:hidden">
 						<Tags></Tags>
 						<PageNavigator></PageNavigator>
 						<BackToTop></BackToTop>

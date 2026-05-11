@@ -29,15 +29,15 @@ export const links: {
 
 export default function Links(props: IProps) {
 	return (
-		<div className="flex h-full items-center gap-2 px-1 text-nowrap" {...props}>
+		<div className="flex h-full flex-wrap items-center gap-1 px-1 text-nowrap" {...props}>
 			{links.map((item) => (
 				<Link
 					key={item.title}
 					href={item.path}
-					className="hover:bg-custom-color-5/30 dark:hover:bg-custom-color-dark-2/30 flex items-center gap-1 rounded-lg px-2 py-1 font-normal hover:shadow-md"
+					className="hover:bg-custom-color-5/30 dark:hover:bg-custom-color-dark-2/30 flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-normal hover:shadow-md max-lg:px-1.5 max-lg:text-[13px] max-md:px-1"
 				>
 					<div className="text-xs">{item.icon}</div>
-					<div className="text-sm">{item.title}</div>
+					<div>{item.title}</div>
 				</Link>
 			))}
 		</div>

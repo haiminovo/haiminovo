@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Home() {
 	return (
 		<Suspense>
-			<div className="flex h-full flex-col items-center p-6 max-md:p-4">
+			<div className="flex h-full flex-col items-center px-3 py-4 sm:px-4 lg:px-5">
 				<PostList></PostList>
 			</div>
 		</Suspense>

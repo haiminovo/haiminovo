@@ -55,10 +55,10 @@ export default async function Post({ params }: PageProps) {
 	const imageSrc = page.image?.trim();
 
 	return (
-		<article id="article" className="container flex flex-col gap-4">
+		<article id="article" className="mx-auto flex w-full max-w-[960px] flex-col gap-4 max-xl:max-w-[860px]">
 			<div className="paper-reading-panel flex flex-col">
-				<h1 className="my-4 border-b border-gray-500/50 pb-2 text-4xl font-black break-all">{page.title}</h1>
-				{page.description && <p className="indent-8 text-lg break-all">{page.description}</p>}
+				<h1 className="my-4 border-b border-gray-500/50 pb-2 text-3xl font-black break-words lg:text-4xl">{page.title}</h1>
+				{page.description && <p className="text-base indent-8 break-words lg:text-lg">{page.description}</p>}
 				<div className="block w-full py-4 dark:brightness-[.9]">
 					{imageSrc && (
 						<div className="bg-custom-color-8 dark:bg-custom-color-dark-8 relative aspect-[5/3] w-full overflow-hidden rounded-xl">

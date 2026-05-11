@@ -20,7 +20,7 @@ export default function DigitalClock(props: IProps) {
 		return () => clearInterval(timmer);
 	}, []);
 	return (
-		<div ref={ref} className={`flex items-center gap-2 ${className}`}>
+		<div ref={ref} className={`flex origin-right scale-[0.2] items-center gap-2 max-lg:scale-[0.17] ${className}`}>
 			{renderArr.map((item: any, index: React.Key) => (
 				<DigitalNumber key={index} value={item}></DigitalNumber>
 			))}

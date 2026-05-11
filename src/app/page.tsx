@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 export default function Home() {
 	return (
 		<Suspense>
-			<div className="flex flex-col gap-4 px-5 pb-4 pt-5 max-md:px-4 max-md:pt-4">
+			<div className="flex flex-col gap-4 px-3 pb-4 pt-4 sm:px-4 lg:px-5">
 				<section className="home-hero">
 					<div className="home-hero__content">
 						<div className="home-hero__avatar-shell">

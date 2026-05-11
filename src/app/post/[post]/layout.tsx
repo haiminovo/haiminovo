@@ -11,7 +11,7 @@ export default function PostLayout({
 	return (
 		<>
 			<div className={`${inter.className} flex flex-col gap-4`}>
-				<div className="flex flex-col p-4">
+				<div className="flex flex-col px-3 py-4 sm:px-4 lg:px-5">
 					{children}
 					<div className="flex justify-end py-8 text-xs">
 						<div className="flex items-center gap-1">
