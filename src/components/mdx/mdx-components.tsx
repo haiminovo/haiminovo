@@ -60,14 +60,14 @@ const components: MDXComponents = {
 	th: ({ className, ...props }) => (
 		<th
 			className={
-				'border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right ' + className
+				'border px-4 py-2 text-left font-bold [[align=center]]:text-center [[align=right]]:text-right ' + className
 			}
 			{...props}
 		/>
 	),
 	td: ({ className, ...props }) => (
 		<td
-			className={'border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right ' + className}
+			className={'px-4 py-2 text-left [[align=center]]:text-center [[align=right]]:text-right ' + className}
 			{...props}
 		/>
 	),

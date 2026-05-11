@@ -64,7 +64,7 @@ export default function PageNavigator(props: IProps) {
 			{dots && (
 				<div className={`sticky top-16 flex max-h-[50vh] w-full flex-col ${props.className}`}>
 					<span className="p-1 font-medium text-font-strong dark:text-font-light-dark">目录</span>
-					<div className="no-scrollbar flex w-full flex-col gap-2 overflow-auto rounded-xl border bg-custom-color-9 p-3 shadow-md dark:border-custom-color-dark-7 dark:bg-custom-color-dark-9">
+					<div className="no-scrollbar flex w-full flex-col gap-2 overflow-auto rounded-xl bg-custom-color-9 p-3 shadow-md dark:border-custom-color-dark-7 dark:bg-custom-color-dark-9">
 						{dots.map((item) => {
 							return (
 								<a

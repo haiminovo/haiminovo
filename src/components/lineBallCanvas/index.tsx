@@ -83,7 +83,7 @@ export default function LineBallCanvas() {
         const lineBallGraph = new Graph();
         lineBallGraph.draw();
     };
-    const canvas: any = useRef();
+    const canvas: any = useRef(null);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const handleMouseMove = (e: any) => { };

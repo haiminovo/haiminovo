@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { FileTextOutlined, HomeOutlined, TeamOutlined, ToolOutlined } from '@ant-design/icons';
+import { FileTextOutlined, HomeOutlined, TeamOutlined } from '@ant-design/icons';
 
 interface IProps {
 	className?: string;
@@ -21,17 +21,12 @@ export const links: {
 			path: '/post',
 			icon: <FileTextOutlined />,
 		},
-		{
-			title: '友链',
-			path: '/friendlyLink',
-			icon: <TeamOutlined />,
-		},
-		{
-			title: '测试',
-			path: '/test',
-			icon: <ToolOutlined />,
-		},
-	];
+	{
+		title: '友链',
+		path: '/friendlyLink',
+		icon: <TeamOutlined />,
+	},
+];
 
 export default function Links(props: IProps) {
 	return (
