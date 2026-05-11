@@ -1,9 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
 
-export default function Footer() {
+interface IProps {
+	className?: string;
+}
+
+export default function Footer(props: IProps) {
+	const { className } = props;
 	return (
-		<footer className="text-font-light dark:text-font-light-dark border-t border-black/5 dark:border-white/5 flex w-full items-center justify-center gap-1 bg-transparent p-2 text-xs whitespace-nowrap max-md:flex-wrap">
+		<footer
+			className={`text-font-light dark:text-font-light-dark mt-auto border-t border-dashed border-black/5 dark:border-white/5 flex w-full items-center justify-center gap-1 bg-transparent p-2 text-xs whitespace-nowrap max-md:flex-wrap ${className || ''}`}
+		>
 			<a
 				className="flex gap-1"
 				target="_blank"

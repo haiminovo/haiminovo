@@ -6,9 +6,10 @@ import JsonLd from '@/components/seo/JsonLd';
 import { createMetadata, getCanonicalUrl, getSeoImage, siteConfig } from '@/lib/seo';
 
 export const metadata = createMetadata({
-	description: 'haimin 的个人博客首页，聚合近期文章更新，持续分享前端开发实践、Web 技术思考与设计灵感。',
+	description:
+		'roadto.top 首页 — 浏览 haimin 的最新技术文章、前端开发实践、Next.js / React 项目记录，以及友情链接。',
 	path: '/',
-	keywords: ['首页', '前端博客', '技术文章'],
+	keywords: ['roadto.top', 'roadtotop', '巅峰之路首页', 'haimin 博客', '技术文章', '前端博客'],
 });
 
 export default function Home() {

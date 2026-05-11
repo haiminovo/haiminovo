@@ -6,9 +6,10 @@ import { createMetadata, getCanonicalUrl, siteConfig } from '@/lib/seo';
 
 export const metadata = createMetadata({
 	title: '文章列表',
-	description: '查看 haimin 博客的全部技术文章，内容覆盖前端开发、Next.js、React、Web 实践与日常建站记录。',
+	description:
+		'roadto.top 文章列表 — 查看 haimin 的全部技术文章，涵盖前端开发、Next.js、React、Web 实践、建站记录与组件实现。',
 	path: '/post',
-	keywords: ['文章列表', '技术文章', '前端开发'],
+	keywords: ['文章列表', '技术文章', '前端开发', 'Next.js 教程', 'React 实践', 'roadto.top'],
 });
 
 export default function Home() {

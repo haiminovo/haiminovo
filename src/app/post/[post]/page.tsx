@@ -41,9 +41,9 @@ export async function generateMetadata({ params }: PageProps) {
 
 	return createMetadata({
 		title: page.title,
-		description: page.description,
+		description: `${page.description} | 来自 roadto.top — haimin 的技术博客。`,
 		path: `/post/${page.slugAsParams}`,
-		keywords: page.tags || [],
+		keywords: [...(page.tags || []), 'roadto.top', 'haimin', '巅峰之路'],
 		image: page.image,
 		type: 'article',
 		publishedTime: page.date,

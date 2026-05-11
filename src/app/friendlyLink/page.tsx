@@ -1,32 +1,36 @@
-import Image from 'next/image';
-import bird0 from 'public/bird0.svg';
 import { createMetadata } from '@/lib/seo';
+import FriendlyLinkCard from '@/components/friendlyLink/FriendlyLinkCard';
 
 interface FriendLink {
-	title: string;
+	title?: string;
 	link: string;
-	desc: string;
+	desc?: string;
 }
 
 export const metadata = createMetadata({
 	title: '友情链接',
-	description: '这里收录一些值得逛逛的个人博客和独立站点，也欢迎互换友链。',
+	description:
+		'roadto.top 友情链接 — 收录值得常逛的个人博客、独立站点与技术社区，欢迎互换友链。',
 	path: '/friendlyLink',
-	keywords: ['友情链接', '博客推荐', '独立站'],
+	keywords: ['友情链接', '博客推荐', '独立站', '友链交换', 'roadto.top'],
 });
 
 const friendLinks: FriendLink[] = [
 	{
-		title: 'RainLink',
 		link: 'http://www.rainlink.blog/',
-		desc: '一个值得逛逛的个人博客站点。',
+	},
+	{
+		link: 'https://islin.cn/',
+	},
+	{
+		link: 'https://www.roadto.top/',
 	},
 ];
 
 export default function FriendlyLink() {
 	return (
 		<div className="flex h-full flex-col items-center p-6 max-md:p-4">
-			<div className="mb-5 flex w-full flex-col gap-2">
+			<div className="mb-6 flex w-full flex-col gap-2">
 				<h1 className="text-3xl font-black">友情链接</h1>
 				<p className="text-sm leading-7 opacity-80">收录一些值得常逛的博客、独立站和朋友们的个人空间。</p>
 			</div>
@@ -36,27 +40,14 @@ export default function FriendlyLink() {
 					<p className="mt-2 text-sm opacity-80">后面可以把你的常用站点、朋友博客或者自己的其它项目加进来。</p>
 				</div>
 			) : (
-				<ul className="flex w-full flex-wrap gap-4">
+				<ul className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2">
 					{friendLinks.map((item) => {
 						return (
 							<li
 								key={item.link}
-								className="bg-custom-color-10 dark:bg-custom-color-dark-7 h-36 min-w-64 basis-[calc(50%-8px)] rounded-xl shadow-xl max-md:flex-grow"
+								className="bg-custom-color-10/80 dark:bg-custom-color-dark-7/80 rounded-xl border border-slate-200/50 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-300/60 hover:bg-white/80 hover:shadow-md dark:border-slate-600/30 dark:hover:border-slate-500/50 dark:hover:bg-slate-700/80"
 							>
-								<a
-									href={item.link}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex h-full w-full items-center gap-4 p-4"
-								>
-									<div className="relative h-28 w-28">
-										<Image className="rounded-xl" src={bird0} alt={item.title + '博客图像'} fill></Image>
-									</div>
-									<div className="flex h-full flex-1 flex-col gap-2">
-										<strong className="text-xl">{item.title}</strong>
-										<p className="line-clamp-3 break-all text-ellipsis">{item.desc}</p>
-									</div>
-								</a>
+								<FriendlyLinkCard title={item.title} link={item.link} desc={item.desc} />
 							</li>
 						);
 					})}

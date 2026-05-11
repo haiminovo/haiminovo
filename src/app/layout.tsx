@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/navbar/NavBar';
 import Aside from '@/components/aside/Aside';
-import MyInf from '@/components/myInf/MyInf';
 import SiteInf from '@/components/siteInf/SiteInf';
 import SiteAnalytics from '@/components/siteAnalytics/SiteAnalytics';
 import Tags from '@/components/tags/Tags';
@@ -40,10 +39,13 @@ export const metadata: Metadata = {
 	icons: {
 		icon: [
 			{ url: '/favicon.ico', sizes: 'any' },
+			{ url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+			{ url: '/favicon/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
 			{ url: '/icon.png', type: 'image/png', sizes: '512x512' },
 		],
 		apple: [{ url: '/apple-icon.png', sizes: '180x180' }],
 	},
+	manifest: '/favicon/site.webmanifest',
 	openGraph: {
 		type: 'website',
 		locale: siteConfig.locale,
@@ -109,17 +111,16 @@ export default function RootLayout({
 				<ClickConfetti />
 				<CursorTrail />
 				<Navbar className="dark:border-custom-color-dark-7 top-0 z-10 h-10 w-full shadow-sm"></Navbar>
-				<main className="flex h-full w-full max-w-[1440px] justify-center gap-2 px-3 max-xl:px-2 max-lg:px-0">
-					<Aside className="h-full min-h-[calc(100vh-40px)] max-lg:hidden">
-						<div className="flex h-full w-full flex-1 flex-col gap-3 pt-5">
-							<MyInf></MyInf>
+				<main className="flex w-full max-w-[1440px] flex-1 justify-center gap-2 px-3 pb-20 max-xl:px-2 max-lg:px-0">
+					<Aside className="max-lg:hidden">
+						<div className="flex w-full flex-1 flex-col gap-3 pt-5">
 							<Tags className="hidden"></Tags>
 							<SiteInf></SiteInf>
 							<PageNavigator className="hidden"></PageNavigator>
 						</div>
 					</Aside>
 					<div className="flex w-full flex-1 flex-col">
-						<div className="no-scrollbar flex h-full w-full flex-col">
+						<div className="no-scrollbar flex w-full flex-col">
 							{children}
 						</div>
 					</div>
