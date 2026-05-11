@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/navbar/NavBar';
@@ -10,13 +10,31 @@ import Tags from '@/components/tags/Tags';
 import PageNavigator from '@/components/pageNavigator/PageNavigator';
 import BackToTop from '@/components/backToTop/BackToTop';
 import Footer from '@/components/footer/Footer';
+import { getCanonicalUrl, getSeoImage, siteConfig } from '@/lib/seo';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: '巅峰之路-haimin的互联网自留地',
-	description: '一个记录开发收获和日常生活的个人站点,主要涉及前端开发,web技术相关内容',
-	keywords: ['haimin', 'haiminovo', 'road to top', 'road to the top', '巅峰之路', '巅峰路', '前端'],
+	metadataBase: new URL(siteConfig.url),
+	title: {
+		default: siteConfig.title,
+		template: `%s | ${siteConfig.name}`,
+	},
+	description: siteConfig.description,
+	keywords: [...siteConfig.keywords],
+	applicationName: siteConfig.name,
+	authors: [{ name: siteConfig.author.name, url: siteConfig.author.url }],
+	creator: siteConfig.author.name,
+	publisher: siteConfig.name,
+	category: 'technology',
+	alternates: {
+		canonical: getCanonicalUrl('/'),
+	},
+	formatDetection: {
+		email: false,
+		address: false,
+		telephone: false,
+	},
 	icons: {
 		icon: [
 			{ url: '/favicon.ico', sizes: 'any' },
@@ -24,6 +42,54 @@ export const metadata: Metadata = {
 		],
 		apple: [{ url: '/apple-icon.png', sizes: '180x180' }],
 	},
+	openGraph: {
+		type: 'website',
+		locale: siteConfig.locale,
+		url: getCanonicalUrl('/'),
+		siteName: siteConfig.name,
+		title: siteConfig.title,
+		description: siteConfig.description,
+		images: [
+			{
+				url: getSeoImage(),
+				width: 1200,
+				height: 630,
+				alt: `${siteConfig.name} 的站点预览图`,
+			},
+		],
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: siteConfig.title,
+		description: siteConfig.description,
+		images: [getSeoImage()],
+		creator: `@${siteConfig.author.handle}`,
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			'max-image-preview': 'large',
+			'max-snippet': -1,
+			'max-video-preview': -1,
+		},
+	},
+	verification: {
+		other: {
+			'baidu-site-verification': 'codeva-IDE8CkNHDF',
+			'msvalidate.01': '078ED44B766D08ACBE91D7855C8966BF',
+		},
+	},
+};
+
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	minimumScale: 1,
+	maximumScale: 10,
+	userScalable: true,
 };
 
 export default function RootLayout({
@@ -33,16 +99,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="zh-Hans-CN" className="relative flex justify-center">
-			<head>
-				<meta
-					name="viewport"
-					content="width=device-width, user-scalable=1, initial-scale=1.0, minimum-scale=1, maximum-scale=10"
-				/>
-				{/* 百度资源验证 */}
-				<meta name="baidu-site-verification" content="codeva-IDE8CkNHDF" />
-				{/* bing资源验证 */}
-				<meta name="msvalidate.01" content="078ED44B766D08ACBE91D7855C8966BF" />
-			</head>
+			<head />
 			<body
 				className={`${inter.className} circuit-texture-canvas bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark flex min-h-screen w-full min-w-80 flex-col items-center`}
 			>

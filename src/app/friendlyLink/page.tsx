@@ -1,6 +1,6 @@
-import { Metadata } from 'next';
 import Image from 'next/image';
 import bird0 from 'public/bird0.svg';
+import { createMetadata } from '@/lib/seo';
 
 interface FriendLink {
 	title: string;
@@ -8,11 +8,12 @@ interface FriendLink {
 	desc: string;
 }
 
-export const metadata: Metadata = {
-	title: '友情链接|巅峰之路',
-	description: '一个记录开发收获和日常生活的个人站点,主要涉及前端开发,web技术相关内容',
-	keywords: ['haimin', 'haiminovo', 'road to top', 'road to the top', '巅峰之路', '巅峰路', '前端'],
-};
+export const metadata = createMetadata({
+	title: '友情链接',
+	description: '这里收录一些值得逛逛的个人博客和独立站点，也欢迎互换友链。',
+	path: '/friendlyLink',
+	keywords: ['友情链接', '博客推荐', '独立站'],
+});
 
 const friendLinks: FriendLink[] = [
 	{
@@ -25,6 +26,10 @@ const friendLinks: FriendLink[] = [
 export default function FriendlyLink() {
 	return (
 		<div className="flex h-full flex-col items-center p-6 max-md:p-4">
+			<div className="mb-5 flex w-full flex-col gap-2">
+				<h1 className="text-3xl font-black">友情链接</h1>
+				<p className="text-sm leading-7 opacity-80">收录一些值得常逛的博客、独立站和朋友们的个人空间。</p>
+			</div>
 			{friendLinks.length === 0 ? (
 				<div className="bg-custom-color-10 dark:bg-custom-color-dark-7 w-full rounded-xl p-8 text-center shadow-md">
 					<p className="text-lg font-semibold">友链席位暂时空着</p>
