@@ -37,15 +37,8 @@ export const metadata: Metadata = {
 		telephone: false,
 	},
 	icons: {
-		icon: [
-			{ url: '/favicon.ico', sizes: 'any' },
-			{ url: '/favicon/favicon.svg', type: 'image/svg+xml' },
-			{ url: '/favicon/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
-			{ url: '/icon.png', type: 'image/png', sizes: '512x512' },
-		],
-		apple: [{ url: '/apple-icon.png', sizes: '180x180' }],
+		icon: [{ url: '/favicon/favicon.ico', sizes: 'any' }],
 	},
-	manifest: '/favicon/site.webmanifest',
 	openGraph: {
 		type: 'website',
 		locale: siteConfig.locale,
