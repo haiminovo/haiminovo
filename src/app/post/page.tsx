@@ -61,7 +61,7 @@ export default function Home() {
 				<section className="mb-4 flex w-full max-w-[960px] flex-col gap-2 rounded-2xl px-1">
 					<h1 className="text-font-strong dark:text-font-light-dark text-3xl font-black">文章列表</h1>
 					<p className="text-font-normal dark:text-font-normal-dark text-sm leading-7">
-						这里整理了站内全部文章，主要记录前端开发、Next.js 与 React 实践，以及博客搭建过程中的一些思考。
+						这里整理了站内全部文章。
 					</p>
 				</section>
 				<PostList></PostList>

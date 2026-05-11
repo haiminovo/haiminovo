@@ -163,6 +163,124 @@ html.dark .paper-reading-panel {
 		inset 0 1px 0 rgb(255 255 255 / 0.03);
 }
 
+/* 文章列表项 hover 时的水波纹光扫效果 */
+@keyframes post-ripple-shine {
+	0% {
+		transform: translateX(-120%) skewX(-20deg);
+	}
+	100% {
+		transform: translateX(220%) skewX(-20deg);
+	}
+}
+
+.post-item-ripple {
+	position: relative;
+	overflow: hidden;
+}
+
+.post-item-ripple::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		105deg,
+		transparent 40%,
+		rgba(255, 255, 255, 0.22) 48%,
+		rgba(255, 255, 255, 0.38) 50%,
+		rgba(255, 255, 255, 0.22) 52%,
+		transparent 60%
+	);
+	transform: translateX(-120%) skewX(-20deg);
+	pointer-events: none;
+	z-index: 2;
+	transition: none;
+}
+
+.post-item-ripple:hover::before {
+	animation: post-ripple-shine 4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+html.dark .post-item-ripple::before {
+	background: linear-gradient(
+		105deg,
+		transparent 40%,
+		rgba(255, 255, 255, 0.08) 48%,
+		rgba(255, 255, 255, 0.16) 50%,
+		rgba(255, 255, 255, 0.08) 52%,
+		transparent 60%
+	);
+}
+
+/* 文章卡片 hover 时的边框微光 + 上浮 */
+@keyframes border-glow {
+	0%,
+	100% {
+		opacity: 0.4;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+.post-item-border-glow {
+	position: relative;
+	transition:
+		transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.post-item-border-glow::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	padding: 1.2px;
+	background: linear-gradient(
+		135deg,
+		transparent 40%,
+		rgba(120, 140, 160, 0.25) 50%,
+		transparent 60%
+	);
+	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+}
+
+.post-item-border-glow:hover {
+	transform: translateY(-3px);
+	box-shadow:
+		0 8px 24px rgba(58, 74, 90, 0.1),
+		0 2px 6px rgba(58, 74, 90, 0.06);
+}
+
+.post-item-border-glow:hover::after {
+	opacity: 1;
+	animation: border-glow 2.5s ease-in-out infinite;
+}
+
+html.dark .post-item-border-glow:hover {
+	box-shadow:
+		0 8px 24px rgba(0, 0, 0, 0.25),
+		0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+html.dark .post-item-border-glow::after {
+	background: linear-gradient(
+		135deg,
+		transparent 40%,
+		rgba(180, 200, 190, 0.12) 50%,
+		transparent 60%
+	);
+}
+
 .home-hero {
 	position: relative;
 	overflow: hidden;

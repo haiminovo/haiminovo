@@ -10,6 +10,8 @@ import Tags from '@/components/tags/Tags';
 import PageNavigator from '@/components/pageNavigator/PageNavigator';
 import BackToTop from '@/components/backToTop/BackToTop';
 import Footer from '@/components/footer/Footer';
+import ClickConfetti from '@/components/clickConfetti/ClickConfetti';
+import CursorTrail from '@/components/cursorTrail/CursorTrail';
 import { getCanonicalUrl, getSeoImage, siteConfig } from '@/lib/seo';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -104,6 +106,8 @@ export default function RootLayout({
 				className={`${inter.className} circuit-texture-canvas bg-custom-color-7 text-font-normal dark:bg-custom-color-dark-7 dark:text-font-normal-dark flex min-h-screen w-full min-w-80 flex-col items-center`}
 			>
 				<SiteAnalytics></SiteAnalytics>
+				<ClickConfetti />
+				<CursorTrail />
 				<Navbar className="dark:border-custom-color-dark-7 top-0 z-10 h-10 w-full shadow-sm"></Navbar>
 				<main className="flex h-full w-full max-w-[1440px] justify-center gap-2 px-3 max-xl:px-2 max-lg:px-0">
 					<Aside className="h-full min-h-[calc(100vh-40px)] max-lg:hidden">

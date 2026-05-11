@@ -10,34 +10,41 @@ export const links: {
 	path: string;
 	icon?: any;
 }[] = [
-	{
-		title: '首页',
-		path: '/',
-		icon: <HomeOutlined />,
-	},
-	{
-		title: '文章',
-		path: '/post',
-		icon: <FileTextOutlined />,
-	},
-	{
-		title: '友链',
-		path: '/friendlyLink',
-		icon: <TeamOutlined />,
-	},
-];
+		{
+			title: '首页',
+			path: '/',
+			icon: <HomeOutlined />,
+		},
+		{
+			title: '文章',
+			path: '/post',
+			icon: <FileTextOutlined />,
+		},
+		{
+			title: '友链',
+			path: '/friendlyLink',
+			icon: <TeamOutlined />,
+		},
+	];
 
 export default function Links(props: IProps) {
 	return (
-		<div className="flex h-full flex-wrap items-center gap-1 px-1 text-nowrap" {...props}>
+		<div className="flex flex-wrap items-center gap-1 px-1 text-nowrap" {...props}>
 			{links.map((item) => (
 				<Link
 					key={item.title}
 					href={item.path}
-					className="hover:bg-custom-color-5/30 dark:hover:bg-custom-color-dark-2/30 flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-normal hover:shadow-md max-lg:px-1.5 max-lg:text-[13px] max-md:px-1"
+					className="group/nav relative flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-normal leading-none text-font-normal transition-colors duration-300 hover:text-font-strong dark:text-font-normal-dark dark:hover:text-font-light-dark max-lg:px-1.5 max-lg:text-[13px] max-md:px-1"
 				>
-					<div className="text-xs">{item.icon}</div>
-					<div>{item.title}</div>
+					<span className="relative flex items-center">
+						<span className="flex items-center text-xs transition-transform duration-300 group-hover/nav:scale-110">
+							{item.icon}
+						</span>
+					</span>
+					<span className="relative">
+						{item.title}
+						<span className="absolute -bottom-0.5 left-0 h-[1.5px] w-0 bg-font-normal transition-all duration-300 group-hover/nav:w-full dark:bg-font-light-dark" />
+					</span>
 				</Link>
 			))}
 		</div>

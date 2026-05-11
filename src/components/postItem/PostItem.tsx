@@ -17,11 +17,11 @@ export default function PostItem(props: IProps) {
 	return (
 		<Link
 			href={`/post/${data.slugAsParams}`}
-			className={`bg-custom-color-9 dark:border-custom-color-dark-4 dark:bg-custom-color-dark-9 relative flex w-full cursor-pointer flex-col justify-between gap-2 rounded-xl p-3 shadow-md ${className}`}
+			className={`bg-custom-color-9 dark:border-custom-color-dark-4 dark:bg-custom-color-dark-9 post-item-ripple post-item-border-glow relative flex w-full cursor-pointer flex-col justify-between gap-2 overflow-hidden rounded-xl p-3 shadow-md ${className}`}
 		>
 			<div
 				className={clsx(
-					'bg-custom-color-7/80 dark:border-custom-color-dark-7 dark:bg-custom-color-dark-7/80 flex overflow-hidden rounded-xl text-black/80 shadow-inner transition-transform duration-200 hover:-translate-y-0.5 max-lg:flex-col dark:text-white',
+					'bg-custom-color-7/80 dark:border-custom-color-dark-7 dark:bg-custom-color-dark-7/80 flex overflow-hidden rounded-xl text-black/80 shadow-inner max-lg:flex-col dark:text-white',
 					{
 						'flex-row-reverse': index % 2 === 1,
 						'max-lg:flex-col': hasImage,
@@ -50,10 +50,13 @@ export default function PostItem(props: IProps) {
 					})}
 				>
 					<h1
-						className={clsx('font-black break-words text-slate-700 dark:text-slate-100', {
-							'line-clamp-2 text-lg leading-7': hasImage,
-							'line-clamp-2 text-base leading-6': !hasImage,
-						})}
+						className={clsx(
+							'font-black break-words text-slate-700 dark:text-slate-100',
+							{
+								'line-clamp-2 text-lg leading-7': hasImage,
+								'line-clamp-2 text-base leading-6': !hasImage,
+							}
+						)}
 					>
 						{title}
 					</h1>
@@ -72,21 +75,24 @@ export default function PostItem(props: IProps) {
 					{tags?.map((item) => (
 						<li
 							key={item}
-							className="from-custom-color-1 to-custom-color-9 dark:from-custom-color-dark-10 dark:to-custom-color-dark-5 flex items-center gap-2 rounded-md bg-gradient-to-tl px-2 py-1 text-xs text-nowrap shadow-sm"
+							className="group/tag relative flex items-center gap-1 overflow-hidden rounded-full border border-slate-300/60 bg-white/70 px-3 py-1 text-xs text-nowrap text-slate-600 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-400/80 hover:bg-white hover:shadow-md dark:border-slate-500/30 dark:bg-slate-700/50 dark:text-slate-300 dark:hover:border-slate-400/50 dark:hover:bg-slate-700/80"
 						>
-							# {item}
+							<span className="text-slate-400 transition-colors duration-300 group-hover/tag:text-slate-500 dark:text-slate-500 dark:group-hover/tag:text-slate-400">
+								#
+							</span>
+							<span>{item}</span>
 						</li>
 					))}
 				</ul>
 				<ul className="text-font-strong dark:text-font-light-dark flex flex-wrap items-center gap-2">
-					<li className="from-custom-color-1 to-custom-color-9 dark:from-custom-color-dark-10 dark:to-custom-color-dark-5 flex flex-wrap items-center gap-2 rounded-md bg-gradient-to-t px-2 py-1 text-xs shadow-sm">
-						<UserOutlined />
+					<li className="flex flex-wrap items-center gap-1.5 rounded-full border border-slate-300/40 bg-white/50 px-3 py-1 text-xs text-slate-500 shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-white/80 dark:border-slate-500/25 dark:bg-slate-700/40 dark:text-slate-400 dark:hover:bg-slate-700/70">
+						<UserOutlined className="text-[10px] text-slate-400 dark:text-slate-500" />
 						{authors.map((item) => (
 							<span key={item}>{item}</span>
 						))}
 					</li>
-					<li className="from-custom-color-1 to-custom-color-9 dark:from-custom-color-dark-10 dark:to-custom-color-dark-5 flex items-center gap-2 rounded-md bg-gradient-to-t px-2 py-1 text-xs whitespace-nowrap shadow-sm">
-						<ClockCircleOutlined />
+					<li className="flex items-center gap-1.5 rounded-full border border-slate-300/40 bg-white/50 px-3 py-1 text-xs whitespace-nowrap text-slate-500 shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-white/80 dark:border-slate-500/25 dark:bg-slate-700/40 dark:text-slate-400 dark:hover:bg-slate-700/70">
+						<ClockCircleOutlined className="text-[10px] text-slate-400 dark:text-slate-500" />
 						<div>{date.slice(0, 10)}</div>
 					</li>
 				</ul>
