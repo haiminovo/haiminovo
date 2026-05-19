@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FileTextOutlined, HomeOutlined, TeamOutlined } from '@ant-design/icons';
+import { FileTextOutlined, HomeOutlined, TeamOutlined, ToolOutlined } from '@ant-design/icons';
 
 interface IProps {
 	className?: string;
@@ -24,6 +24,11 @@ export const links: {
 			title: '友链',
 			path: '/friendlyLink',
 			icon: <TeamOutlined />,
+		},
+		{
+			title: '工具',
+			path: '/tools',
+			icon: <ToolOutlined />,
 		},
 	];
 
