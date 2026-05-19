@@ -82,7 +82,7 @@ export default function MarkdownTool() {
 
 - 实时预览
 - 支持常见语法
-- 本地处理，数据安全
+- 实时预览
 
 ## 代码示例
 

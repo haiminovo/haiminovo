@@ -12,7 +12,7 @@ import {
 export const metadata = createMetadata({
   title: '实用工具',
   description:
-    'roadto.top 实用工具箱 — JSON 格式化、Base64 编解码、Markdown 预览、颜色工具、图片压缩、文本处理等在线小工具，纯本地处理，数据安全。',
+    'roadto.top 实用工具箱 — JSON 格式化、Base64 编解码、Markdown 预览、颜色工具、图片压缩、文本处理等在线小工具。',
   path: '/tools',
   keywords: ['在线工具', 'JSON 格式化', 'Base64', 'Markdown 预览', '颜色工具', '图片压缩', '文本处理'],
 });
@@ -68,7 +68,7 @@ export default function ToolsIndexPage() {
       <div className="mb-6 flex w-full flex-col gap-2">
         <h1 className="text-3xl font-black">实用工具</h1>
         <p className="text-sm leading-7 opacity-80">
-          一些常用的在线小工具，数据仅在本地处理，不会上传至服务器。
+          一些常用的在线小工具。
         </p>
       </div>
 
