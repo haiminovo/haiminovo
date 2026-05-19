@@ -115,8 +115,7 @@ export function createMetadata({
 	const fullTitle = formatPageTitle(title);
 	const mergedKeywords = mergeKeywords(keywords);
 
-	return {
-		title,
+	const result: Metadata = {
 		description,
 		keywords: mergedKeywords,
 		alternates: {
@@ -163,4 +162,10 @@ export function createMetadata({
 			creator: `@${siteConfig.author.handle}`,
 		},
 	};
+
+	if (title) {
+		result.title = title;
+	}
+
+	return result;
 }

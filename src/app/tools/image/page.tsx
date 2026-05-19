@@ -1,10 +1,13 @@
 import ImageTool from '@/components/tools/ImageTool';
 import ToolPageLayout from '../ToolPageLayout';
+import { createMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: '图片压缩 / 格式转换 | 巅峰之路',
+export const metadata = createMetadata({
+  title: '图片压缩 / 格式转换',
   description: '免费的在线图片压缩与格式转换工具，支持 JPEG/PNG/WebP 互转、调整尺寸与质量，浏览器本地处理，不上传服务器。',
-};
+  path: '/tools/image',
+  keywords: ['图片压缩', '图片格式转换', 'JPEG 转 WebP', '在线工具'],
+});
 
 export default function ImagePage() {
   return (
