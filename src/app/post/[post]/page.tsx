@@ -81,7 +81,7 @@ export default async function Post({ params }: PageProps) {
 				url: siteConfig.url,
 				logo: {
 					'@type': 'ImageObject',
-					url: getSeoImage('/favicon/favicon.ico'),
+					url: getSeoImage('/favicon.ico'),
 				},
 			},
 			keywords: articleKeywords.join(', '),

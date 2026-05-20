@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 		telephone: false,
 	},
 	icons: {
-		icon: [{ url: '/favicon/favicon.ico', sizes: 'any' }],
+		icon: [{ url: '/favicon.ico', sizes: 'any' }],
 	},
 	openGraph: {
 		type: 'website',
