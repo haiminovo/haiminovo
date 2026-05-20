@@ -64,9 +64,6 @@ export default function ToolsIndexPage() {
               面向日常开发与内容处理的在线工具箱：JSON、Base64、Markdown、颜色、图片和文本处理都在浏览器本地完成，打开即用。
             </p>
           </div>
-          <span className="rounded-md border border-slate-200/60 bg-white/60 px-3 py-1.5 text-xs text-font-light dark:border-slate-600/40 dark:bg-slate-800/60 dark:text-font-normal-dark">
-            本地处理，不上传文件
-          </span>
         </div>
         <div className="flex flex-wrap gap-2 text-xs text-font-light dark:text-font-normal-dark">
           <span className="rounded-md bg-custom-color-9 px-2.5 py-1 dark:bg-custom-color-dark-8">开发调试</span>

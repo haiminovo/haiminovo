@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef } from 'react';
 import ToolPanel from './ToolPanel';
+import { toolButtonClass, toolPrimaryButtonClass, toolQuietButtonClass } from './buttonStyles';
 
 export default function Base64Tool() {
   const [textInput, setTextInput] = useState('');
@@ -95,26 +96,26 @@ export default function Base64Tool() {
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={encodeText}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolButtonClass}
           >
             编码
           </button>
           <button
             onClick={decodeText}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolButtonClass}
           >
             解码
           </button>
           <button
             onClick={copyTextOutput}
             disabled={!textOutput}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 disabled:opacity-40 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolPrimaryButtonClass}
           >
             复制结果
           </button>
           <button
             onClick={clearText}
-            className="ml-auto rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={`ml-auto ${toolQuietButtonClass}`}
           >
             清空
           </button>
@@ -166,20 +167,20 @@ export default function Base64Tool() {
           />
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolButtonClass}
           >
             选择图片
           </button>
           <button
             onClick={copyImageBase64}
             disabled={!imageBase64}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 disabled:opacity-40 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolPrimaryButtonClass}
           >
             复制 Base64
           </button>
           <button
             onClick={clearImage}
-            className="ml-auto rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={`ml-auto ${toolQuietButtonClass}`}
           >
             清空
           </button>

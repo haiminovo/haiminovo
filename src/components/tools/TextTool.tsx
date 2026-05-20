@@ -2,6 +2,145 @@
 
 import { useState, useCallback } from 'react';
 import ToolPanel from './ToolPanel';
+import { toolButtonClass, toolPrimaryButtonClass, toolQuietButtonClass } from './buttonStyles';
+
+const WRAPPER_PAIRS: Record<string, string> = {
+  '[': ']',
+  '(': ')',
+  '{': '}',
+  '【': '】',
+  '（': '）',
+  '｛': '｝',
+};
+
+function stripOuterWrapper(value: string) {
+  let text = value.trim();
+  let changed = true;
+
+  while (changed && text.length >= 2) {
+    changed = false;
+    const start = text[0];
+    const end = WRAPPER_PAIRS[start];
+
+    if (end && text.endsWith(end)) {
+      text = text.slice(1, -1).trim();
+      changed = true;
+    }
+  }
+
+  return text;
+}
+
+function stripToken(value: string) {
+  const text = stripOuterWrapper(value.trim());
+  const quote = text[0];
+
+  if (
+    text.length >= 2 &&
+    (quote === '"' || quote === "'" || quote === '`') &&
+    text.endsWith(quote)
+  ) {
+    return text.slice(1, -1).trim();
+  }
+
+  return text;
+}
+
+function isQuotedString(value: string) {
+  const text = value.trim();
+  const quote = text[0];
+
+  return (
+    text.length >= 2 &&
+    (quote === '"' || quote === "'" || quote === '`') &&
+    text.endsWith(quote)
+  );
+}
+
+function parseTextItems(value: string) {
+  const input = value.trim();
+  if (!input) return [];
+
+  try {
+    const parsed = JSON.parse(input);
+    if (Array.isArray(parsed)) {
+      return parsed
+        .map((item) => String(item).trim())
+        .filter(Boolean);
+    }
+    if (typeof parsed === 'string') {
+      return [String(parsed).trim()].filter(Boolean);
+    }
+  } catch {
+    // Non-JSON text falls through to the wider tokenizer below.
+  }
+
+  const source = stripOuterWrapper(input);
+  const items: string[] = [];
+  let current = '';
+  let quote: string | null = null;
+  let escaping = false;
+
+  const pushCurrent = () => {
+    const item = stripToken(current);
+    if (item) items.push(item);
+    current = '';
+  };
+
+  for (const char of source) {
+    if (escaping) {
+      current += char;
+      escaping = false;
+      continue;
+    }
+
+    if (char === '\\' && quote) {
+      escaping = true;
+      continue;
+    }
+
+    if (quote) {
+      if (char === quote) quote = null;
+      current += char;
+      continue;
+    }
+
+    if (char === '"' || char === "'" || char === '`') {
+      quote = char;
+      current += char;
+      continue;
+    }
+
+    if (/[\s,，;；、]+/.test(char)) {
+      pushCurrent();
+      continue;
+    }
+
+    current += char;
+  }
+
+  pushCurrent();
+
+  if (
+    items.length === 1 &&
+    !isQuotedString(input) &&
+    !/[\s,，;；、]+/.test(source)
+  ) {
+    return Array.from(items[0]);
+  }
+
+  return items;
+}
+
+function getTextItemsOutputSeparator(value: string) {
+  if (/\r\n|\r|\n/.test(value)) return '\n';
+
+  const source = stripOuterWrapper(value.trim());
+  if (!/[\s,，;；、]+/.test(source)) return '';
+  if (/[，,;；、]/.test(source)) return ', ';
+
+  return ' ';
+}
 
 export default function TextTool() {
   const [input, setInput] = useState('');
@@ -85,18 +224,24 @@ export default function TextTool() {
     try { setResult(decodeURIComponent(input)); } catch { setResult('解码失败'); }
   }, [input, setResult]);
   const duplicateLines = useCallback(() => {
-    const lines = input.split(/\r\n|\r|\n/);
+    const lines = parseTextItems(input);
+    const separator = getTextItemsOutputSeparator(input);
     const seen = new Set<string>();
+    const reported = new Set<string>();
     const dupes: string[] = [];
     lines.forEach((line) => {
       const trimmed = line.trim();
-      if (trimmed && seen.has(trimmed)) dupes.push(trimmed);
+      if (trimmed && seen.has(trimmed) && !reported.has(trimmed)) {
+        reported.add(trimmed);
+        dupes.push(trimmed);
+      }
       seen.add(trimmed);
     });
-    setResult(dupes.length ? dupes.join('\n') : '未发现重复行');
+    setResult(dupes.length ? dupes.join(separator) : '未发现重复行');
   }, [input, setResult]);
   const uniqueLines = useCallback(() => {
-    const lines = input.split(/\r\n|\r|\n/);
+    const lines = parseTextItems(input);
+    const separator = getTextItemsOutputSeparator(input);
     const seen = new Set<string>();
     const result: string[] = [];
     lines.forEach((line) => {
@@ -106,11 +251,12 @@ export default function TextTool() {
         result.push(line);
       }
     });
-    setResult(result.join('\n'));
+    setResult(result.join(separator));
   }, [input, setResult]);
   const sortLines = useCallback(() => {
-    const lines = input.split(/\r\n|\r|\n/);
-    setResult(lines.sort((a, b) => a.localeCompare(b, 'zh-CN')).join('\n'));
+    const lines = parseTextItems(input);
+    const separator = getTextItemsOutputSeparator(input);
+    setResult(lines.sort((a, b) => a.localeCompare(b, 'zh-CN')).join(separator));
   }, [input, setResult]);
 
   const copyOutput = useCallback(() => {
@@ -122,9 +268,6 @@ export default function TextTool() {
     setOutput('');
   }, []);
 
-  const btnClass =
-    'rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7';
-
   return (
     <ToolPanel
       title="文本处理工具"
@@ -134,43 +277,46 @@ export default function TextTool() {
         {/* Toolbar */}
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-medium text-font-light dark:text-font-normal-dark">大小写:</span>
-          <button onClick={toUpperCase} className={btnClass}>大写</button>
-          <button onClick={toLowerCase} className={btnClass}>小写</button>
-          <button onClick={toCamelCase} className={btnClass}>camelCase</button>
-          <button onClick={toPascalCase} className={btnClass}>PascalCase</button>
-          <button onClick={toSnakeCase} className={btnClass}>snake_case</button>
-          <button onClick={toKebabCase} className={btnClass}>kebab-case</button>
+          <button onClick={toUpperCase} className={toolButtonClass}>大写</button>
+          <button onClick={toLowerCase} className={toolButtonClass}>小写</button>
+          <button onClick={toCamelCase} className={toolButtonClass}>camelCase</button>
+          <button onClick={toPascalCase} className={toolButtonClass}>PascalCase</button>
+          <button onClick={toSnakeCase} className={toolButtonClass}>snake_case</button>
+          <button onClick={toKebabCase} className={toolButtonClass}>kebab-case</button>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-medium text-font-light dark:text-font-normal-dark">格式化:</span>
-          <button onClick={removeExtraSpaces} className={btnClass}>去多余空格</button>
-          <button onClick={removeLineBreaks} className={btnClass}>去换行</button>
-          <button onClick={removeAllSpaces} className={btnClass}>去全部空格</button>
-          <button onClick={reverseText} className={btnClass}>反转</button>
-          <button onClick={countChars} className={btnClass}>统计</button>
+          <button onClick={removeExtraSpaces} className={toolButtonClass}>去多余空格</button>
+          <button onClick={removeLineBreaks} className={toolButtonClass}>去换行</button>
+          <button onClick={removeAllSpaces} className={toolButtonClass}>去全部空格</button>
+          <button onClick={reverseText} className={toolButtonClass}>反转</button>
+          <button onClick={countChars} className={toolButtonClass}>统计</button>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-medium text-font-light dark:text-font-normal-dark">编码:</span>
-          <button onClick={escapeHtml} className={btnClass}>HTML 转义</button>
-          <button onClick={unescapeHtml} className={btnClass}>HTML 去转义</button>
-          <button onClick={urlEncode} className={btnClass}>URL 编码</button>
-          <button onClick={urlDecode} className={btnClass}>URL 解码</button>
+          <button onClick={escapeHtml} className={toolButtonClass}>HTML 转义</button>
+          <button onClick={unescapeHtml} className={toolButtonClass}>HTML 去转义</button>
+          <button onClick={urlEncode} className={toolButtonClass}>URL 编码</button>
+          <button onClick={urlDecode} className={toolButtonClass}>URL 解码</button>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-medium text-font-light dark:text-font-normal-dark">行处理:</span>
-          <button onClick={sortLines} className={btnClass}>排序</button>
-          <button onClick={uniqueLines} className={btnClass}>去重</button>
-          <button onClick={duplicateLines} className={btnClass}>找重复</button>
+          <span className="text-xs font-medium text-font-light dark:text-font-normal-dark">处理:</span>
+          <button onClick={sortLines} className={toolButtonClass}>排序</button>
+          <button onClick={uniqueLines} className={toolButtonClass}>去重</button>
+          <button onClick={duplicateLines} className={toolButtonClass}>找重复</button>
+          <span className="text-xs text-font-light/70 dark:text-font-normal-dark/70">
+            支持换行、空格、逗号、数组和外层括号，输出跟随输入方向
+          </span>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <button onClick={copyOutput} disabled={!output} className={`${btnClass} disabled:opacity-40`}>
+          <button onClick={copyOutput} disabled={!output} className={toolPrimaryButtonClass}>
             复制结果
           </button>
-          <button onClick={clearAll} className={btnClass}>
+          <button onClick={clearAll} className={toolQuietButtonClass}>
             清空
           </button>
         </div>

@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useDeferredValue, useMemo } from 'react';
 import ToolPanel from './ToolPanel';
+import { toolPrimaryButtonClass, toolQuietButtonClass } from './buttonStyles';
 
 function simpleMarkdownToHtml(md: string): string {
   let html = md
@@ -121,13 +122,13 @@ console.log(hello);
           <button
             onClick={copyHtml}
             disabled={!input}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 disabled:opacity-40 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolPrimaryButtonClass}
           >
             复制 HTML
           </button>
           <button
             onClick={clearAll}
-            className="ml-auto rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={`ml-auto ${toolQuietButtonClass}`}
           >
             清空
           </button>

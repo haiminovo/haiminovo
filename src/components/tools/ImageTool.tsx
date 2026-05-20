@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef } from 'react';
 import ToolPanel from './ToolPanel';
+import { toolButtonClass, toolPrimaryButtonClass, toolQuietButtonClass } from './buttonStyles';
 
 function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -128,7 +129,7 @@ export default function ImageTool() {
           />
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolButtonClass}
           >
             选择图片
           </button>
@@ -183,7 +184,7 @@ export default function ImageTool() {
           <button
             onClick={processImage}
             disabled={!originalSrc || processing}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 disabled:opacity-40 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolPrimaryButtonClass}
           >
             {processing ? '处理中...' : '开始处理'}
           </button>
@@ -191,14 +192,14 @@ export default function ImageTool() {
           <button
             onClick={downloadImage}
             disabled={!convertedSrc}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 disabled:opacity-40 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolPrimaryButtonClass}
           >
             下载
           </button>
 
           <button
             onClick={clearAll}
-            className="ml-auto rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={`ml-auto ${toolQuietButtonClass}`}
           >
             清空
           </button>

@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import ToolPanel from './ToolPanel';
+import { toolButtonClass, toolPrimaryButtonClass, toolQuietButtonClass } from './buttonStyles';
 
 export default function JsonTool() {
   const [input, setInput] = useState('');
@@ -114,31 +115,31 @@ export default function JsonTool() {
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={formatJson}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolButtonClass}
           >
             格式化
           </button>
           <button
             onClick={compressJson}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolButtonClass}
           >
             压缩
           </button>
           <button
             onClick={validateJson}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolButtonClass}
           >
             校验
           </button>
           <button
             onClick={escapeJson}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolButtonClass}
           >
             转义
           </button>
           <button
             onClick={unescapeJson}
-            className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+            className={toolButtonClass}
           >
             去转义
           </button>
@@ -156,13 +157,13 @@ export default function JsonTool() {
             <button
               onClick={copyOutput}
               disabled={!output}
-              className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 disabled:opacity-40 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+              className={toolPrimaryButtonClass}
             >
               复制结果
             </button>
             <button
               onClick={clearAll}
-              className="rounded-md bg-custom-color-9 px-3 py-1.5 text-xs font-medium text-font-normal transition-colors hover:bg-custom-color-8 dark:bg-custom-color-dark-8 dark:text-font-light-dark dark:hover:bg-custom-color-dark-7"
+              className={toolQuietButtonClass}
             >
               清空
             </button>
