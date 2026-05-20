@@ -74,7 +74,7 @@ export default function FriendlyLink() {
 
 			<div className="mb-6 mt-10 flex w-full flex-col gap-2">
 				<h2 className="text-2xl font-bold">喜欢的站点</h2>
-				<p className="text-sm leading-7 opacity-80">经常逛的一些有趣的站点。</p>
+				<p className="text-sm leading-7 opacity-80">经常逛的一些有趣站点。</p>
 			</div>
 			<ul className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2">
 				{favoriteSites.map((item) => {

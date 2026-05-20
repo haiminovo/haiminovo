@@ -11,6 +11,7 @@ import BackToTop from '@/components/backToTop/BackToTop';
 import Footer from '@/components/footer/Footer';
 import ClickConfetti from '@/components/clickConfetti/ClickConfetti';
 import CursorTrail from '@/components/cursorTrail/CursorTrail';
+import MusicPlayer from '@/components/musicPlayer/MusicPlayer';
 import { getCanonicalUrl, getSeoImage, siteConfig } from '@/lib/seo';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -106,7 +107,8 @@ export default function RootLayout({
 				<Navbar className="dark:border-custom-color-dark-7 top-0 z-10 h-10 w-full shadow-sm"></Navbar>
 				<main className="flex w-full max-w-[1440px] flex-1 justify-center gap-2 px-3 pb-20 max-xl:px-2 max-lg:px-0">
 					<Aside className="max-lg:hidden">
-						<div className="flex w-full flex-1 flex-col gap-3 pt-5">
+						<div className="flex w-full flex-1 flex-col gap-3">
+							<MusicPlayer />
 							<Tags className="hidden"></Tags>
 							<SiteInf></SiteInf>
 							<PageNavigator className="hidden"></PageNavigator>

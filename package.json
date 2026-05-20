@@ -20,6 +20,7 @@
 		"@ant-design/icons": "^6.2.2",
 		"@giscus/react": "^3.1.0",
 		"@types/mdx": "^2.0.13",
+		"aplayer": "^1.10.1",
 		"clsx": "^2.1.1",
 		"concurrently": "^9.2.1",
 		"contentlayer2": "^0.5.8",
