@@ -93,7 +93,7 @@ export default function ClickConfetti() {
 		const ctx = canvas.getContext('2d');
 		if (!ctx) return;
 
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
 		const particles = particlesRef.current;
 		for (let i = particles.length - 1; i >= 0; i--) {
@@ -113,30 +113,36 @@ export default function ClickConfetti() {
 			drawParticle(ctx, p);
 		}
 
-		rafRef.current = requestAnimationFrame(animate);
+		rafRef.current = particles.length > 0 ? requestAnimationFrame(animate) : 0;
 	}, []);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
 		if (!canvas) return;
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (reduceMotion) return;
 
 		const resize = () => {
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
+			const dpr = Math.min(window.devicePixelRatio || 1, 2);
+			const ctx = canvas.getContext('2d');
+			canvas.width = Math.round(window.innerWidth * dpr);
+			canvas.height = Math.round(window.innerHeight * dpr);
+			ctx?.setTransform(dpr, 0, 0, dpr, 0, 0);
 		};
 		resize();
 		window.addEventListener('resize', resize);
 
-		rafRef.current = requestAnimationFrame(animate);
-
 		return () => {
 			window.removeEventListener('resize', resize);
-			cancelAnimationFrame(rafRef.current);
+			if (rafRef.current) cancelAnimationFrame(rafRef.current);
 		};
-	}, [animate]);
+	}, []);
 
 	useEffect(() => {
 		const handleClick = (e: MouseEvent) => {
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			if (reduceMotion) return;
+
 			// 文本选择时不触发礼花
 			const selection = window.getSelection();
 			if (selection && selection.toString().length > 0) return;
@@ -157,11 +163,15 @@ export default function ClickConfetti() {
 			for (let i = 0; i < count; i++) {
 				particlesRef.current.push(createParticle(e.clientX, e.clientY));
 			}
+
+			if (!rafRef.current) {
+				rafRef.current = requestAnimationFrame(animate);
+			}
 		};
 
-		window.addEventListener('click', handleClick);
+		window.addEventListener('click', handleClick, { passive: true });
 		return () => window.removeEventListener('click', handleClick);
-	}, []);
+	}, [animate]);
 
 	return (
 		<canvas

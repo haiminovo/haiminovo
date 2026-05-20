@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { allPosts } from 'contentlayer/generated';
 import { getCanonicalUrl } from '@/lib/seo';
+import { toolItems } from '@/lib/tools-data';
 
 export const dynamic = 'force-static';
 
@@ -24,7 +25,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			changeFrequency: 'monthly',
 			priority: 0.5,
 		},
+		{
+			url: getCanonicalUrl('/tools'),
+			lastModified: new Date(),
+			changeFrequency: 'monthly',
+			priority: 0.8,
+		},
 	];
+
+	const toolPages: MetadataRoute.Sitemap = toolItems.map((tool) => ({
+		url: getCanonicalUrl(tool.path),
+		lastModified: new Date(),
+		changeFrequency: 'monthly',
+		priority: 0.7,
+	}));
 
 	const postPages: MetadataRoute.Sitemap = allPosts.map((post) => ({
 		url: getCanonicalUrl(`/post/${post.slugAsParams}`),
@@ -33,5 +47,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		priority: 0.8,
 	}));
 
-	return [...staticPages, ...postPages];
+	return [...staticPages, ...toolPages, ...postPages];
 }

@@ -26,43 +26,30 @@ const COLORS = [
 export default function CursorTrail() {
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const dotsRef = useRef<ITrailDot[]>([]);
-	const mouseRef = useRef({ x: -100, y: -100 });
 	const rafRef = useRef<number>(0);
+	const lastEmitRef = useRef(0);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
 		if (!canvas) return;
 		const ctx = canvas.getContext('2d');
 		if (!ctx) return;
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+
+		if (reduceMotion || coarsePointer) return;
 
 		const resize = () => {
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
+			const dpr = Math.min(window.devicePixelRatio || 1, 2);
+			canvas.width = Math.round(window.innerWidth * dpr);
+			canvas.height = Math.round(window.innerHeight * dpr);
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 		};
 		resize();
 		window.addEventListener('resize', resize);
 
-		const handleMouseMove = (e: MouseEvent) => {
-			mouseRef.current = { x: e.clientX, y: e.clientY };
-			// 每次移动生成 2-4 个粒子
-			const count = getRandom(2, 4);
-			for (let i = 0; i < count; i++) {
-				const colorBase = COLORS[getRandom(0, COLORS.length - 1)];
-				dotsRef.current.push({
-					x: e.clientX + (Math.random() - 0.5) * 6,
-					y: e.clientY + (Math.random() - 0.5) * 6,
-					life: 1,
-					maxLife: getRandom(20, 40),
-					color: colorBase,
-					size: getRandom(2, 5),
-				});
-			}
-		};
-
-		window.addEventListener('mousemove', handleMouseMove);
-
 		const animate = () => {
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
 			const dots = dotsRef.current;
 			for (let i = dots.length - 1; i >= 0; i--) {
@@ -80,15 +67,45 @@ export default function CursorTrail() {
 				ctx.fill();
 			}
 
-			rafRef.current = requestAnimationFrame(animate);
+			rafRef.current = dots.length > 0 ? requestAnimationFrame(animate) : 0;
 		};
 
-		rafRef.current = requestAnimationFrame(animate);
+		const startAnimation = () => {
+			if (!rafRef.current) {
+				rafRef.current = requestAnimationFrame(animate);
+			}
+		};
+
+		const handleMouseMove = (e: MouseEvent) => {
+			const now = performance.now();
+			if (now - lastEmitRef.current < 24) return;
+			lastEmitRef.current = now;
+
+			const count = getRandom(1, 2);
+			for (let i = 0; i < count; i++) {
+				const colorBase = COLORS[getRandom(0, COLORS.length - 1)];
+				dotsRef.current.push({
+					x: e.clientX + (Math.random() - 0.5) * 6,
+					y: e.clientY + (Math.random() - 0.5) * 6,
+					life: 1,
+					maxLife: getRandom(18, 28),
+					color: colorBase,
+					size: getRandom(2, 4),
+				});
+			}
+
+			if (dotsRef.current.length > 80) {
+				dotsRef.current.splice(0, dotsRef.current.length - 80);
+			}
+			startAnimation();
+		};
+
+		window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
 		return () => {
 			window.removeEventListener('resize', resize);
 			window.removeEventListener('mousemove', handleMouseMove);
-			cancelAnimationFrame(rafRef.current);
+			if (rafRef.current) cancelAnimationFrame(rafRef.current);
 		};
 	}, []);
 

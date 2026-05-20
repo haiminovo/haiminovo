@@ -1,22 +1,6 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-import {
-  ClusterOutlined,
-  FileTextOutlined,
-  BgColorsOutlined,
-  PictureOutlined,
-  FontSizeOutlined,
-  CodeOutlined,
-} from '@ant-design/icons';
-
-const toolLinks = [
-  { key: 'json', title: 'JSON 格式化', path: '/tools/json', icon: <ClusterOutlined /> },
-  { key: 'base64', title: 'Base64 编解码', path: '/tools/base64', icon: <CodeOutlined /> },
-  { key: 'markdown', title: 'Markdown 预览', path: '/tools/markdown', icon: <FileTextOutlined /> },
-  { key: 'color', title: '颜色工具', path: '/tools/color', icon: <BgColorsOutlined /> },
-  { key: 'image', title: '图片压缩', path: '/tools/image', icon: <PictureOutlined /> },
-  { key: 'text', title: '文本处理', path: '/tools/text', icon: <FontSizeOutlined /> },
-];
+import { tools } from '@/lib/tools';
 
 interface ToolPageLayoutProps {
   title: string;
@@ -35,26 +19,32 @@ export default function ToolPageLayout({ title, description, children, activeKey
         )}
       </div>
 
-      {/* Sub-nav */}
-      <div className="mb-6 flex w-full flex-wrap gap-2">
-        {toolLinks.map((tool) => {
+      <nav aria-label="工具导航" className="mb-6 flex w-full gap-2 overflow-x-auto pb-1 max-md:-mx-4 max-md:w-[calc(100%+2rem)] max-md:px-4">
+        <Link
+          href="/tools"
+          className="flex shrink-0 items-center rounded-md px-3 py-2 text-sm font-medium text-font-light transition-colors hover:bg-custom-color-9 hover:text-font-normal dark:text-font-normal-dark dark:hover:bg-custom-color-dark-8 dark:hover:text-font-light-dark"
+        >
+          全部工具
+        </Link>
+        {tools.map((tool) => {
           const isActive = activeKey ? tool.key === activeKey : false;
           return (
             <Link
               key={tool.key}
               href={tool.path}
-              className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-300 ${
+              aria-current={isActive ? 'page' : undefined}
+              className={`flex shrink-0 items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                 isActive
                   ? 'bg-custom-color-10 text-font-strong shadow-sm dark:bg-custom-color-dark-6 dark:text-font-light-dark'
                   : 'text-font-light hover:bg-custom-color-9 hover:text-font-normal dark:text-font-normal-dark dark:hover:bg-custom-color-dark-8 dark:hover:text-font-light-dark'
               }`}
             >
               <span className="text-xs">{tool.icon}</span>
-              <span>{tool.title}</span>
+              <span>{tool.shortTitle}</span>
             </Link>
           );
         })}
-      </div>
+      </nav>
 
       <div className="w-full">{children}</div>
     </div>

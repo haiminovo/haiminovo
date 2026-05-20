@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useDeferredValue, useMemo } from 'react';
 import ToolPanel from './ToolPanel';
 
 function simpleMarkdownToHtml(md: string): string {
@@ -98,6 +98,8 @@ console.log(hello);
 | A | 选项 A |
 | B | 选项 B |
 `);
+  const deferredInput = useDeferredValue(input);
+  const previewHtml = useMemo(() => simpleMarkdownToHtml(deferredInput), [deferredInput]);
 
   const copyHtml = useCallback(() => {
     const html = simpleMarkdownToHtml(input);
@@ -149,7 +151,7 @@ console.log(hello);
             </label>
             <div
               className="min-h-[420px] w-full overflow-auto rounded-lg border border-slate-200/60 bg-white/80 p-4 text-sm leading-relaxed text-font-normal dark:border-slate-600/40 dark:bg-slate-800/60 dark:text-font-light-dark"
-              dangerouslySetInnerHTML={{ __html: simpleMarkdownToHtml(input) }}
+              dangerouslySetInnerHTML={{ __html: previewHtml }}
             />
           </div>
         </div>

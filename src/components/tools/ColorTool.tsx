@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import ToolPanel from './ToolPanel';
 
 function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
@@ -124,10 +124,6 @@ export default function ColorTool() {
     const newRgb = hslToRgb(h, s, l);
     setRgb(newRgb);
     setHex(rgbToHex(newRgb.r, newRgb.g, newRgb.b));
-  }, []);
-
-  useEffect(() => {
-    updateFromHex(hex);
   }, []);
 
   const copyColor = useCallback((color: string) => {
