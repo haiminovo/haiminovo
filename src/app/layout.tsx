@@ -31,6 +31,9 @@ export const metadata: Metadata = {
 	category: 'technology',
 	alternates: {
 		canonical: getCanonicalUrl('/'),
+		types: {
+			'application/rss+xml': `${siteConfig.url}/rss.xml`,
+		},
 	},
 	formatDetection: {
 		email: false,
