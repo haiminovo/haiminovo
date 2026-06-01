@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { allPosts } from 'contentlayer/generated';
 import { getCanonicalUrl } from '@/lib/seo';
 import { toolItems } from '@/lib/tools-data';
+import { sortPostsByDateDesc } from '@/lib/posts';
 
 export const dynamic = 'force-static';
 
@@ -40,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		priority: 0.7,
 	}));
 
-	const postPages: MetadataRoute.Sitemap = allPosts.map((post) => ({
+	const postPages: MetadataRoute.Sitemap = sortPostsByDateDesc(allPosts).map((post) => ({
 		url: getCanonicalUrl(`/post/${post.slugAsParams}`),
 		lastModified: new Date(post.date),
 		changeFrequency: 'monthly',

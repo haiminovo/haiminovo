@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { allPosts } from 'contentlayer/generated';
 import JsonLd from '@/components/seo/JsonLd';
 import { createMetadata, getCanonicalUrl, getSeoImage, siteConfig } from '@/lib/seo';
+import { getRecentPosts } from '@/lib/posts';
 
 export const metadata = createMetadata({
 	description: 'haimin 在互联网的阴湿据点。',
@@ -12,7 +13,7 @@ export const metadata = createMetadata({
 });
 
 export default function Home() {
-	const latestPosts = allPosts.slice(0, 3);
+	const latestPosts = getRecentPosts(allPosts, 3);
 	const jsonLd = [
 		{
 			'@context': 'https://schema.org',

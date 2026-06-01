@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { allPosts } from 'contentlayer/generated';
 import JsonLd from '@/components/seo/JsonLd';
 import { createMetadata, getCanonicalUrl, siteConfig } from '@/lib/seo';
+import { sortPostsByDateDesc } from '@/lib/posts';
 
 export const metadata = createMetadata({
 	title: '文章列表',
@@ -13,6 +14,7 @@ export const metadata = createMetadata({
 });
 
 export default function Home() {
+	const posts = sortPostsByDateDesc(allPosts);
 	const jsonLd = [
 		{
 			'@context': 'https://schema.org',
@@ -44,8 +46,8 @@ export default function Home() {
 			'@context': 'https://schema.org',
 			'@type': 'ItemList',
 			name: '文章目录',
-			numberOfItems: allPosts.length,
-			itemListElement: allPosts.map((post, index) => ({
+			numberOfItems: posts.length,
+			itemListElement: posts.map((post, index) => ({
 				'@type': 'ListItem',
 				position: index + 1,
 				url: getCanonicalUrl(`/post/${post.slugAsParams}`),

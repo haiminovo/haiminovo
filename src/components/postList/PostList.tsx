@@ -3,6 +3,7 @@ import { allPosts, Post } from 'contentlayer/generated';
 import { useSearchParams } from 'next/navigation';
 import PostItem from '../postItem/PostItem';
 import { useMemo } from 'react';
+import { sortPostsByDateDesc } from '@/lib/posts';
 
 interface IProps {
 	size?: number;
@@ -12,11 +13,14 @@ export default function PostList({ size = -1 }: IProps) {
 	const params = useSearchParams();
 	const tag = params.get('tag');
 	const posts = useMemo<Post[]>(() => {
+		const matchedPosts = tag ? allPosts.filter((item) => item.tags?.includes(tag)) : allPosts;
+		const sortedPosts = sortPostsByDateDesc(matchedPosts);
+
 		if (tag) {
-			return allPosts.filter((item) => item.tags?.includes(tag));
+			return sortedPosts;
 		}
 
-		return size > 0 ? allPosts.slice(0, size) : allPosts;
+		return size > 0 ? sortedPosts.slice(0, size) : sortedPosts;
 	}, [size, tag]);
 
 	return (
